@@ -1,0 +1,63 @@
+imports:
+  - { resource: install.yml }
+  - { resource: settings.yml }
+  - { resource: repository.yml }
+  - { resource: sdk.yml }
+
+services:
+
+  cawlop.module:
+    class: 'Cawlop'
+    factory: ['Module', 'getInstanceByName']
+    public: true
+    arguments:
+      - 'cawlop'
+
+  cawlop.context:
+    class: 'Context'
+    factory: ['Context', 'getContext']
+    public: true
+
+  cawlop.logger.factory:
+    class: 'WorldlineOP\PrestaShop\Logger\LoggerFactory'
+    public: true
+    arguments:
+      - '@cawlop.settings'
+
+  cawlop.logger:
+    class: 'WorldlineOP\PrestaShop\Logger\LoggerFactory'
+    public: true
+    arguments:
+      - '@cawlop.settings'
+    factory: ['@cawlop.logger.factory', 'getLogger']
+
+  cawlop.event.presenter:
+    class: 'WorldlineOP\PrestaShop\Presenter\WebhookEventPresenter'
+    public: true
+    arguments:
+      - '@cawlop.getpayment.presenter'
+      - '@cawlop.getrefund.presenter'
+      - '@cawlop.logger.factory'
+
+  cawlop.getpayment.presenter:
+    class: 'WorldlineOP\PrestaShop\Presenter\GetPaymentPresenter'
+    public: true
+    arguments:
+      - '@cawlop.module'
+      - '@cawlop.sdk.client.factory'
+      - '@cawlop.settings.loader'
+      - '@cawlop.logger.factory'
+
+  cawlop.getrefund.presenter:
+    class: 'WorldlineOP\PrestaShop\Presenter\GetRefundPresenter'
+    public: true
+    arguments:
+      - '@cawlop.module'
+      - '@cawlop.logger.factory'
+
+  cawlop.processor.transaction:
+    class: 'WorldlineOP\PrestaShop\Processor\TransactionResponseProcessor'
+    public: true
+    arguments:
+      - '@cawlop.module'
+      - '@cawlop.logger.factory'

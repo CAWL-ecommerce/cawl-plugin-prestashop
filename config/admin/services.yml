@@ -1,0 +1,12 @@
+imports:
+  - { resource: ../common.yml }
+
+services:
+
+  cawlop.transaction.presenter:
+    class: 'WorldlineOP\PrestaShop\Presenter\TransactionPresenter'
+    public: true
+    arguments:
+      - '@cawlop.module'
+      - '@cawlop.repository.transaction'
+      - '@cawlop.sdk.client'

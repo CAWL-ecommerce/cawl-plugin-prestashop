@@ -1,0 +1,100 @@
+services:
+
+  cawlop.settings.serializer:
+    class: 'WorldlineOP\PrestaShop\Serializer\SettingsSerializer'
+    public: true
+
+  cawlop.settings.loader:
+    class: 'WorldlineOP\PrestaShop\Configuration\Loader\SettingsLoader'
+    public: true
+    arguments:
+      - '@=service("cawlop.settings.serializer").getSerializer()'
+
+  cawlop.settings.presenter:
+    class: 'WorldlineOP\PrestaShop\Presenter\ModuleConfigurationPresenter'
+    public: true
+    arguments:
+      - '@cawlop.module'
+      - '@cawlop.settings.loader'
+
+  cawlop.settings.factory:
+    class: 'WorldlineOP\PrestaShop\Configuration\Loader\SettingsLoader'
+    public: true
+    arguments:
+      - '@=service("cawlop.settings.serializer").getSerializer()'
+
+  cawlop.settings:
+    class: 'WorldlineOP\PrestaShop\Configuration\Loader\SettingsLoader'
+    public: true
+    shared: false
+    arguments:
+      - '@=service("cawlop.settings.serializer").getSerializer()'
+    factory: ['@cawlop.settings.factory', 'deserialize']
+
+  cawlop.settings.account.validation:
+    class: 'WorldlineOP\PrestaShop\Configuration\Validation\AccountValidationData'
+    public: true
+    arguments:
+      - '@cawlop.module'
+
+  cawlop.settings.advanced_settings.validation:
+    class: 'WorldlineOP\PrestaShop\Configuration\Validation\AdvancedSettingsValidationData'
+    public: true
+    arguments:
+      - '@cawlop.module'
+
+  cawlop.settings.payment_methods.validation:
+    class: 'WorldlineOP\PrestaShop\Configuration\Validation\PaymentMethodsValidationData'
+    public: true
+    arguments:
+      - '@cawlop.module'
+
+  cawlop.settings.account.resolver:
+    class: 'WorldlineOP\PrestaShop\OptionsResolver\AccountSettingsResolver'
+    public: true
+
+  cawlop.settings.account.updater:
+    class: 'WorldlineOP\PrestaShop\Configuration\Updater\AccountSettingsUpdater'
+    public: true
+    arguments:
+      - '@=service("cawlop.settings.serializer").getSerializer()'
+      - '@cawlop.settings.account.resolver'
+      - '@cawlop.settings'
+      - '@cawlop.settings.account.validation'
+      - '@cawlop.module'
+
+  cawlop.settings.advanced_settings.resolver:
+    class: 'WorldlineOP\PrestaShop\OptionsResolver\AdvancedSettingsResolver'
+    public: true
+
+  cawlop.settings.advanced_settings.updater:
+    class: 'WorldlineOP\PrestaShop\Configuration\Updater\AdvancedSettingsUpdater'
+    public: true
+    arguments:
+      - '@=service("cawlop.settings.serializer").getSerializer()'
+      - '@cawlop.settings.advanced_settings.resolver'
+      - '@cawlop.settings'
+      - '@cawlop.settings.advanced_settings.validation'
+      - '@cawlop.module'
+
+  cawlop.settings.payment_methods.resolver:
+    class: 'WorldlineOP\PrestaShop\OptionsResolver\PaymentMethodsSettingsResolver'
+    public: true
+
+  cawlop.settings.payment_methods.updater:
+    class: 'WorldlineOP\PrestaShop\Configuration\Updater\PaymentMethodsSettingsUpdater'
+    public: true
+    arguments:
+      - '@=service("cawlop.settings.serializer").getSerializer()'
+      - '@cawlop.settings.payment_methods.resolver'
+      - '@cawlop.settings'
+      - '@cawlop.settings.payment_methods.validation'
+      - '@cawlop.module'
+
+  cawlop.settings.get_products:
+    class: 'WorldlineOP\PrestaShop\Configuration\Product\GetProductsRequest'
+    public: true
+    arguments:
+      - '@cawlop.sdk.client'
+      - '@cawlop.settings'
+      - '@cawlop.logger.factory'

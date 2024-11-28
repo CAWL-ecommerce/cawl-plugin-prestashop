@@ -1,0 +1,34 @@
+services:
+
+  cawlop.sdk.client.factory:
+    class: 'WorldlineOP\PrestaShop\Sdk\ClientFactory'
+    public: true
+    arguments:
+      - '@cawlop.sdk.communicator'
+      - '@cawlop.settings'
+
+  cawlop.sdk.client:
+    class: 'WorldlineOP\PrestaShop\Sdk\ClientFactory'
+    public: true
+    arguments:
+      - '@cawlop.sdk.communicator'
+      - '@cawlop.settings'
+    factory: ['@cawlop.sdk.client.factory', 'getMerchant']
+
+  cawlop.sdk.connection:
+    class: 'OnlinePayments\Sdk\DefaultConnection'
+    public: true
+
+  cawlop.sdk.communicator_configuration.factory:
+    class: 'WorldlineOP\PrestaShop\Sdk\CommunicatorConfigurationFactory'
+    public: true
+    arguments:
+      - '@cawlop.settings'
+      - '@cawlop.module'
+
+  cawlop.sdk.communicator:
+    class: 'OnlinePayments\Sdk\Communicator'
+    public: true
+    arguments:
+      - '@cawlop.sdk.connection'
+      - '@=service("cawlop.sdk.communicator_configuration.factory").getInstance()'

@@ -1,0 +1,40 @@
+services:
+
+  cawlop.shopping_cart.presenter:
+    class: 'WorldlineOP\PrestaShop\Presenter\ShoppingCartPresenter'
+    public: true
+
+  cawlop.payment_request.builder:
+    class: 'WorldlineOP\PrestaShop\Builder\PaymentRequestBuilder'
+    public: true
+    arguments:
+      - '@cawlop.settings'
+      - '@cawlop.module'
+      - '@cawlop.context'
+      - '@cawlop.shopping_cart.presenter'
+
+  cawlop.hosted_payment_request.builder:
+    class: 'WorldlineOP\PrestaShop\Builder\HostedPaymentRequestBuilder'
+    public: true
+    arguments:
+      - '@cawlop.settings'
+      - '@cawlop.module'
+      - '@cawlop.context'
+      - '@cawlop.shopping_cart.presenter'
+
+  cawlop.payment_request.director:
+    class: 'WorldlineOP\PrestaShop\Builder\PaymentRequestDirector'
+    public: true
+    calls:
+      - method: setBuilder
+        arguments:
+          - '@cawlop.payment_request.builder'
+
+  cawlop.hosted_payment_request.director:
+    class: 'WorldlineOP\PrestaShop\Builder\PaymentRequestDirector'
+    public: true
+    calls:
+      - method: setBuilder
+        arguments:
+          - '@cawlop.hosted_payment_request.builder'
+

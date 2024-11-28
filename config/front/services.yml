@@ -1,0 +1,41 @@
+imports:
+  - { resource: ../common.yml }
+  - { resource: ./payment_builder.yml }
+
+services:
+
+  cawlop.payment.presenter:
+    class: 'WorldlineOP\PrestaShop\Presenter\PaymentOptionsPresenter'
+    public: true
+    arguments:
+      - '@cawlop.module'
+      - '@cawlop.settings'
+      - '@cawlop.context'
+
+  cawlop.repository.hosted_checkout:
+    class: 'WorldlineOP\PrestaShop\Repository\HostedCheckoutRepository'
+    public: true
+
+  cawlop.repository.created_payment:
+    class: 'WorldlineOP\PrestaShop\Repository\CreatedPaymentRepository'
+    public: true
+
+  cawlop.checksum.address:
+    class: 'AddressChecksum'
+    public: true
+
+  cawlop.checksum.cart:
+    class: 'WorldlineopCartChecksum'
+    public: true
+    arguments:
+      - '@cawlop.checksum.address'
+
+  cawlop.storedcards.presenter:
+    class: 'WorldlineOP\PrestaShop\Presenter\StoredCardsPresenter'
+    public: true
+    arguments:
+      - '@cawlop.module'
+      - '@cawlop.context'
+      - '@cawlop.sdk.client'
+      - '@cawlop.repository.token'
+
