@@ -12,7 +12,7 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace WorldlineOP\PrestaShop\Repository;
+namespace CawlOP\PrestaShop\Repository;
 
 use Db;
 

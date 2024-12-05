@@ -63,7 +63,7 @@ class Cawlop extends PaymentModule
      */
     public function install()
     {
-        /** @var WorldlineOP\PrestaShop\Installer\Installer $installer */
+        /** @var CawlOP\PrestaShop\Installer\Installer $installer */
         $installer = $this->getService('cawlop.installer');
         if (false === parent::install()) {
             $installer->getLogger()->error('parent::install() returns false');
@@ -72,9 +72,9 @@ class Cawlop extends PaymentModule
         }
         try {
             $installer->run();
-        } catch (\WorldlineOP\PrestaShop\Exception\ExceptionList $list) {
+        } catch (\CawlOP\PrestaShop\Exception\ExceptionList $list) {
             foreach ($list as $item) {
-                /** @var \WorldlineOP\PrestaShop\Exception\ExceptionList $e */
+                /** @var \CawlOP\PrestaShop\Exception\ExceptionList $e */
                 $e = $item;
                 $installer->getLogger()->error(sprintf('%s - File: %s - Line: %s - Trace: %s', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
 
@@ -95,9 +95,9 @@ class Cawlop extends PaymentModule
      */
     public function uninstall()
     {
-        Configuration::deleteByName('WORLDLINEOP_ACCOUNT_SETTINGS');
-        Configuration::deleteByName('WORLDLINEOP_ADVANCED_SETTINGS');
-        Configuration::deleteByName('WORLDLINEOP_PAYMENT_METHODS_SETTINGS');
+        Configuration::deleteByName('CAWLOP_ACCOUNT_SETTINGS');
+        Configuration::deleteByName('CAWLOP_ADVANCED_SETTINGS');
+        Configuration::deleteByName('CAWLOP_PAYMENT_METHODS_SETTINGS');
 
         return parent::uninstall();
     }
@@ -185,7 +185,7 @@ class Cawlop extends PaymentModule
     public function hookPaymentOptions()
     {
         try {
-            /** @var \WorldlineOP\PrestaShop\Presenter\PaymentOptionsPresenter $paymentOptionsPresenter */
+            /** @var \CawlOP\PrestaShop\Presenter\PaymentOptionsPresenter $paymentOptionsPresenter */
             $paymentOptionsPresenter = $this->getService('cawlop.payment.presenter');
         } catch (Exception $e) {
             $this->logger->error('Error while presenting payment options', ['message' => $e->getMessage()]);
@@ -246,9 +246,9 @@ class Cawlop extends PaymentModule
             return $this->displayError(sprintf($this->l('Please change shop context to shop ID %d'), $order->id_shop));
         }
         try {
-            /** @var \WorldlineOP\PrestaShop\Presenter\TransactionPresenter $transactionPresenter */
+            /** @var \CawlOP\PrestaShop\Presenter\TransactionPresenter $transactionPresenter */
             $transactionPresenter = $this->getService('cawlop.transaction.presenter');
-            /** @var \WorldlineOP\PrestaShop\Presenter\ModuleConfigurationPresenter $settingsPresenter */
+            /** @var \CawlOP\PrestaShop\Presenter\ModuleConfigurationPresenter $settingsPresenter */
             $settingsPresenter = $this->getService('cawlop.settings.presenter');
 
             $this->context->smarty->assign([
@@ -323,7 +323,7 @@ class Cawlop extends PaymentModule
         if (!Validate::isLoadedObject($order)) {
             return '';
         }
-        /** @var \WorldlineOP\PrestaShop\Repository\TransactionRepository $transactionRepository */
+        /** @var \CawlOP\PrestaShop\Repository\TransactionRepository $transactionRepository */
         $transactionRepository = $this->getService('cawlop.repository.transaction');
         /** @var WorldlineopTransaction $transaction */
         $transaction = $transactionRepository->findByIdOrder($order->id);
@@ -350,11 +350,11 @@ class Cawlop extends PaymentModule
     {
         $idProduct = (int) $params['id_product'];
         $this->context->smarty->assign([
-            'worldlineopGCTypeNone' => \WorldlineOP\PrestaShop\Builder\HostedPaymentRequestBuilder::GIFT_CARD_PRODUCT_TYPE_NONE,
-            'worldlineopGCTypeFoodDrink' => \WorldlineOP\PrestaShop\Builder\HostedPaymentRequestBuilder::GIFT_CARD_PRODUCT_TYPE_FOOD_DRINK,
-            'worldlineopGCTypeHomeGarden' => \WorldlineOP\PrestaShop\Builder\HostedPaymentRequestBuilder::GIFT_CARD_PRODUCT_TYPE_HOME_GARDEN,
-            'worldlineopGCTypeGiftFlowers' => \WorldlineOP\PrestaShop\Builder\HostedPaymentRequestBuilder::GIFT_CARD_PRODUCT_TYPE_GIFT_FLOWERS,
-            'worldlineopGCSelectedType' => \WorldlineOP\PrestaShop\Utils\Tools::getGiftCardTypeByIdProduct($idProduct),
+            'worldlineopGCTypeNone' => \CawlOP\PrestaShop\Builder\HostedPaymentRequestBuilder::GIFT_CARD_PRODUCT_TYPE_NONE,
+            'worldlineopGCTypeFoodDrink' => \CawlOP\PrestaShop\Builder\HostedPaymentRequestBuilder::GIFT_CARD_PRODUCT_TYPE_FOOD_DRINK,
+            'worldlineopGCTypeHomeGarden' => \CawlOP\PrestaShop\Builder\HostedPaymentRequestBuilder::GIFT_CARD_PRODUCT_TYPE_HOME_GARDEN,
+            'worldlineopGCTypeGiftFlowers' => \CawlOP\PrestaShop\Builder\HostedPaymentRequestBuilder::GIFT_CARD_PRODUCT_TYPE_GIFT_FLOWERS,
+            'worldlineopGCSelectedType' => \CawlOP\PrestaShop\Utils\Tools::getGiftCardTypeByIdProduct($idProduct),
         ]);
 
         return $this->display(dirname(__FILE__), 'views/templates/admin/hookDisplayAdminProductsExtra.tpl');

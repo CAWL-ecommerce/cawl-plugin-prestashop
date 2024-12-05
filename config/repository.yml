@@ -1,9 +1,9 @@
 services:
 
   cawlop.repository.token:
-    class: 'WorldlineOP\PrestaShop\Repository\TokenRepository'
+    class: 'CawlOP\PrestaShop\Repository\TokenRepository'
     public: true
 
   cawlop.repository.transaction:
-    class: 'WorldlineOP\PrestaShop\Repository\TransactionRepository'
+    class: 'CawlOP\PrestaShop\Repository\TransactionRepository'
     public: true

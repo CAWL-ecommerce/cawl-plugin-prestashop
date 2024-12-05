@@ -12,7 +12,7 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace WorldlineOP\PrestaShop\Presenter;
+namespace CawlOP\PrestaShop\Presenter;
 
 use Address;
 use Cart;
@@ -31,11 +31,11 @@ use OnlinePayments\Sdk\Merchant\Products\GetPaymentProductParams;
 use Order;
 use Validate;
 use Cawlop;
-use WorldlineOP\PrestaShop\Configuration\Loader\SettingsLoader;
-use WorldlineOP\PrestaShop\Logger\LoggerFactory;
-use WorldlineOP\PrestaShop\Repository\TransactionRepository;
-use WorldlineOP\PrestaShop\Sdk\ClientFactory;
-use WorldlineOP\PrestaShop\Utils\Tools;
+use CawlOP\PrestaShop\Configuration\Loader\SettingsLoader;
+use CawlOP\PrestaShop\Logger\LoggerFactory;
+use CawlOP\PrestaShop\Repository\TransactionRepository;
+use CawlOP\PrestaShop\Sdk\ClientFactory;
+use CawlOP\PrestaShop\Utils\Tools;
 
 /**
  * Class GetPaymentPresenter
@@ -193,9 +193,9 @@ class GetPaymentPresenter implements PresenterInterface
             $this->logger->error($e->getMessage());
         }
         $token = ['needSave' => false];
-        /** @var \WorldlineOP\PrestaShop\Repository\HostedCheckoutRepository $hostedCheckoutRepository */
+        /** @var \CawlOP\PrestaShop\Repository\HostedCheckoutRepository $hostedCheckoutRepository */
         $hostedCheckoutRepository = $this->module->getService('cawlop.repository.hosted_checkout');
-        /** @var \WorldlineOP\PrestaShop\Repository\CreatedPaymentRepository $createdPaymentRepository */
+        /** @var \CawlOP\PrestaShop\Repository\CreatedPaymentRepository $createdPaymentRepository */
         $createdPaymentRepository = $this->module->getService('cawlop.repository.created_payment');
 
         /** @var HostedCheckout $hostedCheckout */

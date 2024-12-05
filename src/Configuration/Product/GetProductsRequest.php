@@ -12,7 +12,7 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace WorldlineOP\PrestaShop\Configuration\Product;
+namespace CawlOP\PrestaShop\Configuration\Product;
 
 use Configuration;
 use Country;
@@ -20,8 +20,8 @@ use Currency;
 use OnlinePayments\Sdk\Domain\GetPaymentProductsResponse;
 use OnlinePayments\Sdk\Merchant\MerchantClient;
 use OnlinePayments\Sdk\Merchant\Products\GetPaymentProductsParams;
-use WorldlineOP\PrestaShop\Configuration\Entity\Settings;
-use WorldlineOP\PrestaShop\Logger\LoggerFactory;
+use CawlOP\PrestaShop\Configuration\Entity\Settings;
+use CawlOP\PrestaShop\Logger\LoggerFactory;
 
 /**
  * Class GetProductsRequest

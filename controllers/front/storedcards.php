@@ -34,14 +34,14 @@ class CawlopStoredCardsModuleFrontController extends ModuleFrontController
      */
     public function initContent()
     {
-        /** @var \WorldlineOP\PrestaShop\Logger\LoggerFactory $loggerFactory */
+        /** @var \CawlOP\PrestaShop\Logger\LoggerFactory $loggerFactory */
         $loggerFactory = $this->module->getService('cawlop.logger.factory');
         $this->logger = $loggerFactory->setChannel('StoredCards');
         if ($this->redirectStoredCards) {
             $this->redirectWithNotifications($this->context->link->getModuleLink('cawlop', 'storedcards', []));
         }
         parent::initContent();
-        /** @var \WorldlineOP\PrestaShop\Presenter\StoredCardsPresenter $storedCardsPresenter */
+        /** @var \CawlOP\PrestaShop\Presenter\StoredCardsPresenter $storedCardsPresenter */
         $storedCardsPresenter = $this->module->getService('cawlop.storedcards.presenter');
         $this->context->smarty->assign([
             'stored_cards' => $storedCardsPresenter->present(),
@@ -89,7 +89,7 @@ class CawlopStoredCardsModuleFrontController extends ModuleFrontController
 
             return false;
         }
-        /** @var \WorldlineOP\PrestaShop\Repository\TokenRepository $tokenRepository */
+        /** @var \CawlOP\PrestaShop\Repository\TokenRepository $tokenRepository */
         $tokenRepository = $this->module->getService('cawlop.repository.token');
         $storedCard = $tokenRepository->findById((int) $idStoreCard);
         if (false === $storedCard

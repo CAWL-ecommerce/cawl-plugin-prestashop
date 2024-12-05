@@ -1,14 +1,14 @@
 services:
 
   cawlop.sdk.client.factory:
-    class: 'WorldlineOP\PrestaShop\Sdk\ClientFactory'
+    class: 'CawlOP\PrestaShop\Sdk\ClientFactory'
     public: true
     arguments:
       - '@cawlop.sdk.communicator'
       - '@cawlop.settings'
 
   cawlop.sdk.client:
-    class: 'WorldlineOP\PrestaShop\Sdk\ClientFactory'
+    class: 'CawlOP\PrestaShop\Sdk\ClientFactory'
     public: true
     arguments:
       - '@cawlop.sdk.communicator'
@@ -20,7 +20,7 @@ services:
     public: true
 
   cawlop.sdk.communicator_configuration.factory:
-    class: 'WorldlineOP\PrestaShop\Sdk\CommunicatorConfigurationFactory'
+    class: 'CawlOP\PrestaShop\Sdk\CommunicatorConfigurationFactory'
     public: true
     arguments:
       - '@cawlop.settings'

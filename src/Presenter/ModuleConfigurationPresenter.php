@@ -12,14 +12,14 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace WorldlineOP\PrestaShop\Presenter;
+namespace CawlOP\PrestaShop\Presenter;
 
 use OrderState;
 use Cawlop;
-use WorldlineOP\PrestaShop\Configuration\Entity\AccountSettings;
-use WorldlineOP\PrestaShop\Configuration\Entity\PaymentSettings;
-use WorldlineOP\PrestaShop\Configuration\Loader\SettingsLoader;
-use WorldlineOP\PrestaShop\Utils\Tools;
+use CawlOP\PrestaShop\Configuration\Entity\AccountSettings;
+use CawlOP\PrestaShop\Configuration\Entity\PaymentSettings;
+use CawlOP\PrestaShop\Configuration\Loader\SettingsLoader;
+use CawlOP\PrestaShop\Utils\Tools;
 
 /**
  * Class ModuleConfigurationPresenter

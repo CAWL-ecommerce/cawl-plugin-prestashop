@@ -12,7 +12,7 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace WorldlineOP\PrestaShop\Presenter;
+namespace CawlOP\PrestaShop\Presenter;
 
 use Configuration;
 use Context;
@@ -25,9 +25,9 @@ use OnlinePayments\Sdk\Domain\CreateHostedTokenizationRequest;
 use OnlinePayments\Sdk\ValidationException;
 use PrestaShop\PrestaShop\Core\Payment\PaymentOption;
 use Cawlop;
-use WorldlineOP\PrestaShop\Configuration\Entity\Settings;
-use WorldlineOP\PrestaShop\Repository\TokenRepository;
-use WorldlineOP\PrestaShop\Utils\Tools;
+use CawlOP\PrestaShop\Configuration\Entity\Settings;
+use CawlOP\PrestaShop\Repository\TokenRepository;
+use CawlOP\PrestaShop\Utils\Tools;
 
 /**
  * Class PaymentOptionsPresenter

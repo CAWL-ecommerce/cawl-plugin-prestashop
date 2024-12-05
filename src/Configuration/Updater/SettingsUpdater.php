@@ -12,17 +12,17 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace WorldlineOP\PrestaShop\Configuration\Updater;
+namespace CawlOP\PrestaShop\Configuration\Updater;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validation;
-use WorldlineOP\PrestaShop\Configuration\Entity\Settings;
-use WorldlineOP\PrestaShop\Configuration\Validation\AbstractValidationData;
-use WorldlineOP\PrestaShop\Exception\ExceptionList;
-use WorldlineOP\PrestaShop\OptionsResolver\AbstractSettingsResolver;
+use CawlOP\PrestaShop\Configuration\Entity\Settings;
+use CawlOP\PrestaShop\Configuration\Validation\AbstractValidationData;
+use CawlOP\PrestaShop\Exception\ExceptionList;
+use CawlOP\PrestaShop\OptionsResolver\AbstractSettingsResolver;
 
 /**
  * Class SettingsUpdater

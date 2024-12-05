@@ -12,10 +12,10 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace WorldlineOP\PrestaShop\Configuration\Updater;
+namespace CawlOP\PrestaShop\Configuration\Updater;
 
 use Exception;
-use WorldlineOP\PrestaShop\Configuration\Entity\PaymentMethodsSettings;
+use CawlOP\PrestaShop\Configuration\Entity\PaymentMethodsSettings;
 
 /**
  * Class PaymentMethodsSettingsUpdater
@@ -29,7 +29,7 @@ class PaymentMethodsSettingsUpdater extends SettingsUpdater
 
     protected function save()
     {
-        \Configuration::updateValue('WORLDLINEOP_PAYMENT_METHODS_SETTINGS', $this->json);
+        \Configuration::updateValue('CAWLOP_PAYMENT_METHODS_SETTINGS', $this->json);
     }
 
     /**

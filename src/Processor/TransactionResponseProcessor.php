@@ -12,17 +12,17 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace WorldlineOP\PrestaShop\Processor;
+namespace CawlOP\PrestaShop\Processor;
 
 use Context;
 use Order;
 use Symfony\Component\Lock\Factory;
 use Symfony\Component\Lock\Store\FlockStore;
 use Cawlop;
-use WorldlineOP\PrestaShop\Logger\LoggerFactory;
-use WorldlineOP\PrestaShop\Presenter\TransactionPresented;
-use WorldlineOP\PrestaShop\Repository\TokenRepository;
-use WorldlineOP\PrestaShop\Utils\Tools;
+use CawlOP\PrestaShop\Logger\LoggerFactory;
+use CawlOP\PrestaShop\Presenter\TransactionPresented;
+use CawlOP\PrestaShop\Repository\TokenRepository;
+use CawlOP\PrestaShop\Utils\Tools;
 use WorldlineopToken;
 use WorldlineopTransaction;
 
@@ -89,7 +89,7 @@ class TransactionResponseProcessor
             if (false !== ($orderIds = Tools::getOrderIdsByIdCart($presentedData->cardDetails['idCart']))) {
                 foreach ($orderIds as $idOrder) {
                     $this->logger->debug(sprintf('Saving transaction for order %d', $idOrder));
-                    /** @var \WorldlineOP\PrestaShop\Repository\TransactionRepository $transactionRepository */
+                    /** @var \CawlOP\PrestaShop\Repository\TransactionRepository $transactionRepository */
                     $transactionRepository = $this->module->getService('cawlop.repository.transaction');
                     $transaction = new WorldlineopTransaction();
                     $transaction->reference = pSQL($presentedData->transaction['merchantReference']);

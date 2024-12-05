@@ -12,11 +12,11 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace WorldlineOP\PrestaShop\Presenter;
+namespace CawlOP\PrestaShop\Presenter;
 
 use Cart;
-use WorldlineOP\PrestaShop\Builder\HostedPaymentRequestBuilder;
-use WorldlineOP\PrestaShop\Utils\Tools;
+use CawlOP\PrestaShop\Builder\HostedPaymentRequestBuilder;
+use CawlOP\PrestaShop\Utils\Tools;
 
 /**
  * Class ShoppingCartPresenter

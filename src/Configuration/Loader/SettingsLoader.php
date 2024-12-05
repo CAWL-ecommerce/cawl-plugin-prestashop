@@ -12,13 +12,13 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace WorldlineOP\PrestaShop\Configuration\Loader;
+namespace CawlOP\PrestaShop\Configuration\Loader;
 
 use Symfony\Component\Serializer\Serializer;
-use WorldlineOP\PrestaShop\Configuration\Entity\AccountSettings;
-use WorldlineOP\PrestaShop\Configuration\Entity\AdvancedSettings;
-use WorldlineOP\PrestaShop\Configuration\Entity\PaymentMethodsSettings;
-use WorldlineOP\PrestaShop\Configuration\Entity\Settings;
+use CawlOP\PrestaShop\Configuration\Entity\AccountSettings;
+use CawlOP\PrestaShop\Configuration\Entity\AdvancedSettings;
+use CawlOP\PrestaShop\Configuration\Entity\PaymentMethodsSettings;
+use CawlOP\PrestaShop\Configuration\Entity\Settings;
 
 /**
  * Class SettingsLoader
@@ -51,9 +51,9 @@ class SettingsLoader
      */
     public function deserialize()
     {
-        $jsonAccount = \Configuration::get('WORLDLINEOP_ACCOUNT_SETTINGS', null, $this->idShopGroup, $this->idShop) ?: '[]';
-        $jsonAdvancedSettings = \Configuration::get('WORLDLINEOP_ADVANCED_SETTINGS', null, $this->idShopGroup, $this->idShop) ?: '[]';
-        $jsonPaymentMethodsSettings = \Configuration::get('WORLDLINEOP_PAYMENT_METHODS_SETTINGS', null, $this->idShopGroup, $this->idShop) ?: '[]';
+        $jsonAccount = \Configuration::get('CAWLOP_ACCOUNT_SETTINGS', null, $this->idShopGroup, $this->idShop) ?: '[]';
+        $jsonAdvancedSettings = \Configuration::get('CAWLOP_ADVANCED_SETTINGS', null, $this->idShopGroup, $this->idShop) ?: '[]';
+        $jsonPaymentMethodsSettings = \Configuration::get('CAWLOP_PAYMENT_METHODS_SETTINGS', null, $this->idShopGroup, $this->idShop) ?: '[]';
 
         $accountSettings = $this->serializer->deserialize($jsonAccount, AccountSettings::class, 'json');
         $advancedSettings = $this->serializer->deserialize($jsonAdvancedSettings, AdvancedSettings::class, 'json');

@@ -12,9 +12,9 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace WorldlineOP\PrestaShop\Configuration\Updater;
+namespace CawlOP\PrestaShop\Configuration\Updater;
 
-use WorldlineOP\PrestaShop\Configuration\Entity\AccountSettings;
+use CawlOP\PrestaShop\Configuration\Entity\AccountSettings;
 
 /**
  * Class AccountSettingsUpdater
@@ -28,7 +28,7 @@ class AccountSettingsUpdater extends SettingsUpdater
 
     protected function save()
     {
-        \Configuration::updateValue('WORLDLINEOP_ACCOUNT_SETTINGS', $this->json);
+        \Configuration::updateValue('CAWLOP_ACCOUNT_SETTINGS', $this->json);
     }
 
     /**

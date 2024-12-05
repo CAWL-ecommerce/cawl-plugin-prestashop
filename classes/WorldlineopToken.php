@@ -46,7 +46,7 @@ class WorldlineopToken extends ObjectModel
 
     /** @var array */
     public static $definition = [
-        'table' => 'worldlineop_token',
+        'table' => 'cawlop_token',
         'primary' => 'id_worldlineop_token',
         'fields' => [
             'id_customer' => [

@@ -12,13 +12,13 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace WorldlineOP\PrestaShop\Serializer;
+namespace CawlOP\PrestaShop\Serializer;
 
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use WorldlineOP\PrestaShop\Configuration\Entity\PaymentMethod;
-use WorldlineOP\PrestaShop\Configuration\Entity\PaymentMethodsSettings;
+use CawlOP\PrestaShop\Configuration\Entity\PaymentMethod;
+use CawlOP\PrestaShop\Configuration\Entity\PaymentMethodsSettings;
 
 /**
  * Class PaymentMethodsSettingsDenormalizer

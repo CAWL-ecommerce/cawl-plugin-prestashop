@@ -12,7 +12,7 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace WorldlineOP\PrestaShop\Presenter;
+namespace CawlOP\PrestaShop\Presenter;
 
 use Configuration;
 use Context;
@@ -21,7 +21,7 @@ use Currency;
 use OnlinePayments\Sdk\Merchant\MerchantClient;
 use OnlinePayments\Sdk\Merchant\Products\GetPaymentProductParams;
 use Cawlop;
-use WorldlineOP\PrestaShop\Repository\TokenRepository;
+use CawlOP\PrestaShop\Repository\TokenRepository;
 
 /**
  * Class StoredCardsPresenter

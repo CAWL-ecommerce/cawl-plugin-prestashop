@@ -12,11 +12,11 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace WorldlineOP\PrestaShop\Sdk;
+namespace CawlOP\PrestaShop\Sdk;
 
 use OnlinePayments\Sdk\Client;
 use OnlinePayments\Sdk\Communicator;
-use WorldlineOP\PrestaShop\Configuration\Entity\Settings;
+use CawlOP\PrestaShop\Configuration\Entity\Settings;
 
 /**
  * Class ClientFactory

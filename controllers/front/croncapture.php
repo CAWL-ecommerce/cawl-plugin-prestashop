@@ -16,8 +16,8 @@ if (!defined('_PS_VERSION_')) {
 }
 
 use OnlinePayments\Sdk\Domain\CapturePaymentRequest;
-use WorldlineOP\PrestaShop\Configuration\Entity\PaymentSettings;
-use WorldlineOP\PrestaShop\Utils\Decimal;
+use CawlOP\PrestaShop\Configuration\Entity\PaymentSettings;
+use CawlOP\PrestaShop\Utils\Decimal;
 
 /**
  * Class CawlopCronCaptureModuleFrontController
@@ -68,7 +68,7 @@ class CawlopCronCaptureModuleFrontController extends ModuleFrontController
     public function displayAjaxRunCron()
     {
         $secureKey = \Tools::getValue('secure_key');
-        if ($secureKey !== \WorldlineOP\PrestaShop\Utils\Tools::hash($this->module->getLocalPath())) {
+        if ($secureKey !== \CawlOP\PrestaShop\Utils\Tools::hash($this->module->getLocalPath())) {
             header('HTTP/1.1 200 OK');
             exit;
         }
@@ -76,7 +76,7 @@ class CawlopCronCaptureModuleFrontController extends ModuleFrontController
         if ($this->verbose) {
             printf('<pre>');
         }
-        /** @var \WorldlineOP\PrestaShop\Configuration\Loader\SettingsLoader $settingsLoader */
+        /** @var \CawlOP\PrestaShop\Configuration\Loader\SettingsLoader $settingsLoader */
         $settingsLoader = $this->module->getService('cawlop.settings.loader');
         $shopsSettings = [];
         $restrictOSIds1 = [Configuration::getGlobalValue('PS_OS_CANCELED')];
@@ -125,7 +125,7 @@ class CawlopCronCaptureModuleFrontController extends ModuleFrontController
         }
         /** @var \OnlinePayments\Sdk\Merchant\MerchantClient $merchantClient */
         $merchantClient = $this->module->getService('cawlop.sdk.client');
-        /** @var \WorldlineOP\PrestaShop\Repository\TransactionRepository $transactionRepository */
+        /** @var \CawlOP\PrestaShop\Repository\TransactionRepository $transactionRepository */
         $transactionRepository = $this->module->getService('cawlop.repository.transaction');
         $rows = array_map(
             function ($array) {
@@ -145,7 +145,7 @@ class CawlopCronCaptureModuleFrontController extends ModuleFrontController
             if (!isset($shopsSettings[$order->id_shop])) {
                 $shopsSettings[$order->id_shop] = $settingsLoader->setContext($order->id_shop);
             }
-            /** @var \WorldlineOP\PrestaShop\Configuration\Entity\Settings $settings */
+            /** @var \CawlOP\PrestaShop\Configuration\Entity\Settings $settings */
             $settings = $shopsSettings[$order->id_shop];
             if (PaymentSettings::TRANSACTION_TYPE_IMMEDIATE === $settings->advancedSettings->paymentSettings->transactionType
                 || 0 === $settings->advancedSettings->paymentSettings->captureDelay
@@ -193,7 +193,7 @@ class CawlopCronCaptureModuleFrontController extends ModuleFrontController
             }
             $amount = $paymentResponse->getPaymentOutput()->getAmountOfMoney()->getAmount();
             $currency = $paymentResponse->getPaymentOutput()->getAmountOfMoney()->getCurrencyCode();
-            $pow = \WorldlineOP\PrestaShop\Utils\Tools::getCurrencyDecimalByIso($currency);
+            $pow = \CawlOP\PrestaShop\Utils\Tools::getCurrencyDecimalByIso($currency);
             $this->printOrderDebug(sprintf(
                 'About to capture %s for transaction ID %s',
                 Decimal::divide((string) $amount, (string) pow(10, $pow)) . $currency,

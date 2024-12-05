@@ -12,13 +12,13 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace WorldlineOP\PrestaShop\Logger;
+namespace CawlOP\PrestaShop\Logger;
 
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
 use Monolog\Processor\UidProcessor;
-use WorldlineOP\PrestaShop\Configuration\Entity\Settings;
-use WorldlineOP\PrestaShop\Utils\Tools;
+use CawlOP\PrestaShop\Configuration\Entity\Settings;
+use CawlOP\PrestaShop\Utils\Tools;
 
 /**
  * Class LoggerFactory

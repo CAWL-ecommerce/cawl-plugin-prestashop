@@ -5,7 +5,7 @@ imports:
 services:
 
   cawlop.payment.presenter:
-    class: 'WorldlineOP\PrestaShop\Presenter\PaymentOptionsPresenter'
+    class: 'CawlOP\PrestaShop\Presenter\PaymentOptionsPresenter'
     public: true
     arguments:
       - '@cawlop.module'
@@ -13,11 +13,11 @@ services:
       - '@cawlop.context'
 
   cawlop.repository.hosted_checkout:
-    class: 'WorldlineOP\PrestaShop\Repository\HostedCheckoutRepository'
+    class: 'CawlOP\PrestaShop\Repository\HostedCheckoutRepository'
     public: true
 
   cawlop.repository.created_payment:
-    class: 'WorldlineOP\PrestaShop\Repository\CreatedPaymentRepository'
+    class: 'CawlOP\PrestaShop\Repository\CreatedPaymentRepository'
     public: true
 
   cawlop.checksum.address:
@@ -31,7 +31,7 @@ services:
       - '@cawlop.checksum.address'
 
   cawlop.storedcards.presenter:
-    class: 'WorldlineOP\PrestaShop\Presenter\StoredCardsPresenter'
+    class: 'CawlOP\PrestaShop\Presenter\StoredCardsPresenter'
     public: true
     arguments:
       - '@cawlop.module'

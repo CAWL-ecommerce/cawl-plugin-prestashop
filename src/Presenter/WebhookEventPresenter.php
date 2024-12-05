@@ -12,11 +12,11 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace WorldlineOP\PrestaShop\Presenter;
+namespace CawlOP\PrestaShop\Presenter;
 
 use OnlinePayments\Sdk\Domain\WebhooksEvent;
-use WorldlineOP\PrestaShop\Configuration\Entity\Settings;
-use WorldlineOP\PrestaShop\Logger\LoggerFactory;
+use CawlOP\PrestaShop\Configuration\Entity\Settings;
+use CawlOP\PrestaShop\Logger\LoggerFactory;
 
 /**
  * Class TransactionPresenter

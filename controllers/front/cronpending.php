@@ -63,7 +63,7 @@ class CawlopCronPendingModuleFrontController extends ModuleFrontController
     public function displayAjaxRunCron()
     {
         $secureKey = \Tools::getValue('secure_key');
-        if ($secureKey !== \WorldlineOP\PrestaShop\Utils\Tools::hash($this->module->getLocalPath())) {
+        if ($secureKey !== \CawlOP\PrestaShop\Utils\Tools::hash($this->module->getLocalPath())) {
             header('HTTP/1.1 200 OK');
             exit;
         }
@@ -72,7 +72,7 @@ class CawlopCronPendingModuleFrontController extends ModuleFrontController
             printf('<pre>');
         }
         $shops = Shop::getShops(false, null, true);
-        /** @var \WorldlineOP\PrestaShop\Configuration\Loader\SettingsLoader $settingsLoader */
+        /** @var \CawlOP\PrestaShop\Configuration\Loader\SettingsLoader $settingsLoader */
         $settingsLoader = $this->module->getService('cawlop.settings.loader');
         $shopSettings = [];
         $pendingStateIds = [];
@@ -105,7 +105,7 @@ class CawlopCronPendingModuleFrontController extends ModuleFrontController
         }
         /** @var \OnlinePayments\Sdk\Merchant\MerchantClient $merchantClient */
         $merchantClient = $this->module->getService('cawlop.sdk.client');
-        /** @var \WorldlineOP\PrestaShop\Repository\TransactionRepository $transactionRepository */
+        /** @var \CawlOP\PrestaShop\Repository\TransactionRepository $transactionRepository */
         $rows = array_map(
             function ($array) {
                 return $array['id_order'];
@@ -122,7 +122,7 @@ class CawlopCronPendingModuleFrontController extends ModuleFrontController
                 $this->printOrderDebug('Cannot load order');
                 continue;
             }
-            /** @var \WorldlineOP\PrestaShop\Configuration\Entity\Settings $settings */
+            /** @var \CawlOP\PrestaShop\Configuration\Entity\Settings $settings */
             $settings = $shopSettings[$order->id_shop];
             if ($order->current_state != $settings->advancedSettings->paymentSettings->pendingOrderStateId) {
                 $this->printOrderDebug('Shop does not match status');

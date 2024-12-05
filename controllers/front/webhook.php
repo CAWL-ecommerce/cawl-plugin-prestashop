@@ -17,8 +17,8 @@ if (!defined('_PS_VERSION_')) {
 
 use OnlinePayments\Sdk\Webhooks\InMemorySecretKeyStore;
 use OnlinePayments\Sdk\Webhooks\WebhooksHelper;
-use WorldlineOP\PrestaShop\Configuration\Entity\Settings;
-use WorldlineOP\PrestaShop\Utils\Tools;
+use CawlOP\PrestaShop\Configuration\Entity\Settings;
+use CawlOP\PrestaShop\Utils\Tools;
 
 /**
  * Class CawlopWebhookModuleFrontController
@@ -36,7 +36,7 @@ class CawlopWebhookModuleFrontController extends ModuleFrontController
      */
     public function postProcess()
     {
-        /** @var \WorldlineOP\PrestaShop\Logger\LoggerFactory $loggerFactory */
+        /** @var \CawlOP\PrestaShop\Logger\LoggerFactory $loggerFactory */
         $loggerFactory = $this->module->getService('cawlop.logger.factory');
         $this->logger = $loggerFactory->setChannel('Webhooks');
         $data = \Tools::file_get_contents('php://input');
@@ -72,12 +72,12 @@ class CawlopWebhookModuleFrontController extends ModuleFrontController
         //header('HTTP/1.1 200 OK');
         $this->respondOK();
 
-        /** @var \WorldlineOP\PrestaShop\Presenter\WebhookEventPresenter $eventPresenter */
+        /** @var \CawlOP\PrestaShop\Presenter\WebhookEventPresenter $eventPresenter */
         $eventPresenter = $this->module->getService('cawlop.event.presenter');
         try {
             $eventPresenter->handlePending($event, $settings);
             $presentedData = $eventPresenter->present($event, $this->context->shop->id);
-            /** @var \WorldlineOP\PrestaShop\Processor\TransactionResponseProcessor $transactionResponseProcessor */
+            /** @var \CawlOP\PrestaShop\Processor\TransactionResponseProcessor $transactionResponseProcessor */
             $transactionResponseProcessor = $this->module->getService('cawlop.processor.transaction');
             $transactionResponseProcessor->process($presentedData);
         } catch (Exception $e) {

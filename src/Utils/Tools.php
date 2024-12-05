@@ -12,7 +12,7 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace WorldlineOP\PrestaShop\Utils;
+namespace CawlOP\PrestaShop\Utils;
 
 use Alcohol\ISO4217;
 use Currency;
@@ -22,7 +22,7 @@ use Mail;
 use Order;
 use Symfony\Component\Filesystem\Filesystem;
 use Validate;
-use WorldlineOP\PrestaShop\Builder\HostedPaymentRequestBuilder;
+use CawlOP\PrestaShop\Builder\HostedPaymentRequestBuilder;
 
 /**
  * Class Tools
@@ -289,7 +289,7 @@ class Tools
         $dbQuery = new \DbQuery();
         $dbQuery
             ->select('product_type')
-            ->from('worldlineop_product_gift_card')
+            ->from('cawlop_product_gift_card')
             ->where('id_product = ' . (int) $idProduct);
 
         return \Db::getInstance()->getValue($dbQuery) ?: HostedPaymentRequestBuilder::GIFT_CARD_PRODUCT_TYPE_NONE;

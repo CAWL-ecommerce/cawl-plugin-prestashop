@@ -55,7 +55,7 @@ class HostedCheckout extends ObjectModel
 
     /** @var array */
     public static $definition = [
-        'table' => 'worldlineop_hosted_checkout',
+        'table' => 'cawlop_hosted_checkout',
         'primary' => 'id_hosted_checkout',
         'fields' => [
             'id_cart' => [

@@ -12,13 +12,13 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace WorldlineOP\PrestaShop\Builder;
+namespace CawlOP\PrestaShop\Builder;
 
 use OnlinePayments\Sdk\Domain\CardPaymentMethodSpecificInput;
 use OnlinePayments\Sdk\Domain\MobilePaymentMethodSpecificInput;
 use OnlinePayments\Sdk\Domain\RedirectionData;
 use OnlinePayments\Sdk\Domain\ThreeDSecure;
-use WorldlineOP\PrestaShop\Utils\Tools;
+use CawlOP\PrestaShop\Utils\Tools;
 
 /**
  * Class PaymentRequestBuilder

@@ -12,10 +12,10 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace WorldlineOP\PrestaShop\Configuration\Updater;
+namespace CawlOP\PrestaShop\Configuration\Updater;
 
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use WorldlineOP\PrestaShop\Configuration\Entity\AdvancedSettings;
+use CawlOP\PrestaShop\Configuration\Entity\AdvancedSettings;
 
 /**
  * Class AdvancedSettingsUpdater
@@ -29,7 +29,7 @@ class AdvancedSettingsUpdater extends SettingsUpdater
 
     protected function save()
     {
-        \Configuration::updateValue('WORLDLINEOP_ADVANCED_SETTINGS', $this->json);
+        \Configuration::updateValue('CAWLOP_ADVANCED_SETTINGS', $this->json);
     }
 
     /**
