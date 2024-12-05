@@ -70,7 +70,7 @@ class TransactionPresenter implements PresenterInterface
         /** @var \WorldlineopTransaction $transaction */
         $transaction = $this->transactionRepository->findByIdOrder($idOrder);
         if (false === $transaction) {
-            throw new \Exception('Cannot find Worldline transaction');
+            throw new \Exception('Cannot find Cawl transaction');
         }
         try {
             $paymentDetails = $this->merchantClient->payments()->getPaymentDetails($transaction->reference);
