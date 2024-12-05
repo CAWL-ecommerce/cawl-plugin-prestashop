@@ -1,30 +1,30 @@
 services:
 
   cawlop.settings.serializer:
-    class: 'CawlOP\PrestaShop\Serializer\SettingsSerializer'
+    class: 'WorldlineOP\PrestaShop\Serializer\SettingsSerializer'
     public: true
 
   cawlop.settings.loader:
-    class: 'CawlOP\PrestaShop\Configuration\Loader\SettingsLoader'
+    class: 'WorldlineOP\PrestaShop\Configuration\Loader\SettingsLoader'
     public: true
     arguments:
       - '@=service("cawlop.settings.serializer").getSerializer()'
 
   cawlop.settings.presenter:
-    class: 'CawlOP\PrestaShop\Presenter\ModuleConfigurationPresenter'
+    class: 'WorldlineOP\PrestaShop\Presenter\ModuleConfigurationPresenter'
     public: true
     arguments:
       - '@cawlop.module'
       - '@cawlop.settings.loader'
 
   cawlop.settings.factory:
-    class: 'CawlOP\PrestaShop\Configuration\Loader\SettingsLoader'
+    class: 'WorldlineOP\PrestaShop\Configuration\Loader\SettingsLoader'
     public: true
     arguments:
       - '@=service("cawlop.settings.serializer").getSerializer()'
 
   cawlop.settings:
-    class: 'CawlOP\PrestaShop\Configuration\Loader\SettingsLoader'
+    class: 'WorldlineOP\PrestaShop\Configuration\Loader\SettingsLoader'
     public: true
     shared: false
     arguments:
@@ -32,29 +32,29 @@ services:
     factory: ['@cawlop.settings.factory', 'deserialize']
 
   cawlop.settings.account.validation:
-    class: 'CawlOP\PrestaShop\Configuration\Validation\AccountValidationData'
+    class: 'WorldlineOP\PrestaShop\Configuration\Validation\AccountValidationData'
     public: true
     arguments:
       - '@cawlop.module'
 
   cawlop.settings.advanced_settings.validation:
-    class: 'CawlOP\PrestaShop\Configuration\Validation\AdvancedSettingsValidationData'
+    class: 'WorldlineOP\PrestaShop\Configuration\Validation\AdvancedSettingsValidationData'
     public: true
     arguments:
       - '@cawlop.module'
 
   cawlop.settings.payment_methods.validation:
-    class: 'CawlOP\PrestaShop\Configuration\Validation\PaymentMethodsValidationData'
+    class: 'WorldlineOP\PrestaShop\Configuration\Validation\PaymentMethodsValidationData'
     public: true
     arguments:
       - '@cawlop.module'
 
   cawlop.settings.account.resolver:
-    class: 'CawlOP\PrestaShop\OptionsResolver\AccountSettingsResolver'
+    class: 'WorldlineOP\PrestaShop\OptionsResolver\AccountSettingsResolver'
     public: true
 
   cawlop.settings.account.updater:
-    class: 'CawlOP\PrestaShop\Configuration\Updater\AccountSettingsUpdater'
+    class: 'WorldlineOP\PrestaShop\Configuration\Updater\AccountSettingsUpdater'
     public: true
     arguments:
       - '@=service("cawlop.settings.serializer").getSerializer()'
@@ -64,11 +64,11 @@ services:
       - '@cawlop.module'
 
   cawlop.settings.advanced_settings.resolver:
-    class: 'CawlOP\PrestaShop\OptionsResolver\AdvancedSettingsResolver'
+    class: 'WorldlineOP\PrestaShop\OptionsResolver\AdvancedSettingsResolver'
     public: true
 
   cawlop.settings.advanced_settings.updater:
-    class: 'CawlOP\PrestaShop\Configuration\Updater\AdvancedSettingsUpdater'
+    class: 'WorldlineOP\PrestaShop\Configuration\Updater\AdvancedSettingsUpdater'
     public: true
     arguments:
       - '@=service("cawlop.settings.serializer").getSerializer()'
@@ -78,11 +78,11 @@ services:
       - '@cawlop.module'
 
   cawlop.settings.payment_methods.resolver:
-    class: 'CawlOP\PrestaShop\OptionsResolver\PaymentMethodsSettingsResolver'
+    class: 'WorldlineOP\PrestaShop\OptionsResolver\PaymentMethodsSettingsResolver'
     public: true
 
   cawlop.settings.payment_methods.updater:
-    class: 'CawlOP\PrestaShop\Configuration\Updater\PaymentMethodsSettingsUpdater'
+    class: 'WorldlineOP\PrestaShop\Configuration\Updater\PaymentMethodsSettingsUpdater'
     public: true
     arguments:
       - '@=service("cawlop.settings.serializer").getSerializer()'
@@ -92,7 +92,7 @@ services:
       - '@cawlop.module'
 
   cawlop.settings.get_products:
-    class: 'CawlOP\PrestaShop\Configuration\Product\GetProductsRequest'
+    class: 'WorldlineOP\PrestaShop\Configuration\Product\GetProductsRequest'
     public: true
     arguments:
       - '@cawlop.sdk.client'

@@ -19,7 +19,7 @@ use OnlinePayments\Sdk\Domain\AmountOfMoney;
 use OnlinePayments\Sdk\Domain\CapturePaymentRequest;
 use OnlinePayments\Sdk\Domain\RefundRequest;
 use OnlinePayments\Sdk\ResponseException;
-use CawlOP\PrestaShop\Utils\Decimal;
+use WorldlineOP\PrestaShop\Utils\Decimal;
 
 /**
  * Class AdminCawlopAjaxTransactionController
@@ -49,7 +49,7 @@ class AdminCawlopAjaxTransactionController extends ModuleAdminController
         /** @var \OnlinePayments\Sdk\Merchant\MerchantClient $merchantClient */
         $merchantClient = $this->module->getService('cawlop.sdk.client');
 
-        $pow = \CawlOP\PrestaShop\Utils\Tools::getCurrencyDecimalByIso($transaction['currencyCode']);
+        $pow = \WorldlineOP\PrestaShop\Utils\Tools::getCurrencyDecimalByIso($transaction['currencyCode']);
         $capturePaymentRequest = new CapturePaymentRequest();
         $capturePaymentRequest->setAmount((int) Decimal::multiply((string) $transaction['amountToCapture'], (string) pow(10, $pow))->getIntegerPart());
         try {
@@ -98,7 +98,7 @@ class AdminCawlopAjaxTransactionController extends ModuleAdminController
 
         $refundRequest = new RefundRequest();
         $amountOfMoney = new AmountOfMoney();
-        $amountOfMoney->setAmount(\CawlOP\PrestaShop\Utils\Tools::getAmountInCents($transaction['amountToRefund'], $transaction['currencyCode']));
+        $amountOfMoney->setAmount(\WorldlineOP\PrestaShop\Utils\Tools::getAmountInCents($transaction['amountToRefund'], $transaction['currencyCode']));
         $amountOfMoney->setCurrencyCode($transaction['currencyCode']);
         $refundRequest->setAmountOfMoney($amountOfMoney);
         try {

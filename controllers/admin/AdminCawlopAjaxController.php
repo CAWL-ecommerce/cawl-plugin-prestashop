@@ -15,7 +15,7 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-use CawlOP\PrestaShop\Exception\ExceptionList;
+use WorldlineOP\PrestaShop\Exception\ExceptionList;
 
 /**
  * Class AdminCawlopAjaxController
@@ -36,7 +36,7 @@ class AdminCawlopAjaxController extends ModuleAdminController
     public function __construct()
     {
         parent::__construct();
-        /** @var \CawlOP\PrestaShop\Logger\LoggerFactory $loggerFactory */
+        /** @var \WorldlineOP\PrestaShop\Logger\LoggerFactory $loggerFactory */
         $loggerFactory = $this->module->getService('cawlop.logger.factory');
         $this->logger = $loggerFactory->setChannel('Ajax');
     }
@@ -53,7 +53,7 @@ class AdminCawlopAjaxController extends ModuleAdminController
     public function ajaxProcessGetPaymentProducts()
     {
         $paymentType = Tools::getValue('type');
-        /** @var \CawlOP\PrestaShop\Configuration\Product\GetProductsRequest $productRequest */
+        /** @var \WorldlineOP\PrestaShop\Configuration\Product\GetProductsRequest $productRequest */
         $productRequest = $this->module->getService('cawlop.settings.get_products');
         try {
             $paymentMethods = $productRequest->request($paymentType);
@@ -85,7 +85,7 @@ class AdminCawlopAjaxController extends ModuleAdminController
 
     public function ajaxProcessHideWhatsNew()
     {
-        /** @var \CawlOP\PrestaShop\Configuration\Updater\AdvancedSettingsUpdater $updater */
+        /** @var \WorldlineOP\PrestaShop\Configuration\Updater\AdvancedSettingsUpdater $updater */
         $updater = $this->module->getService('cawlop.settings.advanced_settings.updater');
         try {
             $updater->update(['displayWhatsNew' => false]);

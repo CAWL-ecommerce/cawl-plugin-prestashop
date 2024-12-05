@@ -12,7 +12,7 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace CawlOP\PrestaShop\Presenter;
+namespace WorldlineOP\PrestaShop\Presenter;
 
 use OnlinePayments\Sdk\Domain\CaptureOutput;
 use OnlinePayments\Sdk\Domain\CardPaymentMethodSpecificOutput;
@@ -26,8 +26,8 @@ use OnlinePayments\Sdk\Domain\RefundOutput;
 use OnlinePayments\Sdk\Domain\RefundRedirectMethodSpecificOutput;
 use OnlinePayments\Sdk\Merchant\MerchantClient;
 use Cawlop;
-use CawlOP\PrestaShop\Repository\TransactionRepository;
-use CawlOP\PrestaShop\Utils\Tools;
+use WorldlineOP\PrestaShop\Repository\TransactionRepository;
+use WorldlineOP\PrestaShop\Utils\Tools;
 
 /**
  * Class TransactionPresenter

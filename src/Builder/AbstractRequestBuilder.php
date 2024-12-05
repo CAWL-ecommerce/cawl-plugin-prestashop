@@ -12,7 +12,7 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace CawlOP\PrestaShop\Builder;
+namespace WorldlineOP\PrestaShop\Builder;
 
 use Context;
 use Country;
@@ -35,11 +35,11 @@ use OnlinePayments\Sdk\Domain\SurchargeSpecificInput;
 use RandomLib\Factory;
 use SecurityLib\Strength;
 use Cawlop;
-use CawlOP\PrestaShop\Configuration\Entity\PaymentMethodsSettings;
-use CawlOP\PrestaShop\Configuration\Entity\PaymentSettings;
-use CawlOP\PrestaShop\Configuration\Entity\Settings;
-use CawlOP\PrestaShop\Presenter\ShoppingCartPresenter;
-use CawlOP\PrestaShop\Utils\Tools;
+use WorldlineOP\PrestaShop\Configuration\Entity\PaymentMethodsSettings;
+use WorldlineOP\PrestaShop\Configuration\Entity\PaymentSettings;
+use WorldlineOP\PrestaShop\Configuration\Entity\Settings;
+use WorldlineOP\PrestaShop\Presenter\ShoppingCartPresenter;
+use WorldlineOP\PrestaShop\Utils\Tools;
 
 /**
  * Class AbstractRequestBuilder

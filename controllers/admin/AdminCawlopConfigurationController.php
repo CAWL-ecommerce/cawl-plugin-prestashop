@@ -20,9 +20,9 @@ use OnlinePayments\Sdk\Communicator;
 use OnlinePayments\Sdk\CommunicatorConfiguration;
 use OnlinePayments\Sdk\DefaultConnection;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use CawlOP\PrestaShop\Configuration\Entity\AccountSettings;
-use CawlOP\PrestaShop\Configuration\Entity\Settings;
-use CawlOP\PrestaShop\Exception\ExceptionList;
+use WorldlineOP\PrestaShop\Configuration\Entity\AccountSettings;
+use WorldlineOP\PrestaShop\Configuration\Entity\Settings;
+use WorldlineOP\PrestaShop\Exception\ExceptionList;
 
 /**
  * Class AdminCawlopConfigurationController
@@ -61,7 +61,7 @@ class AdminCawlopConfigurationController extends ModuleAdminController
     {
         parent::setMedia($isNewTheme);
         $this->context->controller->addCSS([$this->module->getLocalPath() . '/views/css/config.css']);
-        /** @var \CawlOP\PrestaShop\Configuration\Entity\Settings $settings */
+        /** @var \WorldlineOP\PrestaShop\Configuration\Entity\Settings $settings */
         $settings = $this->module->getService('cawlop.settings');
         // @formatter:off
         Media::addJsDef([
@@ -94,7 +94,7 @@ class AdminCawlopConfigurationController extends ModuleAdminController
     public function initContent()
     {
         $this->setModals();
-        /** @var \CawlOP\PrestaShop\Presenter\ModuleConfigurationPresenter $presenter */
+        /** @var \WorldlineOP\PrestaShop\Presenter\ModuleConfigurationPresenter $presenter */
         $presenter = $this->module->getService('cawlop.settings.presenter');
         $data = $presenter->present();
         $data['activeTab'] = $this->activeTab;
@@ -130,7 +130,7 @@ class AdminCawlopConfigurationController extends ModuleAdminController
 
     public function saveAccount()
     {
-        /** @var \CawlOP\PrestaShop\Configuration\Updater\AccountSettingsUpdater $updater */
+        /** @var \WorldlineOP\PrestaShop\Configuration\Updater\AccountSettingsUpdater $updater */
         $updater = $this->module->getService('cawlop.settings.account.updater');
         $form = Tools::getValue('worldlineopAccountSettings');
         try {
@@ -157,12 +157,12 @@ class AdminCawlopConfigurationController extends ModuleAdminController
     public function testCredentials()
     {
         $form = Tools::getValue('worldlineopAccountSettings');
-        /** @var \CawlOP\PrestaShop\Configuration\Updater\AccountSettingsUpdater $accountUpdater */
+        /** @var \WorldlineOP\PrestaShop\Configuration\Updater\AccountSettingsUpdater $accountUpdater */
         $accountUpdater = $this->module->getService('cawlop.settings.account.updater');
         $form = $accountUpdater->forceResolve($form);
         $accountTested = new AccountSettings();
         $accountTested = $accountUpdater->forceDenormalize($form, $accountTested);
-        /** @var \CawlOP\PrestaShop\Configuration\Entity\Settings $savedSettings */
+        /** @var \WorldlineOP\PrestaShop\Configuration\Entity\Settings $savedSettings */
         $savedSettings = $this->module->getService('cawlop.settings');
         $settings = new Settings();
         $settings->accountSettings = $accountTested;
@@ -205,9 +205,9 @@ class AdminCawlopConfigurationController extends ModuleAdminController
      */
     public function updatePaymentMethods()
     {
-        /** @var \CawlOP\PrestaShop\Configuration\Product\GetProductsRequest $getProductsService */
+        /** @var \WorldlineOP\PrestaShop\Configuration\Product\GetProductsRequest $getProductsService */
         $getProductsService = $this->module->getService('cawlop.settings.get_products');
-        /** @var \CawlOP\PrestaShop\Configuration\Updater\PaymentMethodsSettingsUpdater $updater */
+        /** @var \WorldlineOP\PrestaShop\Configuration\Updater\PaymentMethodsSettingsUpdater $updater */
         $updater = $this->module->getService('cawlop.settings.payment_methods.updater');
         try {
             $iframeProducts = $getProductsService->request('iframe');
@@ -224,7 +224,7 @@ class AdminCawlopConfigurationController extends ModuleAdminController
     public function processSaveAdvancedSettingsForm()
     {
         $this->activeTab = self::TAB_ADVANCED_SETTINGS;
-        /** @var \CawlOP\PrestaShop\Configuration\Updater\AdvancedSettingsUpdater $updater */
+        /** @var \WorldlineOP\PrestaShop\Configuration\Updater\AdvancedSettingsUpdater $updater */
         $updater = $this->module->getService('cawlop.settings.advanced_settings.updater');
         $form = Tools::getValue('worldlineopAdvancedSettings');
         try {
@@ -242,7 +242,7 @@ class AdminCawlopConfigurationController extends ModuleAdminController
     public function processSavePaymentMethodsSettingsForm()
     {
         $this->activeTab = self::TAB_PAYMENT_METHODS;
-        /** @var \CawlOP\PrestaShop\Configuration\Updater\PaymentMethodsSettingsUpdater $updater */
+        /** @var \WorldlineOP\PrestaShop\Configuration\Updater\PaymentMethodsSettingsUpdater $updater */
         $updater = $this->module->getService('cawlop.settings.payment_methods.updater');
         $form = Tools::getValue('worldlineopPaymentMethodsSettings');
         try {

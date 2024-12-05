@@ -12,11 +12,11 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace CawlOP\PrestaShop\Configuration\Validation;
+namespace WorldlineOP\PrestaShop\Configuration\Validation;
 
 use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\Regex;
-use CawlOP\PrestaShop\Configuration\Entity\AccountSettings;
+use WorldlineOP\PrestaShop\Configuration\Entity\AccountSettings;
 
 /**
  * Class AccountValidationData

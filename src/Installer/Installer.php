@@ -12,17 +12,17 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace CawlOP\PrestaShop\Installer;
+namespace WorldlineOP\PrestaShop\Installer;
 
 use Monolog\Logger;
 use PrestaShopBundle\Install\SqlLoader;
 use Symfony\Component\Yaml\Parser;
-use CawlOP\PrestaShop\Configuration\Updater\AccountSettingsUpdater;
-use CawlOP\PrestaShop\Configuration\Updater\AdvancedSettingsUpdater;
-use CawlOP\PrestaShop\Configuration\Updater\PaymentMethodsSettingsUpdater;
-use CawlOP\PrestaShop\Logger\LoggerFactory;
-use CawlOP\PrestaShop\Utils\OrderStatusManager;
-use CawlOP\PrestaShop\Utils\TabManager;
+use WorldlineOP\PrestaShop\Configuration\Updater\AccountSettingsUpdater;
+use WorldlineOP\PrestaShop\Configuration\Updater\AdvancedSettingsUpdater;
+use WorldlineOP\PrestaShop\Configuration\Updater\PaymentMethodsSettingsUpdater;
+use WorldlineOP\PrestaShop\Logger\LoggerFactory;
+use WorldlineOP\PrestaShop\Utils\OrderStatusManager;
+use WorldlineOP\PrestaShop\Utils\TabManager;
 
 /**
  * Class Installer

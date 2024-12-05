@@ -4,7 +4,7 @@ imports:
 services:
 
   cawlop.transaction.presenter:
-    class: 'CawlOP\PrestaShop\Presenter\TransactionPresenter'
+    class: 'WorldlineOP\PrestaShop\Presenter\TransactionPresenter'
     public: true
     arguments:
       - '@cawlop.module'

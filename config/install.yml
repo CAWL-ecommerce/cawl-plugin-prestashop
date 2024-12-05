@@ -1,15 +1,15 @@
 services:
 
   cawlop.tab.manager:
-    class: 'CawlOP\PrestaShop\Utils\TabManager'
+    class: 'WorldlineOP\PrestaShop\Utils\TabManager'
     public: true
 
   cawlop.status.manager:
-    class: 'CawlOP\PrestaShop\Utils\OrderStatusManager'
+    class: 'WorldlineOP\PrestaShop\Utils\OrderStatusManager'
     public: true
 
   cawlop.installer:
-    class: 'CawlOP\PrestaShop\Installer\Installer'
+    class: 'WorldlineOP\PrestaShop\Installer\Installer'
     public: true
     arguments:
       - '@cawlop.module'

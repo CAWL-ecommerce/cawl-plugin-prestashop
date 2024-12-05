@@ -43,7 +43,7 @@ class CreatedPayment extends ObjectModel
 
     /** @var array */
     public static $definition = [
-        'table' => 'cawlop_created_payment',
+        'table' => 'worldlineop_created_payment',
         'primary' => 'id_created_payment',
         'fields' => [
             'id_cart' => [

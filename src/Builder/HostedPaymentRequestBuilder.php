@@ -12,7 +12,7 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace CawlOP\PrestaShop\Builder;
+namespace WorldlineOP\PrestaShop\Builder;
 
 use Language;
 use OnlinePayments\Sdk\Domain\AmountOfMoney;
@@ -30,9 +30,9 @@ use OnlinePayments\Sdk\Domain\ShoppingCart;
 use OnlinePayments\Sdk\Domain\ThreeDSecure;
 use RandomLib\Factory;
 use SecurityLib\Strength;
-use CawlOP\PrestaShop\Configuration\Entity\PaymentMethodsSettings;
-use CawlOP\PrestaShop\Configuration\Entity\PaymentSettings;
-use CawlOP\PrestaShop\Utils\Tools;
+use WorldlineOP\PrestaShop\Configuration\Entity\PaymentMethodsSettings;
+use WorldlineOP\PrestaShop\Configuration\Entity\PaymentSettings;
+use WorldlineOP\PrestaShop\Utils\Tools;
 
 /**
  * Class HostedPaymentRequestBuilder

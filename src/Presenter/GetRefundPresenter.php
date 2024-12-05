@@ -12,16 +12,16 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 
-namespace CawlOP\PrestaShop\Presenter;
+namespace WorldlineOP\PrestaShop\Presenter;
 
 use Cart;
 use OnlinePayments\Sdk\Domain\RefundResponse;
 use Order;
 use Validate;
 use Cawlop;
-use CawlOP\PrestaShop\Logger\LoggerFactory;
-use CawlOP\PrestaShop\Repository\TransactionRepository;
-use CawlOP\PrestaShop\Utils\Tools;
+use WorldlineOP\PrestaShop\Logger\LoggerFactory;
+use WorldlineOP\PrestaShop\Repository\TransactionRepository;
+use WorldlineOP\PrestaShop\Utils\Tools;
 
 /**
  * Class GetRefundPresenter

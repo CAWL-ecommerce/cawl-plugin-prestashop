@@ -19,20 +19,20 @@ services:
     public: true
 
   cawlop.logger.factory:
-    class: 'CawlOP\PrestaShop\Logger\LoggerFactory'
+    class: 'WorldlineOP\PrestaShop\Logger\LoggerFactory'
     public: true
     arguments:
       - '@cawlop.settings'
 
   cawlop.logger:
-    class: 'CawlOP\PrestaShop\Logger\LoggerFactory'
+    class: 'WorldlineOP\PrestaShop\Logger\LoggerFactory'
     public: true
     arguments:
       - '@cawlop.settings'
     factory: ['@cawlop.logger.factory', 'getLogger']
 
   cawlop.event.presenter:
-    class: 'CawlOP\PrestaShop\Presenter\WebhookEventPresenter'
+    class: 'WorldlineOP\PrestaShop\Presenter\WebhookEventPresenter'
     public: true
     arguments:
       - '@cawlop.getpayment.presenter'
@@ -40,7 +40,7 @@ services:
       - '@cawlop.logger.factory'
 
   cawlop.getpayment.presenter:
-    class: 'CawlOP\PrestaShop\Presenter\GetPaymentPresenter'
+    class: 'WorldlineOP\PrestaShop\Presenter\GetPaymentPresenter'
     public: true
     arguments:
       - '@cawlop.module'
@@ -49,14 +49,14 @@ services:
       - '@cawlop.logger.factory'
 
   cawlop.getrefund.presenter:
-    class: 'CawlOP\PrestaShop\Presenter\GetRefundPresenter'
+    class: 'WorldlineOP\PrestaShop\Presenter\GetRefundPresenter'
     public: true
     arguments:
       - '@cawlop.module'
       - '@cawlop.logger.factory'
 
   cawlop.processor.transaction:
-    class: 'CawlOP\PrestaShop\Processor\TransactionResponseProcessor'
+    class: 'WorldlineOP\PrestaShop\Processor\TransactionResponseProcessor'
     public: true
     arguments:
       - '@cawlop.module'

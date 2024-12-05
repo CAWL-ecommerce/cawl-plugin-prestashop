@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `PREFIX_cawlop_hosted_checkout`
+CREATE TABLE IF NOT EXISTS `PREFIX_worldlineop_hosted_checkout`
 (
     `id_hosted_checkout`   INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
     `id_cart`              INT(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `PREFIX_cawlop_hosted_checkout`
     COLLATE = 'utf8mb4_general_ci'
     ENGINE = InnoDB
 ;
-CREATE TABLE IF NOT EXISTS `PREFIX_cawlop_transaction`
+CREATE TABLE IF NOT EXISTS `PREFIX_worldlineop_transaction`
 (
     `id_worldlineop_transaction` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
     `id_order`                   INT(10) UNSIGNED NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `PREFIX_cawlop_transaction`
     COLLATE = 'utf8mb4_general_ci'
     ENGINE = InnoDB
 ;
-CREATE TABLE IF NOT EXISTS `PREFIX_cawlop_created_payment` (
+CREATE TABLE IF NOT EXISTS `PREFIX_worldlineop_created_payment` (
 	`id_created_payment` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`id_cart` INT(11) NOT NULL,
 	`payment_id` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_general_ci',
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `PREFIX_cawlop_created_payment` (
     COLLATE='utf8mb4_general_ci'
     ENGINE=InnoDB
 ;
-CREATE TABLE IF NOT EXISTS `PREFIX_cawlop_token` (
+CREATE TABLE IF NOT EXISTS `PREFIX_worldlineop_token` (
 	`id_worldlineop_token` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`id_customer` INT(10) UNSIGNED NOT NULL,
 	`id_shop` INT(10) UNSIGNED NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `PREFIX_cawlop_token` (
     ENGINE=InnoDB
 ;
 
-CREATE TABLE IF NOT EXISTS `PREFIX_cawlop_product_gift_card` (
+CREATE TABLE IF NOT EXISTS `PREFIX_worldlineop_product_gift_card` (
     `id_product` INT(10) UNSIGNED NOT NULL,
     `product_type` ENUM('none','FoodAndDrink','HomeAndGarden','GiftAndFlowers') NOT NULL DEFAULT 'none' COLLATE 'utf8mb4_general_ci',
     UNIQUE INDEX `id_product` (`id_product`) USING BTREE

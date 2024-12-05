@@ -34,7 +34,7 @@ class WorldlineopTransaction extends ObjectModel
 
     /** @var array */
     public static $definition = [
-        'table' => 'cawlop_transaction',
+        'table' => 'worldlineop_transaction',
         'primary' => 'id_worldlineop_transaction',
         'fields' => [
             'id_order' => [
