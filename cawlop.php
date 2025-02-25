@@ -41,7 +41,7 @@ class Cawlop extends PaymentModule
 
         $this->name = 'cawlop';
         $this->author = 'Cawl Online Payments';
-        $this->version = '1.0.0';
+        $this->version = '1.0.1';
         $this->tab = 'payments_gateways';
         // $this->module_key = '089d13d0218de8085259e542483f4438'; TODO: UPDATE MODULE KEY WHEN MODULE IS RELEASING
         $this->currencies = true;
@@ -128,7 +128,7 @@ class Cawlop extends PaymentModule
             case 'order':
                 $this->context->controller->registerJavascript(
                     'worldineoc-js-sdk',
-                    'https://payment.preprod.ca.cawl-solutions.fr/hostedtokenization/js/client/tokenizer.min.js',
+                    'https://payment.preprod.cawl-solutions.fr/hostedtokenization/js/client/tokenizer.min.js',
                     ['server' => 'remote', 'priority' => 1, 'position' => 'head', 'attribute' => 'defer']
                 );
                 $this->context->controller->registerStylesheet(
