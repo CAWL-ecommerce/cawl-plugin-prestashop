@@ -83,8 +83,8 @@ configuration:
     paymentFlowSettingsDisplayed: 0
     force3DsV2: 1
     switchEndpoint: 0
-    testEndpoint: 'https://payment.preprod.ca.cawl-solutions.fr'
-    prodEndpoint: 'https://payment.ca.cawl-solutions.fr'
+    testEndpoint: 'https://payment.preprod.cawl-solutions.fr'
+    prodEndpoint: 'https://payment.cawl-solutions.fr'
     logsEnabled: 0
     paymentSettings:
       transactionType: 'SALE'

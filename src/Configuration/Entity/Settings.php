@@ -19,8 +19,8 @@ namespace WorldlineOP\PrestaShop\Configuration\Entity;
  */
 class Settings
 {
-    const DEFAULT_SDK_ENDPOINT_TEST = 'https://payment.preprod.ca.cawl-solutions.fr';
-    const DEFAULT_SDK_ENDPOINT_PROD = 'https://payment.ca.cawl-solutions.fr';
+    const DEFAULT_SDK_ENDPOINT_TEST = 'https://payment.preprod.cawl-solutions.fr';
+    const DEFAULT_SDK_ENDPOINT_PROD = 'https://payment.cawl-solutions.fr';
 
     const DEFAULT_SUBDOMAIN = 'https://payment.';
 
