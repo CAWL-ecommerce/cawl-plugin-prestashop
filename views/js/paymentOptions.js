@@ -13,6 +13,30 @@
  */
 
 var hostedTokenizationObj;
+var cardVerificationPassed = false;
+
+//adding this code to make sure that submit button stays disabled in case when credit card information is not valid
+document.addEventListener("DOMContentLoaded", function () {
+  let checkBoxElements = document.getElementsByClassName('ps-shown-by-js');
+  for (let i = 0; i < checkBoxElements.length; i++) {
+    if (checkBoxElements[i].id === 'conditions_to_approve[terms-and-conditions]') {
+      checkBoxElements[i].addEventListener('change', function (event) {
+        var submitBtn = document.querySelector
+        ('.js-payment-binary:not([style*="display: none"]):not([style*="display:none"])');
+
+        if (submitBtn) {
+          if (!submitBtn.querySelector('button').classList.contains('disabled') && !cardVerificationPassed) {
+            submitBtn.querySelector('button').classList.add('disabled');
+          }
+
+          if (cardVerificationPassed) {
+            submitBtn.querySelector('button').classList.remove('disabled');
+          }
+        }
+      })
+    }
+  }
+});
 
 const htpPrototype = function (e) {
   this.payButtonClick = function (event) {
@@ -56,14 +80,14 @@ const htpPrototype = function (e) {
 
   this.init = function () {
     this.client = new Tokenizer(
-      this.urls.htp,
-      this.elems.iframeContainer.querySelector('.js-worldlineop-htp').id,
-      {
-        hideCardholderName: false,
-        validationCallback: this.validationCallback,
-        storePermanently:false,
-        surchargeCallback: this.surchargeCallback,
-      }
+        this.urls.htp,
+        this.elems.iframeContainer.querySelector('.js-worldlineop-htp').id,
+        {
+          hideCardholderName: false,
+          validationCallback: this.validationCallback,
+          storePermanently: false,
+          surchargeCallback: this.surchargeCallback,
+        }
     );
     this.client.initialize();
     if (this.cartDetails.cardToken !== undefined) {
@@ -77,6 +101,9 @@ const htpPrototype = function (e) {
   this.validationCallback = function (result) {
     var btn = document.querySelector('.js-payment-binary:not([style*="display: none"]):not([style*="display:none"])');
     btn.querySelector('button').disabled = !result.valid;
+    result.valid ? btn.querySelector('button').classList.remove('disabled') :
+        btn.querySelector('button').classList.add('disabled');
+    cardVerificationPassed = true;
   };
 
   this.surchargeCallback = function (result) {
