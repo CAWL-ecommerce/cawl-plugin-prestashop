@@ -62,13 +62,13 @@ abstract class AbstractRequestBuilder implements PaymentRequestBuilderInterface
     const CARD_ON_FILE_SEQUENCE_INDICATOR_FIRST = 'first';
     const CARD_ON_FILE_SEQUENCE_INDICATOR_SUBSEQUENT = 'subsequent';
 
-    const THREE_DS_LOW_VALUE = 'low-value';
-    const THREE_DS_AMOUNT_EUR = 30;
-
     const CHALLENGE_INDICATOR_REQUIRED = 'challenge-required';
+    const CHALLENGE_INDICATOR_NO_PREFERENCE = 'no-preference';
 
     const SURCHARGE_ON_BEHALF_OF = 'on-behalf-of';
     const SURCHARGE_PASS_THROUGH = 'pass-through';
+
+    const MAX_NUMBER_OF_ITEMS = 99;
 
     /** @var Settings */
     protected $settings;
@@ -99,9 +99,9 @@ abstract class AbstractRequestBuilder implements PaymentRequestBuilderInterface
      * @param Context $context
      */
     public function __construct(
-        Settings              $settings,
-        Cawlop                $module,
-        Context               $context,
+        Settings $settings,
+        Cawlop $module,
+        Context $context,
         ShoppingCartPresenter $shoppingCartPresenter
     ) {
         $this->settings = $settings;

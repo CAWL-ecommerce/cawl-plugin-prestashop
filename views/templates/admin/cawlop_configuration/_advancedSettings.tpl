@@ -247,7 +247,7 @@
             </div>
             <div class="col-lg-9 col-lg-offset-3">
               <div class="help-block">
-                  {l s='If you use the split order feature, activate this option to gracefully handle the duplication of the order by retaining any incoming webhook for the determined period' mod='cawlop'}
+                {l s='If you use the split order feature, activate this option to gracefully handle the duplication of the order by retaining any incoming webhook for the determined period' mod='cawlop'}
               </div>
             </div>
           </div>
@@ -349,7 +349,7 @@
         <!-- Group cards -->
         <div class="form-group">
           <label class="control-label col-lg-3 ">
-              {l s='Group payment options by card' mod='cawlop'}
+            {l s='Group payment options by card' mod='cawlop'}
           </label>
           <div class="col-lg-9">
             <span class="switch prestashop-switch fixed-width-sm">
@@ -383,7 +383,7 @@
         <!-- Force 3DsV2 -->
         <div class="form-group js-worldlineop-switch-force-3ds-block">
           <label class="control-label col-lg-3 ">
-              {l s='Force 3DsV2' mod='cawlop'}
+            {l s='Enable 3Ds' mod='cawlop'}
           </label>
           <div class="col-lg-9 js-worldlineop-switch-force-3ds-switch">
               <span class="switch prestashop-switch fixed-width-sm">
@@ -404,16 +404,16 @@
           </div>
           <div class="col-lg-9 col-lg-offset-3">
             <div class="help-block">
-                {l s='It is mandatory to enforce 3DsV2 in Europe, but can be turned off for other geographies' mod='cawlop'}
+              {l s='It is mandatory to enforce 3DsV2 in Europe, but can be turned off for other geographies' mod='cawlop'}
             </div>
           </div>
         </div>
         <!-- /Force 3DsV2 -->
         <div class="js-worldlineop-force-3ds-disabled-block">
-          <!-- Enforce 3DS -->
+          <!-- Mandatory 3DS -->
           <div class="form-group js-worldlineop-enforce-challenge-block">
             <label class="control-label col-lg-3 ">
-              {l s='Request challenge on all cards transactions' mod='cawlop'}
+              {l s='Enable mandatory 3DS' mod='cawlop'}
             </label>
             <div class="col-lg-9 js-worldlineop-enforce-challenge-switch">
               <span class="switch prestashop-switch fixed-width-sm">
@@ -437,11 +437,11 @@
               </div>
             </div>
           </div>
-          <!-- /Enforce 3DS -->
+          <!-- /Mandatory 3DS -->
           <!-- 3DS Exemption -->
           <div class="form-group js-worldlineop-3ds-exemption-block">
             <label class="control-label col-lg-3 ">
-                {l s='Exempt transactions from 3DS' mod='cawlop'}
+              {l s='Enable 3DS exemption' mod='cawlop'}
             </label>
             <div class="col-lg-9">
               <span class="switch prestashop-switch fixed-width-sm">
@@ -460,10 +460,75 @@
                 <a class="slide-button btn"></a>
               </span>
             </div>
-            <div class="col-lg-9 col-lg-offset-3">
+            <div class="col-lg-9 col-lg-offset-3 wl-margin-bottom-15">
               <div class="help-block">
-                  {l s='When enabled, transactions with an order amount < 30 EUR will be exempted from 3DS' mod='cawlop'}
+                {l s='When enabled, transactions with an order amount < 30 EUR will be exempted from 3DS' mod='cawlop'}
                 <span></span>
+              </div>
+            </div>
+            <div class="exemption-type js-worldlineop-3ds-exemption-params">
+              <label class="control-label col-lg-3 "
+                     for="wlToggleButton">
+                {l s='Exemption type' mod='cawlop'}
+              </label>
+              <div class="col-lg-9">
+                <button type="button"
+                        class="btn btn-default wl-dropdown-toggle"
+                        tabindex="-1"
+                        name="wlToggleButton"
+                        data-toggle="dropdown">
+                                    <span class="js-worldlineop-select-3ds-exemption-type-button-text"
+                                          value="{$data.advancedSettings.threeDSExemptedType|default:'low-value'|escape:'htmlall':'UTF-8'}">
+                                        {if $data.advancedSettings.threeDSExemptedType == 'low-value' || !$data.advancedSettings.threeDSExemptedType}
+                                          {l s='low-value (default)' mod='cawlop'}
+                                        {else}
+                                          {$data.advancedSettings.threeDSExemptedType|escape:'htmlall':'UTF-8'}
+                                        {/if}
+                                    </span>
+                  <i class="icon-caret-down"></i>
+                </button>
+                <input type="hidden" name="worldlineopAdvancedSettings[threeDSExemptedType]"
+                       value="{$data.advancedSettings.threeDSExemptedType|default:'low-value'|escape:'htmlall':'UTF-8'}"
+                       id="wl-selectedExemptedType">
+                <ul class="dropdown-menu exemption-types-list js-worldlineop-select-3ds-exemption-type-list">
+                  <li value="low-value">
+                    {l s='low-value (default)' mod='cawlop'}
+                  </li>
+                  <li value="transaction-risk-analysis">
+                    {l s='transaction-risk-analysis' mod='cawlop'}
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-9 col-lg-offset-3">
+                <div class="help-block">
+                  {l s='Please select the exemption type.' mod='cawlop'}
+                  <span></span>
+                </div>
+              </div>
+
+              <label class="control-label col-lg-3 "
+                     for="worldlineopAdvancedSettings[threeDSExemptedValue]">
+                {l s='Exemption limit' mod='cawlop'}
+              </label>
+              <div class="col-lg-9">
+                <input value="{$data.advancedSettings.threeDSExemptedValue|default:0|escape:'htmlall':'UTF-8'}"
+                       class="wl-exempt-type-input js-worldlineop-select-3ds-exemption-limit-input"
+                       type="number" name="worldlineopAdvancedSettings[threeDSExemptedValue]"
+                       min="0"
+                       required
+                />
+              </div>
+              <div class="col-lg-9 col-lg-offset-3">
+                <div id="js-worldlineop-select-3ds-exemption-limit-30" class="help-block">
+                  {l s='Please enter the amount limit (0 to 30 EUR)' mod='cawlop'}
+                  <span></span>
+                </div>
+                <div id="js-worldlineop-select-3ds-exemption-limit-100" class="help-block wl-hidden-element">
+                  {l s='Please enter the amount limit (0 to 100 EUR)' mod='cawlop'}
+                  <span></span>
+                </div>
+                <div id="js-worldlineop-select-3ds-exemption-limit-invalid-amount" class="help-block wl-hidden-element">
+                </div>
               </div>
             </div>
           </div>
@@ -476,7 +541,7 @@
         <!-- Surcharging -->
         <div class="form-group">
           <label class="control-label col-lg-3 ">
-              {l s='Enable surcharging' mod='cawlop'}
+            {l s='Enable surcharging' mod='cawlop'}
           </label>
           <div class="col-lg-9">
             <span class="switch prestashop-switch fixed-width-sm">
@@ -508,9 +573,10 @@
       </div>
     </div>
     <div class="panel-footer">
-      <button type="submit" class="btn btn-default pull-right" name="submitSaveAdvancedSettingsForm">
+      <button type="submit" class="btn btn-default pull-right js-worldlineop-submit-advanced-settings-form" name="submitSaveAdvancedSettingsForm">
         <i class="process-icon-save"></i> {l s='Save' mod='cawlop'}
       </button>
     </div>
   </form>
 </div>
+
