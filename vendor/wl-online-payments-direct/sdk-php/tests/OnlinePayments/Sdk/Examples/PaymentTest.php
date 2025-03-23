@@ -197,6 +197,9 @@ class PaymentTest extends ClientTestCase
      */
     public function testCreateMinimalPayment()
     {
+        $this->markTestSkipped('Payment may or may not succeed');
+        $this->expectNotToPerformAssertions();
+
         $client = $this->getClient();
         $merchantId = $this->getMerchantId();
         /** @var CreatePaymentResponse $createPaymentResponse */
@@ -257,7 +260,8 @@ class PaymentTest extends ClientTestCase
         $client = $this->getClient();
         $merchantId = $this->getMerchantId();
         $callContext = new CallContext();
-        $dateTimeWitMicroseconds = DateTime::createFromFormat('U.u', microtime(true));
+        $idempotenceRequestTimestamp = null;
+        $dateTimeWitMicroseconds = DateTime::createFromFormat('U.u', (string) microtime(true));
         $callContext->setIdempotenceKey(__FUNCTION__ . '::' . $dateTimeWitMicroseconds->format('Ymd-His-u'));
         $this->assertEmpty($callContext->getIdempotenceRequestTimestamp());
 

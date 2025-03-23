@@ -21,7 +21,7 @@ class CommunicatorTest extends OnlinePaymentsTestCase
     /**
      * @throws Exception
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->defaultCommunicator = new Communicator(
             new DefaultConnection(),
@@ -30,12 +30,14 @@ class CommunicatorTest extends OnlinePaymentsTestCase
         $this->defaultResponseClassMap = new ResponseClassMap('');
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
     }
 
     public function testApiRequestNoop()
     {
+        $this->expectNotToPerformAssertions();
+
         new Communicator(new DefaultConnection(), new CommunicatorConfiguration('', '', '', ''));
     }
 
@@ -58,12 +60,13 @@ class CommunicatorTest extends OnlinePaymentsTestCase
      */
     public function testApiRequestGet()
     {
+        $this->expectNotToPerformAssertions();
+
         $relativeUri = sprintf('/%s/%s/products', Client::API_VERSION, $this->getMerchantId());
         $findParams = new GetPaymentProductsParams();
         $findParams->setCountryCode('NL');
         $findParams->setCurrencyCode('EUR');
-        $clientHeaders = [];
-        $this->defaultCommunicator->get($this->defaultResponseClassMap, $relativeUri, $clientHeaders, $findParams);
+        $this->defaultCommunicator->get($this->defaultResponseClassMap, $relativeUri, '', $findParams);
     }
 
     /**
@@ -86,6 +89,8 @@ class CommunicatorTest extends OnlinePaymentsTestCase
      */
     public function testApiRequestPost()
     {
+        $this->expectNotToPerformAssertions();
+
         try {
             $relativeUri = sprintf('/%s/%s/payments/1/cancel', Client::API_VERSION, $this->getMerchantId());
             $this->defaultCommunicator->post($this->defaultResponseClassMap, $relativeUri);
@@ -100,6 +105,8 @@ class CommunicatorTest extends OnlinePaymentsTestCase
      */
     public function testApiRequestPut()
     {
+        $this->expectNotToPerformAssertions();
+
         try {
             $relativeUri = sprintf('/%s/%s/tokens/1', Client::API_VERSION, $this->getMerchantId());
             $this->defaultCommunicator->put($this->defaultResponseClassMap, $relativeUri);
@@ -114,6 +121,8 @@ class CommunicatorTest extends OnlinePaymentsTestCase
      */
     public function testApiRequestDelete()
     {
+        $this->expectNotToPerformAssertions();
+
         try {
             $relativeUri = sprintf('/%s/%s/tokens/1', Client::API_VERSION, $this->getMerchantId());
             $this->defaultCommunicator->delete($this->defaultResponseClassMap, $relativeUri);
