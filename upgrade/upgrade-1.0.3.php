@@ -17,7 +17,7 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-const ADVANCED_SETTINGS_COLUMN_NAME = 'CAWLOP_ADVANCED_SETTINGS';
+const ADVANCED_SETTINGS_COLUMN_NAME = 'WORLDLINEOP_ADVANCED_SETTINGS';
 const THREE_DS_EXEMPTED_DEFAULT_TYPE = 'low-value';
 const THREE_DS_EXEMPTED_DEFAULT_VALUE = '30';
 
@@ -30,7 +30,7 @@ function upgrade_module_1_0_3()
     $previousShopContext = Shop::getContext();
     Shop::setContext(Shop::CONTEXT_ALL);
 
-    $sql = 'SELECT * FROM ' . _DB_PREFIX_ . 'configuration WHERE name = "CAWLOP_ADVANCED_SETTINGS"';
+    $sql = 'SELECT * FROM ' . _DB_PREFIX_ . 'configuration WHERE name = "WORLDLINEOP_ADVANCED_SETTINGS"';
     $results = Db::getInstance()->executeS($sql);
 
     foreach ($results as $result) {
