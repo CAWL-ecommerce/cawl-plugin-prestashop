@@ -95,9 +95,10 @@ class Cawlop extends PaymentModule
      */
     public function uninstall()
     {
-        Configuration::deleteByName('WORLDLINEOP_ACCOUNT_SETTINGS');
-        Configuration::deleteByName('WORLDLINEOP_ADVANCED_SETTINGS');
-        Configuration::deleteByName('WORLDLINEOP_PAYMENT_METHODS_SETTINGS');
+        Configuration::deleteByName('CAWLOP_ACCOUNT_SETTINGS');
+        Configuration::deleteByName('CAWLOP_ADVANCED_SETTINGS');
+        Configuration::deleteByName('CAWLOP_PAYMENT_METHODS_SETTINGS');
+        Configuration::deleteByName('CAWLOP_SHOW_ADVANCED_SETTINGS');
 
         return parent::uninstall();
     }

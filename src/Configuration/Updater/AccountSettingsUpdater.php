@@ -28,7 +28,7 @@ class AccountSettingsUpdater extends SettingsUpdater
 
     protected function save()
     {
-        \Configuration::updateValue('WORLDLINEOP_ACCOUNT_SETTINGS', $this->json);
+        \Configuration::updateValue('CAWLOP_ACCOUNT_SETTINGS', $this->json);
     }
 
     /**

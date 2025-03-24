@@ -30,8 +30,10 @@ function upgrade_module_1_0_3()
     $previousShopContext = Shop::getContext();
     Shop::setContext(Shop::CONTEXT_ALL);
 
+    $db = DB::getInstance();
+
     $sql = 'SELECT * FROM ' . _DB_PREFIX_ . 'configuration WHERE name = "WORLDLINEOP_ADVANCED_SETTINGS"';
-    $results = Db::getInstance()->executeS($sql);
+    $results = $db->executeS($sql);
 
     foreach ($results as $result) {
         if (!array_key_exists('value', $result) || empty($result['value'])) {
@@ -52,6 +54,23 @@ function upgrade_module_1_0_3()
             $result['id_shop']
         );
     }
+
+    $sql = 'UPDATE ' . _DB_PREFIX_ . 'configuration
+        SET name = CASE 
+            WHEN name = "WORLDLINEOP_ADVANCED_SETTINGS" THEN "CAWLOP_ADVANCED_SETTINGS"
+            WHEN name = "WORLDLINEOP_SHOW_ADVANCED_SETTINGS" THEN "CAWLOP_SHOW_ADVANCED_SETTINGS"
+            WHEN name = "WORLDLINEOP_ACCOUNT_SETTINGS" THEN "CAWLOP_ACCOUNT_SETTINGS"
+            WHEN name = "WORLDLINEOP_PAYMENT_METHODS_SETTINGS" THEN "CAWLOP_PAYMENT_METHODS_SETTINGS"
+        END
+        WHERE name IN (
+            "WORLDLINEOP_ADVANCED_SETTINGS",
+            "WORLDLINEOP_ACCOUNT_SETTINGS",
+            "WORLDLINEOP_PAYMENT_METHODS_SETTINGS",
+            "WORLDLINEOP_SHOW_ADVANCED_SETTINGS"
+        )';
+
+    $db->execute($sql);
+
     Shop::setContext($previousShopContext);
 
     return true;

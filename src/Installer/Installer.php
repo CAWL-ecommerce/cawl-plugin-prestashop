@@ -107,7 +107,7 @@ class Installer
         $defaults['configuration']['advancedSettings']['paymentSettings']['pendingOrderStateId'] = \Configuration::getGlobalValue('WOP_PENDING_ORDER_STATUS_ID');
         $defaults['configuration']['advancedSettings']['paymentSettings']['errorOrderStateId'] = \Configuration::get('PS_OS_ERROR');
         $this->advancedSettingsUpdater->update($defaults['configuration']['advancedSettings']);
-        \Configuration::updateGlobalValue('WORLDLINEOP_SHOW_ADVANCED_SETTINGS', false);
+        \Configuration::updateGlobalValue('CAWLOP_SHOW_ADVANCED_SETTINGS', false);
         $this->logger->info('Applying payment methods default configuration');
         $this->paymentMethodsSettingsUpdater->update($defaults['configuration']['paymentMethodsSettings']);
         $this->logger->info('Default configuration applied');

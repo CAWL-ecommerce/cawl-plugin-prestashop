@@ -51,9 +51,9 @@ class SettingsLoader
      */
     public function deserialize()
     {
-        $jsonAccount = \Configuration::get('WORLDLINEOP_ACCOUNT_SETTINGS', null, $this->idShopGroup, $this->idShop) ?: '[]';
-        $jsonAdvancedSettings = \Configuration::get('WORLDLINEOP_ADVANCED_SETTINGS', null, $this->idShopGroup, $this->idShop) ?: '[]';
-        $jsonPaymentMethodsSettings = \Configuration::get('WORLDLINEOP_PAYMENT_METHODS_SETTINGS', null, $this->idShopGroup, $this->idShop) ?: '[]';
+        $jsonAccount = \Configuration::get('CAWLOP_ACCOUNT_SETTINGS', null, $this->idShopGroup, $this->idShop) ?: '[]';
+        $jsonAdvancedSettings = \Configuration::get('CAWLOP_ADVANCED_SETTINGS', null, $this->idShopGroup, $this->idShop) ?: '[]';
+        $jsonPaymentMethodsSettings = \Configuration::get('CAWLOP_PAYMENT_METHODS_SETTINGS', null, $this->idShopGroup, $this->idShop) ?: '[]';
 
         $accountSettings = $this->serializer->deserialize($jsonAccount, AccountSettings::class, 'json');
         $advancedSettings = $this->serializer->deserialize($jsonAdvancedSettings, AdvancedSettings::class, 'json');
