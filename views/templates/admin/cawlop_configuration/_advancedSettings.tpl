@@ -462,7 +462,7 @@
             </div>
             <div class="col-lg-9 col-lg-offset-3 wl-margin-bottom-15">
               <div class="help-block">
-                {l s='When enabled, transactions with an order amount < 30 EUR will be exempted from 3DS' mod='cawlop'}
+                {l s='When enabled, transactions with an order amount < exemption limit value will be exempted from 3DS' mod='cawlop'}
                 <span></span>
               </div>
             </div>
