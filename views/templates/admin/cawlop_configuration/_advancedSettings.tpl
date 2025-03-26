@@ -441,7 +441,12 @@
           <!-- 3DS Exemption -->
           <div class="form-group js-worldlineop-3ds-exemption-block">
             <label class="control-label col-lg-3 ">
-              {l s='Enable 3DS exemption' mod='cawlop'}
+              <span class="label-tooltip"
+                    data-toggle="tooltip"
+                    data-html="true"
+                    data-original-title="{l s='By enabling the 3DS Exemption, you allow the card issuer and your acquirer to evaluate the risk level of transactions up to the Exemption Limit you specify in EUR. If the criteria are met, your customers will be exempt from Strong Customer Authentication (SCA).' mod='worldlineop'}<br>{l s='If your acquirer rejects the exemption and requires SCA, this is referred to as a soft decline. In such cases, we will attempt to prompt the customer for SCA and reinitiate the transaction if the customer successfully authenticates.' mod='worldlineop'}">
+                {l s='Exempt transactions from 3DS' mod='worldlineop'}
+              </span>
             </label>
             <div class="col-lg-9">
               <span class="switch prestashop-switch fixed-width-sm">
@@ -467,9 +472,21 @@
               </div>
             </div>
             <div class="exemption-type js-worldlineop-3ds-exemption-params">
+              <div class="alert alert-warning">
+                <p class="text-info">
+                  {l s='Please be aware that if fraud occurs on a transaction that has been granted an exemption, the liability falls on the merchant!' mod='worldlineop'}
+                </p>
+              </div>
               <label class="control-label col-lg-3 "
                      for="wlToggleButton">
-                {l s='Exemption type' mod='cawlop'}
+                 <span class="label-tooltip"
+                       data-toggle="tooltip"
+                       data-html="true"
+                       data-original-title="{l s='The Low-Value exemption is suitable for transactions below the specified monetary threshold of 30 EUR, allowing these low-value transactions a change to bypass Strong Customer Authentication (SCA) and streamline the checkout process.' mod='worldlineop'}
+                      <br>{l s='On the other hand, the Transaction-Risk-Analysis exemption enables a dynamic risk assessment for your transactions. The card issuer and your acquirer will evaluate the transaction based on various risk factors, allowing transactions up to a limit of 100 EUR to qualify for exemption if they are deemed low risk.' mod='worldlineop'}
+                      <br>{l s='Make your selection carefully to optimize the balance between customer experience and security for your transactions.' mod='worldlineop'}">
+                  {l s='Exemption type' mod='worldlineop'}
+                </span>
               </label>
               <div class="col-lg-9">
                 <button type="button"
@@ -505,10 +522,18 @@
                   <span></span>
                 </div>
               </div>
-
+              <input type="hidden" id="databaseStoredExemptedValue" value="{$data.advancedSettings.threeDSExemptedValue|default:0|escape:'htmlall':'UTF-8'}"/>
+              <input type="hidden" id="databaseStoredExemptedType" value="{$data.advancedSettings.threeDSExemptedType|default:'low-value'|escape:'htmlall':'UTF-8'}"/>
               <label class="control-label col-lg-3 "
                      for="worldlineopAdvancedSettings[threeDSExemptedValue]">
-                {l s='Exemption limit' mod='cawlop'}
+                <span class="label-tooltip"
+                      data-toggle="tooltip"
+                      data-html="true"
+                      data-original-title="{l s='The exemption limit is specified in EUR. Therefore, if the checkout currency is not in EUR, the conversion will depend on the exchange rate to EUR. It is essential to have EUR configured in your environment, and to ensure accurate conversions, please keep your exchange rates updated.' mod='worldlineop'}
+                        <br>{l s='If EUR is not configured, the 3DS exemption will not be applied, and the transaction will not have the exemption requested.' mod='worldlineop'}
+                        <br><br>{l s='Additional Note: PSD2 designates the EUR as the base currency for determining exemption limits for other currencies in the EEA. However, each region can decide to adapt these limits, and regions outside the EEA may also support exemption requests. Due to these complexities, we cannot guarantee that the exemption request will be considered by the issuer or your acquirer.' mod='worldlineop'}">
+                  {l s='Exemption limit' mod='worldlineop'}
+                </span>
               </label>
               <div class="col-lg-9">
                 <input value="{$data.advancedSettings.threeDSExemptedValue|default:0|escape:'htmlall':'UTF-8'}"
@@ -520,11 +545,11 @@
               </div>
               <div class="col-lg-9 col-lg-offset-3">
                 <div id="js-worldlineop-select-3ds-exemption-limit-30" class="help-block">
-                  {l s='Please enter the amount limit (0 to 30 EUR)' mod='cawlop'}
+                  {l s='Please enter the amount limit (0 to 30 EUR).' mod='cawlop'}
                   <span></span>
                 </div>
                 <div id="js-worldlineop-select-3ds-exemption-limit-100" class="help-block wl-hidden-element">
-                  {l s='Please enter the amount limit (0 to 100 EUR)' mod='cawlop'}
+                  {l s='Please enter the amount limit (0 to 100 EUR).' mod='cawlop'}
                   <span></span>
                 </div>
                 <div id="js-worldlineop-select-3ds-exemption-limit-invalid-amount" class="help-block wl-hidden-element">

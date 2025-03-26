@@ -240,9 +240,19 @@ $(document).ready(function () {
         if (helpTextExemptionLimit30 && helpTextExemptionLimit100) {
           exemptionLimitAmount = !isLimit30Selected ? 100 : exemptionLimitAmount;
           if (!helpTextExemptionLimitInvalid[0].innerText.includes(exemptionLimitAmount)) {
-            helpTextExemptionLimitInvalid[0].innerText = 'Entered amount must not exceed ' + exemptionLimitAmount + ' EUR';
+            helpTextExemptionLimitInvalid[0].innerText = 'The amount entered is not within the allowed range of 0-' + exemptionLimitAmount + ' EUR.';
           }
           shownErrorMessage = !isLimit30Selected ? helpTextExemptionLimit100 : helpTextExemptionLimit30;
+        }
+
+        // first check if exempted type and value are already saved
+        let storedType = document.getElementById('databaseStoredExemptedType')?.value;
+        let storedValue = document.getElementById('databaseStoredExemptedValue')?.value;
+
+        if (storedType && storedType === exemptionTypeButtonValue && event.target.tagName.toLowerCase() === 'li') {
+          inputElement.value = storedValue ?? 0;
+          WorldlineOP.disableSaveForExemptionParams(helpTextExemptionLimitInvalid, shownErrorMessage, inputElement);
+          return;
         }
 
         // showing error in case when entered value is greater then limit
