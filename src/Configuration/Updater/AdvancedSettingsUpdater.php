@@ -29,7 +29,7 @@ class AdvancedSettingsUpdater extends SettingsUpdater
 
     protected function save()
     {
-        \Configuration::updateValue('WORLDLINEOP_ADVANCED_SETTINGS', $this->json);
+        \Configuration::updateValue('CAWLOP_ADVANCED_SETTINGS', $this->json);
     }
 
     /**

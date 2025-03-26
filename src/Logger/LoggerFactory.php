@@ -42,7 +42,7 @@ class LoggerFactory
         $this->settings = $settings;
         $level = $settings->advancedSettings->logsEnabled === true ? Logger::DEBUG : Logger::INFO;
         $fileHandler = new RotatingFileHandler(
-            _PS_MODULE_DIR_ . 'worldlineop/' . sprintf('logs/%s.log', Tools::hash(_PS_MODULE_DIR_)),
+            _PS_MODULE_DIR_ . 'cawlop/' . sprintf('logs/%s.log', Tools::hash(_PS_MODULE_DIR_)),
             3,
             $level
         );

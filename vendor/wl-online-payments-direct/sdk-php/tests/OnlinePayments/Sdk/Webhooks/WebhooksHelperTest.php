@@ -3,6 +3,7 @@
 namespace OnlinePayments\Sdk\Webhooks;
 
 use OnlinePayments\Sdk\ConnectionResponse;
+use OnlinePayments\Sdk\Domain\WebhooksEvent;
 use OnlinePayments\Sdk\ResponseClassMap;
 use OnlinePayments\Sdk\ResponseFactory;
 use PHPUnit\Framework\TestCase;
@@ -92,9 +93,8 @@ EOD;
 
     private $invalidBody;
 
-    public function __construct()
+    protected function setUp(): void
     {
-        parent::__construct();
         $this->validBody = preg_replace("/\r\n/", "\n", self::VALID_BODY_WITHOUT_LINEBREAK_FIX);
         $this->invalidBody = preg_replace("/\r\n/", "\n", self::INVALID_BODY_WITHOUT_LINEBREAK_FIX);
     }
@@ -133,6 +133,8 @@ EOD;
 
     function testUnmarshalMissingHeaders()
     {
+        $this->expectNotToPerformAssertions();
+
         $secretKeyStore = new InMemorySecretKeyStore(array(self::KEY_ID => self::SECRET_KEY));
         $helper = $this->createHelper($secretKeyStore);
 
@@ -190,6 +192,8 @@ EOD;
 
     function testUnmarshalBytesInvalidBody()
     {
+        $this->expectNotToPerformAssertions();
+
         $secretKeyStore = new InMemorySecretKeyStore(array(self::KEY_ID => self::SECRET_KEY));
         $helper = $this->createHelper($secretKeyStore);
 
@@ -204,6 +208,8 @@ EOD;
 
     function testUnmarshalBytesInvalidSecretKey()
     {
+        $this->expectNotToPerformAssertions();
+
         $invalidSecretKey = '1' . self::SECRET_KEY;
         $secretKeyStore = new InMemorySecretKeyStore(array(self::KEY_ID => $invalidSecretKey));
         $helper = $this->createHelper($secretKeyStore);
@@ -219,6 +225,8 @@ EOD;
 
     function testUnmarshalBytesInvalidSignature()
     {
+        $this->expectNotToPerformAssertions();
+
         $secretKeyStore = new InMemorySecretKeyStore(array(self::KEY_ID => self::SECRET_KEY));
         $helper = $this->createHelper($secretKeyStore);
 
@@ -256,6 +264,7 @@ class ApiVersionMismatchTestingResponseFactory extends ResponseFactory
         ResponseClassMap   $responseClassMap
     )
     {
+        /** @var WebhooksEvent $event */
         $event = parent::createResponse($response, $responseClassMap);
         $event->setApiVersion('v0');
         return $event;

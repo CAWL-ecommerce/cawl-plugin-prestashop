@@ -15,6 +15,11 @@ class CardPaymentMethodSpecificOutput extends DataObject
 {
     // Properties
     /**
+     * @var AcquirerInformation
+     */
+    private $acquirerInformation;
+
+    /**
      * @var int
      */
     private $authenticatedAmount;
@@ -28,6 +33,11 @@ class CardPaymentMethodSpecificOutput extends DataObject
      * @var CardEssentials
      */
     private $card;
+
+    /**
+     * @var CurrencyConversion
+     */
+    private $currencyConversion;
 
     /**
      * @var ExternalTokenLinked
@@ -50,6 +60,16 @@ class CardPaymentMethodSpecificOutput extends DataObject
     private $paymentOption;
 
     /**
+     * @var PaymentProduct3208SpecificOutput
+     */
+    private $paymentProduct3208SpecificOutput;
+
+    /**
+     * @var PaymentProduct3209SpecificOutput
+     */
+    private $paymentProduct3209SpecificOutput;
+
+    /**
      * @var int
      */
     private $paymentProductId;
@@ -70,6 +90,21 @@ class CardPaymentMethodSpecificOutput extends DataObject
     private $token;
 
     // Methods
+    /**
+     * @return AcquirerInformation
+     */
+    public function getAcquirerInformation()
+    {
+        return $this->acquirerInformation;
+    }
+    /**
+     * @var AcquirerInformation
+     */
+    public function setAcquirerInformation($value)
+    {
+        $this->acquirerInformation = $value;
+    }
+
     /**
      * @return int
      */
@@ -113,6 +148,21 @@ class CardPaymentMethodSpecificOutput extends DataObject
     public function setCard($value)
     {
         $this->card = $value;
+    }
+
+    /**
+     * @return CurrencyConversion
+     */
+    public function getCurrencyConversion()
+    {
+        return $this->currencyConversion;
+    }
+    /**
+     * @var CurrencyConversion
+     */
+    public function setCurrencyConversion($value)
+    {
+        $this->currencyConversion = $value;
     }
 
     /**
@@ -173,6 +223,36 @@ class CardPaymentMethodSpecificOutput extends DataObject
     public function setPaymentOption($value)
     {
         $this->paymentOption = $value;
+    }
+
+    /**
+     * @return PaymentProduct3208SpecificOutput
+     */
+    public function getPaymentProduct3208SpecificOutput()
+    {
+        return $this->paymentProduct3208SpecificOutput;
+    }
+    /**
+     * @var PaymentProduct3208SpecificOutput
+     */
+    public function setPaymentProduct3208SpecificOutput($value)
+    {
+        $this->paymentProduct3208SpecificOutput = $value;
+    }
+
+    /**
+     * @return PaymentProduct3209SpecificOutput
+     */
+    public function getPaymentProduct3209SpecificOutput()
+    {
+        return $this->paymentProduct3209SpecificOutput;
+    }
+    /**
+     * @var PaymentProduct3209SpecificOutput
+     */
+    public function setPaymentProduct3209SpecificOutput($value)
+    {
+        $this->paymentProduct3209SpecificOutput = $value;
     }
 
     /**
@@ -241,6 +321,9 @@ class CardPaymentMethodSpecificOutput extends DataObject
     public function toObject()
     {
         $object = parent::toObject();
+        if ($this->acquirerInformation !== null) {
+            $object->acquirerInformation = $this->acquirerInformation->toObject();
+        }
         if ($this->authenticatedAmount !== null) {
             $object->authenticatedAmount = $this->authenticatedAmount;
         }
@@ -249,6 +332,9 @@ class CardPaymentMethodSpecificOutput extends DataObject
         }
         if ($this->card !== null) {
             $object->card = $this->card->toObject();
+        }
+        if ($this->currencyConversion !== null) {
+            $object->currencyConversion = $this->currencyConversion->toObject();
         }
         if ($this->externalTokenLinked !== null) {
             $object->externalTokenLinked = $this->externalTokenLinked->toObject();
@@ -261,6 +347,12 @@ class CardPaymentMethodSpecificOutput extends DataObject
         }
         if ($this->paymentOption !== null) {
             $object->paymentOption = $this->paymentOption;
+        }
+        if ($this->paymentProduct3208SpecificOutput !== null) {
+            $object->paymentProduct3208SpecificOutput = $this->paymentProduct3208SpecificOutput->toObject();
+        }
+        if ($this->paymentProduct3209SpecificOutput !== null) {
+            $object->paymentProduct3209SpecificOutput = $this->paymentProduct3209SpecificOutput->toObject();
         }
         if ($this->paymentProductId !== null) {
             $object->paymentProductId = $this->paymentProductId;
@@ -285,6 +377,13 @@ class CardPaymentMethodSpecificOutput extends DataObject
     public function fromObject($object)
     {
         parent::fromObject($object);
+        if (property_exists($object, 'acquirerInformation')) {
+            if (!is_object($object->acquirerInformation)) {
+                throw new UnexpectedValueException('value \'' . print_r($object->acquirerInformation, true) . '\' is not an object');
+            }
+            $value = new AcquirerInformation();
+            $this->acquirerInformation = $value->fromObject($object->acquirerInformation);
+        }
         if (property_exists($object, 'authenticatedAmount')) {
             $this->authenticatedAmount = $object->authenticatedAmount;
         }
@@ -297,6 +396,13 @@ class CardPaymentMethodSpecificOutput extends DataObject
             }
             $value = new CardEssentials();
             $this->card = $value->fromObject($object->card);
+        }
+        if (property_exists($object, 'currencyConversion')) {
+            if (!is_object($object->currencyConversion)) {
+                throw new UnexpectedValueException('value \'' . print_r($object->currencyConversion, true) . '\' is not an object');
+            }
+            $value = new CurrencyConversion();
+            $this->currencyConversion = $value->fromObject($object->currencyConversion);
         }
         if (property_exists($object, 'externalTokenLinked')) {
             if (!is_object($object->externalTokenLinked)) {
@@ -317,6 +423,20 @@ class CardPaymentMethodSpecificOutput extends DataObject
         }
         if (property_exists($object, 'paymentOption')) {
             $this->paymentOption = $object->paymentOption;
+        }
+        if (property_exists($object, 'paymentProduct3208SpecificOutput')) {
+            if (!is_object($object->paymentProduct3208SpecificOutput)) {
+                throw new UnexpectedValueException('value \'' . print_r($object->paymentProduct3208SpecificOutput, true) . '\' is not an object');
+            }
+            $value = new PaymentProduct3208SpecificOutput();
+            $this->paymentProduct3208SpecificOutput = $value->fromObject($object->paymentProduct3208SpecificOutput);
+        }
+        if (property_exists($object, 'paymentProduct3209SpecificOutput')) {
+            if (!is_object($object->paymentProduct3209SpecificOutput)) {
+                throw new UnexpectedValueException('value \'' . print_r($object->paymentProduct3209SpecificOutput, true) . '\' is not an object');
+            }
+            $value = new PaymentProduct3209SpecificOutput();
+            $this->paymentProduct3209SpecificOutput = $value->fromObject($object->paymentProduct3209SpecificOutput);
         }
         if (property_exists($object, 'paymentProductId')) {
             $this->paymentProductId = $object->paymentProductId;

@@ -29,7 +29,7 @@ class PaymentMethodsSettingsUpdater extends SettingsUpdater
 
     protected function save()
     {
-        \Configuration::updateValue('WORLDLINEOP_PAYMENT_METHODS_SETTINGS', $this->json);
+        \Configuration::updateValue('CAWLOP_PAYMENT_METHODS_SETTINGS', $this->json);
     }
 
     /**

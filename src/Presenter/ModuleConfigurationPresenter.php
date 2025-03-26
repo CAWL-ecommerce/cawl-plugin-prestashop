@@ -57,7 +57,7 @@ class ModuleConfigurationPresenter implements PresenterInterface
         $settings = $this->settingsLoader->normalize();
         $settings['extra'] = [
             'moduleVersion' => $this->module->version,
-            'advancedSettingsEnabled' => \Configuration::getGlobalValue('WORLDLINEOP_SHOW_ADVANCED_SETTINGS'),
+            'advancedSettingsEnabled' => \Configuration::getGlobalValue('CAWLOP_SHOW_ADVANCED_SETTINGS'),
             'path' => [
                 'module' => sprintf(__PS_BASE_URI__ . 'modules/%s/', $this->module->name),
                 'img' => sprintf(__PS_BASE_URI__ . 'modules/%s/views/img/', $this->module->name),

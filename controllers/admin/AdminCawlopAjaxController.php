@@ -43,7 +43,7 @@ class AdminCawlopAjaxController extends ModuleAdminController
 
     public function ajaxProcessToggleAdvSettings()
     {
-        Configuration::updateGlobalValue('WORLDLINEOP_SHOW_ADVANCED_SETTINGS', Tools::getValue('newState'));
+        Configuration::updateGlobalValue('CAWLOP_SHOW_ADVANCED_SETTINGS', Tools::getValue('newState'));
         exit(json_encode(['errors' => false]));
     }
 

@@ -5,16 +5,17 @@
 
 namespace OnlinePayments\Sdk\Merchant\Payments;
 
+use OnlinePayments\Sdk\ApiResource;
 use OnlinePayments\Sdk\CallContext;
 use OnlinePayments\Sdk\Domain\CancelPaymentRequest;
 use OnlinePayments\Sdk\Domain\CapturePaymentRequest;
 use OnlinePayments\Sdk\Domain\CompletePaymentRequest;
 use OnlinePayments\Sdk\Domain\CreatePaymentRequest;
 use OnlinePayments\Sdk\Domain\RefundRequest;
-use OnlinePayments\Sdk\Resource;
+use OnlinePayments\Sdk\Domain\SubsequentPaymentRequest;
 use OnlinePayments\Sdk\ResponseClassMap;
 
-class PaymentsClient extends Resource implements PaymentsClientInterface
+class PaymentsClient extends ApiResource implements PaymentsClientInterface
 {
     /**
      * {@inheritDoc}
@@ -77,6 +78,24 @@ class PaymentsClient extends Resource implements PaymentsClientInterface
         return $this->getCommunicator()->post(
             $responseClassMap,
             $this->instantiateUri('/v2/{merchantId}/payments/{paymentId}/cancel'),
+            $this->getClientMetaInfo(),
+            $body,
+            null,
+            $callContext
+        );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function subsequentPayment($paymentId, SubsequentPaymentRequest $body, CallContext $callContext = null)
+    {
+        $this->context['paymentId'] = $paymentId;
+        $responseClassMap = new ResponseClassMap('\OnlinePayments\Sdk\Domain\SubsequentPaymentResponse');
+        $responseClassMap->setDefaultErrorResponseClassName('\OnlinePayments\Sdk\Domain\PaymentErrorResponse');
+        return $this->getCommunicator()->post(
+            $responseClassMap,
+            $this->instantiateUri('/v2/{merchantId}/payments/{paymentId}/subsequent'),
             $this->getClientMetaInfo(),
             $body,
             null,
