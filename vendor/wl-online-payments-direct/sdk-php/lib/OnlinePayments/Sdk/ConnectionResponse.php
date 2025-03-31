@@ -10,7 +10,7 @@ namespace OnlinePayments\Sdk;
 interface ConnectionResponse
 {
     /**
-     * @return int
+     * @return string
      */
     public function getHttpStatusCode();
 

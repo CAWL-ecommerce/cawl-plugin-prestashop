@@ -5,12 +5,12 @@
 
 namespace OnlinePayments\Sdk\Merchant\Sessions;
 
-use OnlinePayments\Sdk\ApiResource;
 use OnlinePayments\Sdk\CallContext;
 use OnlinePayments\Sdk\Domain\SessionRequest;
+use OnlinePayments\Sdk\Resource;
 use OnlinePayments\Sdk\ResponseClassMap;
 
-class SessionsClient extends ApiResource implements SessionsClientInterface
+class SessionsClient extends Resource implements SessionsClientInterface
 {
     /**
      * {@inheritDoc}

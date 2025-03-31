@@ -5,11 +5,9 @@
 
 namespace OnlinePayments\Sdk\Merchant;
 
-use OnlinePayments\Sdk\ApiResource;
 use OnlinePayments\Sdk\Merchant\HostedCheckout\HostedCheckoutClient;
 use OnlinePayments\Sdk\Merchant\HostedTokenization\HostedTokenizationClient;
 use OnlinePayments\Sdk\Merchant\Mandates\MandatesClient;
-use OnlinePayments\Sdk\Merchant\PaymentLinks\PaymentLinksClient;
 use OnlinePayments\Sdk\Merchant\Payments\PaymentsClient;
 use OnlinePayments\Sdk\Merchant\Payouts\PayoutsClient;
 use OnlinePayments\Sdk\Merchant\ProductGroups\ProductGroupsClient;
@@ -17,8 +15,9 @@ use OnlinePayments\Sdk\Merchant\Products\ProductsClient;
 use OnlinePayments\Sdk\Merchant\Services\ServicesClient;
 use OnlinePayments\Sdk\Merchant\Sessions\SessionsClient;
 use OnlinePayments\Sdk\Merchant\Tokens\TokensClient;
+use OnlinePayments\Sdk\Resource;
 
-class MerchantClient extends ApiResource implements MerchantClientInterface
+class MerchantClient extends Resource implements MerchantClientInterface
 {
     /**
      * {@inheritDoc}
@@ -42,14 +41,6 @@ class MerchantClient extends ApiResource implements MerchantClientInterface
     public function mandates()
     {
         return new MandatesClient($this, $this->context);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function paymentLinks()
-    {
-        return new PaymentLinksClient($this, $this->context);
     }
 
     /**

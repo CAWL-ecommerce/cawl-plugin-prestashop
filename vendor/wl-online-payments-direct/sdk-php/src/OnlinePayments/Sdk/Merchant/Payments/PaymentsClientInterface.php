@@ -25,8 +25,6 @@ use OnlinePayments\Sdk\Domain\PaymentResponse;
 use OnlinePayments\Sdk\Domain\RefundRequest;
 use OnlinePayments\Sdk\Domain\RefundResponse;
 use OnlinePayments\Sdk\Domain\RefundsResponse;
-use OnlinePayments\Sdk\Domain\SubsequentPaymentRequest;
-use OnlinePayments\Sdk\Domain\SubsequentPaymentResponse;
 use OnlinePayments\Sdk\IdempotenceException;
 use OnlinePayments\Sdk\InvalidResponseException;
 use OnlinePayments\Sdk\PaymentPlatformException;
@@ -36,7 +34,7 @@ use OnlinePayments\Sdk\ValidationException;
 interface PaymentsClientInterface
 {
     /**
-     * ApiResource /v2/{merchantId}/payments - Create payment
+     * Resource /v2/{merchantId}/payments - Create payment
      *
      * @param CreatePaymentRequest $body
      * @param CallContext $callContext
@@ -55,7 +53,7 @@ interface PaymentsClientInterface
     public function createPayment(CreatePaymentRequest $body, CallContext $callContext = null);
 
     /**
-     * ApiResource /v2/{merchantId}/payments/{paymentId} - Get payment
+     * Resource /v2/{merchantId}/payments/{paymentId} - Get payment
      *
      * @param string $paymentId
      * @param CallContext $callContext
@@ -73,7 +71,7 @@ interface PaymentsClientInterface
     public function getPayment($paymentId, CallContext $callContext = null);
 
     /**
-     * ApiResource /v2/{merchantId}/payments/{paymentId}/complete - Complete payment
+     * Resource /v2/{merchantId}/payments/{paymentId}/complete - Complete payment
      *
      * @param string $paymentId
      * @param CompletePaymentRequest $body
@@ -93,7 +91,7 @@ interface PaymentsClientInterface
     public function completePayment($paymentId, CompletePaymentRequest $body, CallContext $callContext = null);
 
     /**
-     * ApiResource /v2/{merchantId}/payments/{paymentId}/cancel - Cancel payment
+     * Resource /v2/{merchantId}/payments/{paymentId}/cancel - Cancel payment
      *
      * @param string $paymentId
      * @param CancelPaymentRequest $body
@@ -112,27 +110,7 @@ interface PaymentsClientInterface
     public function cancelPayment($paymentId, CancelPaymentRequest $body = null, CallContext $callContext = null);
 
     /**
-     * ApiResource /v2/{merchantId}/payments/{paymentId}/subsequent - Subsequent payment
-     *
-     * @param string $paymentId
-     * @param SubsequentPaymentRequest $body
-     * @param CallContext $callContext
-     * @return SubsequentPaymentResponse
-     *
-     * @throws ApiException
-     * @throws AuthorizationException
-     * @throws Exception
-     * @throws PaymentPlatformException
-     * @throws IdempotenceException
-     * @throws InvalidResponseException
-     * @throws ReferenceException
-     * @throws ValidationException
-     * @throws DeclinedPaymentException
-     */
-    public function subsequentPayment($paymentId, SubsequentPaymentRequest $body, CallContext $callContext = null);
-
-    /**
-     * ApiResource /v2/{merchantId}/payments/{paymentId}/refund - Refund payment
+     * Resource /v2/{merchantId}/payments/{paymentId}/refund - Refund payment
      *
      * @param string $paymentId
      * @param RefundRequest $body
@@ -152,7 +130,7 @@ interface PaymentsClientInterface
     public function refundPayment($paymentId, RefundRequest $body, CallContext $callContext = null);
 
     /**
-     * ApiResource /v2/{merchantId}/payments/{paymentId}/capture - Capture payment
+     * Resource /v2/{merchantId}/payments/{paymentId}/capture - Capture payment
      *
      * @param string $paymentId
      * @param CapturePaymentRequest $body
@@ -171,7 +149,7 @@ interface PaymentsClientInterface
     public function capturePayment($paymentId, CapturePaymentRequest $body, CallContext $callContext = null);
 
     /**
-     * ApiResource /v2/{merchantId}/payments/{paymentId}/captures - Get Captures Api
+     * Resource /v2/{merchantId}/payments/{paymentId}/captures - Get Captures Api
      *
      * @param string $paymentId
      * @param CallContext $callContext
@@ -189,7 +167,7 @@ interface PaymentsClientInterface
     public function getCaptures($paymentId, CallContext $callContext = null);
 
     /**
-     * ApiResource /v2/{merchantId}/payments/{paymentId}/details - Get payment details
+     * Resource /v2/{merchantId}/payments/{paymentId}/details - Get payment details
      *
      * @param string $paymentId
      * @param CallContext $callContext
@@ -207,7 +185,7 @@ interface PaymentsClientInterface
     public function getPaymentDetails($paymentId, CallContext $callContext = null);
 
     /**
-     * ApiResource /v2/{merchantId}/payments/{paymentId}/refunds - Get Refunds Api
+     * Resource /v2/{merchantId}/payments/{paymentId}/refunds - Get Refunds Api
      *
      * @param string $paymentId
      * @param CallContext $callContext

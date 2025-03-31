@@ -14,47 +14,47 @@ class WebhooksEvent extends DataObject
 {
     // Properties
     /**
-     * @var string|null
+     * @var string
      */
     private $apiVersion = null;
 
     /**
-     * @var string|null
+     * @var string
      */
     private $id = null;
 
     /**
-     * @var string|null
+     * @var string
      */
     private $created = null;
 
     /**
-     * @var string|null
+     * @var string
      */
     private $merchantId = null;
 
     /**
-     * @var string|null
+     * @var string
      */
     private $type = null;
 
     /**
-     * @var PaymentResponse|null
+     * @var PaymentResponse
      */
     private $payment = null;
 
     /**
-     * @var PayoutResponse|null
+     * @var PayoutResponse
      */
     private $payout = null;
 
     /**
-     * @var RefundResponse|null
+     * @var RefundResponse
      */
     private $refund = null;
 
     /**
-     * @var TokenResponse|null
+     * @var TokenResponse
      */
     private $token = null;
 

@@ -20,14 +20,14 @@ class MobilePaymentMethodHostedCheckoutSpecificInput extends DataObject
     private $authorizationMode;
 
     /**
-     * @var MobilePaymentProduct320SpecificInput
-     */
-    private $paymentProduct320SpecificInput;
-
-    /**
      * @var int
      */
     private $paymentProductId;
+
+    /**
+     * @var MobilePaymentProduct320SpecificInput
+     */
+    private $paymentProduct320SpecificInput;
 
     // Methods
     /**
@@ -46,21 +46,6 @@ class MobilePaymentMethodHostedCheckoutSpecificInput extends DataObject
     }
 
     /**
-     * @return MobilePaymentProduct320SpecificInput
-     */
-    public function getPaymentProduct320SpecificInput()
-    {
-        return $this->paymentProduct320SpecificInput;
-    }
-    /**
-     * @var MobilePaymentProduct320SpecificInput
-     */
-    public function setPaymentProduct320SpecificInput($value)
-    {
-        $this->paymentProduct320SpecificInput = $value;
-    }
-
-    /**
      * @return int
      */
     public function getPaymentProductId()
@@ -76,6 +61,22 @@ class MobilePaymentMethodHostedCheckoutSpecificInput extends DataObject
     }
 
     /**
+     * @return MobilePaymentProduct320SpecificInput
+     */
+    public function getPaymentProduct320SpecificInput()
+    {
+        return $this->paymentProduct320SpecificInput;
+    }
+
+    /**
+     * @var MobilePaymentProduct320SpecificInput $paymentProduct320SpecificInput
+     */
+    public function setPaymentProduct320SpecificInput($paymentProduct320SpecificInput): void
+    {
+        $this->paymentProduct320SpecificInput = $paymentProduct320SpecificInput;
+    }
+
+    /**
      * @return object
      */
     public function toObject()
@@ -84,11 +85,11 @@ class MobilePaymentMethodHostedCheckoutSpecificInput extends DataObject
         if ($this->authorizationMode !== null) {
             $object->authorizationMode = $this->authorizationMode;
         }
-        if ($this->paymentProduct320SpecificInput !== null) {
-            $object->paymentProduct320SpecificInput = $this->paymentProduct320SpecificInput->toObject();
-        }
         if ($this->paymentProductId !== null) {
             $object->paymentProductId = $this->paymentProductId;
+        }
+        if ($this->paymentProduct320SpecificInput !== null) {
+            $object->paymentProduct320SpecificInput = $this->paymentProduct320SpecificInput->toObject();
         }
         return $object;
     }
@@ -104,15 +105,15 @@ class MobilePaymentMethodHostedCheckoutSpecificInput extends DataObject
         if (property_exists($object, 'authorizationMode')) {
             $this->authorizationMode = $object->authorizationMode;
         }
+        if (property_exists($object, 'paymentProductId')) {
+            $this->paymentProductId = $object->paymentProductId;
+        }
         if (property_exists($object, 'paymentProduct320SpecificInput')) {
             if (!is_object($object->paymentProduct320SpecificInput)) {
                 throw new UnexpectedValueException('value \'' . print_r($object->paymentProduct320SpecificInput, true) . '\' is not an object');
             }
             $value = new MobilePaymentProduct320SpecificInput();
             $this->paymentProduct320SpecificInput = $value->fromObject($object->paymentProduct320SpecificInput);
-        }
-        if (property_exists($object, 'paymentProductId')) {
-            $this->paymentProductId = $object->paymentProductId;
         }
         return $this;
     }

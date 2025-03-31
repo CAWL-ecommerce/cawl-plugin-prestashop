@@ -20,7 +20,7 @@ interface ClientInterface
     function disableLogging();
 
     /**
-     * ApiResource /v2/{merchantId}
+     * Resource /v2/{merchantId}
      *
      * @param string $merchantId
      * @return MerchantClientInterface

@@ -13,22 +13,22 @@ use UnexpectedValueException;
 class ShoppingCartExtension extends DataObject
 {
     /**
-     * @var string|null
+     * @var string
      */
     private $creator = null;
 
     /**
-     * @var string|null
+     * @var string
      */
     private $name = null;
 
     /**
-     * @var string|null
+     * @var string
      */
     private $version = null;
 
     /**
-     * @var string|null
+     * @var string
      */
     private $extensionId = null;
 

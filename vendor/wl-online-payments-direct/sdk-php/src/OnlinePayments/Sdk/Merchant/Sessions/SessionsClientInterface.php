@@ -20,7 +20,7 @@ use OnlinePayments\Sdk\ValidationException;
 interface SessionsClientInterface
 {
     /**
-     * ApiResource /v2/{merchantId}/sessions - Create session
+     * Resource /v2/{merchantId}/sessions - Create session
      *
      * @param SessionRequest $body
      * @param CallContext $callContext

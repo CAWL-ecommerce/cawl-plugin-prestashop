@@ -21,7 +21,7 @@ use OnlinePayments\Sdk\ValidationException;
 interface TokensClientInterface
 {
     /**
-     * ApiResource /v2/{merchantId}/tokens - Create token
+     * Resource /v2/{merchantId}/tokens - Create token
      *
      * @param CreateTokenRequest $body
      * @param CallContext $callContext
@@ -39,7 +39,7 @@ interface TokensClientInterface
     public function createToken(CreateTokenRequest $body, CallContext $callContext = null);
 
     /**
-     * ApiResource /v2/{merchantId}/tokens/{tokenId} - Get token
+     * Resource /v2/{merchantId}/tokens/{tokenId} - Get token
      *
      * @param string $tokenId
      * @param CallContext $callContext
@@ -57,7 +57,7 @@ interface TokensClientInterface
     public function getToken($tokenId, CallContext $callContext = null);
 
     /**
-     * ApiResource /v2/{merchantId}/tokens/{tokenId} - Delete token
+     * Resource /v2/{merchantId}/tokens/{tokenId} - Delete token
      *
      * @param string $tokenId
      * @param CallContext $callContext
