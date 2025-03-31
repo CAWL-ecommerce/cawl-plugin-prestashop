@@ -10,7 +10,7 @@ namespace OnlinePayments\Sdk;
 class ProxyConfiguration
 {
     /**
-     * @var string|null
+     * @var string
      */
     protected $host = null;
     /**

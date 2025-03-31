@@ -20,7 +20,7 @@ use OnlinePayments\Sdk\ValidationException;
 interface ProductGroupsClientInterface
 {
     /**
-     * ApiResource /v2/{merchantId}/productgroups - Get product groups
+     * Resource /v2/{merchantId}/productgroups - Get product groups
      *
      * @param GetProductGroupsParams $query
      * @param CallContext $callContext
@@ -38,7 +38,7 @@ interface ProductGroupsClientInterface
     public function getProductGroups(GetProductGroupsParams $query, CallContext $callContext = null);
 
     /**
-     * ApiResource /v2/{merchantId}/productgroups/{paymentProductGroupId} - Get product group
+     * Resource /v2/{merchantId}/productgroups/{paymentProductGroupId} - Get product group
      *
      * @param string $paymentProductGroupId
      * @param GetProductGroupParams $query

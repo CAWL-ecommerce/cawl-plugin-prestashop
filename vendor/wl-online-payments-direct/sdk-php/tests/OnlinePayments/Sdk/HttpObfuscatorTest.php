@@ -35,7 +35,7 @@ class HttpObfuscatorTest extends TestCase
     /**
      * @return array
      */
-    public static function rawObfuscatedRequestProvider()
+    public function rawObfuscatedRequestProvider()
     {
         return array(
             array(
@@ -96,7 +96,7 @@ class HttpObfuscatorTest extends TestCase
     /**
      * @return array
      */
-    public static function rawObfuscatedResponseProvider()
+    public function rawObfuscatedResponseProvider()
     {
         return array(
             array(

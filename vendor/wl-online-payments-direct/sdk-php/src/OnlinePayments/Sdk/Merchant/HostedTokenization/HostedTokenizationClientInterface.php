@@ -21,7 +21,7 @@ use OnlinePayments\Sdk\ValidationException;
 interface HostedTokenizationClientInterface
 {
     /**
-     * ApiResource /v2/{merchantId}/hostedtokenizations - Create hosted tokenization session
+     * Resource /v2/{merchantId}/hostedtokenizations - Create hosted tokenization session
      *
      * @param CreateHostedTokenizationRequest $body
      * @param CallContext $callContext
@@ -39,7 +39,7 @@ interface HostedTokenizationClientInterface
     public function createHostedTokenization(CreateHostedTokenizationRequest $body, CallContext $callContext = null);
 
     /**
-     * ApiResource /v2/{merchantId}/hostedtokenizations/{hostedTokenizationId} - Get hosted tokenization session
+     * Resource /v2/{merchantId}/hostedtokenizations/{hostedTokenizationId} - Get hosted tokenization session
      *
      * @param string $hostedTokenizationId
      * @param CallContext $callContext

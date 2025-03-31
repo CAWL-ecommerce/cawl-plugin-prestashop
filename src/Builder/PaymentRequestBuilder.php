@@ -50,18 +50,18 @@ class PaymentRequestBuilder extends AbstractRequestBuilder
         }
 
         $threeDSecure = new ThreeDSecure();
-        $redirectionData = new RedirectionData();
-
-        $redirectionData->setReturnUrl(
-            $this->context->link->getModuleLink($this->module->name, 'redirect', ['action' => 'redirectReturnIframe'])
-        );
         if (self::PRODUCT_ID_MAESTRO == $this->idProduct || true === $this->settings->advancedSettings->force3DsV2) {
             $threeDSecure->setSkipAuthentication(false);
-        }
-        if (false === $this->settings->advancedSettings->force3DsV2) {
+
+            $redirectionData = new RedirectionData();
+            $redirectionData->setReturnUrl(
+                $this->context->link->getModuleLink($this->module->name, 'redirect', ['action' => 'redirectReturnIframe'])
+            );
+            $threeDSecure->setRedirectionData($redirectionData);
+        } else {
             $threeDSecure->setSkipAuthentication(true);
         }
-        $threeDSecure->setRedirectionData($redirectionData);
+
         $orderTotalInEuros = Tools::getAmountInEuros($this->context->cart->getOrderTotal(), new \Currency($this->context->cart->id_currency));
         if (true === $this->settings->advancedSettings->threeDSExempted &&
             $this->settings->advancedSettings->threeDSExemptedValue >= $orderTotalInEuros) {

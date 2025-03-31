@@ -54,12 +54,12 @@ class DefaultConnectionResponse implements ConnectionResponse
     }
 
     /**
-     * @param string|int $name
+     * @param string $name
      * @return string|array
      */
     public function getHeaderValue($name)
     {
-        $lowerCasedName = strtolower((string) $name);
+        $lowerCasedName = strtolower($name);
         if (array_key_exists($lowerCasedName, $this->lowerCasedHeaderKeyMap)) {
             return $this->headers[$this->lowerCasedHeaderKeyMap[$lowerCasedName]];
         }

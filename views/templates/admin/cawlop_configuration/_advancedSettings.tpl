@@ -523,7 +523,7 @@
                 </div>
               </div>
               <input type="hidden" id="databaseStoredExemptedValue" value="{$data.advancedSettings.threeDSExemptedValue|default:0|escape:'htmlall':'UTF-8'}"/>
-              <input type="hidden" id="databaseStoredExemptedType" value="{$data.advancedSettings.threeDSExemptedType|default:'low-value'|escape:'htmlall':'UTF-8'}"/>
+              <input type="hidden" id="databaseStoredExemptedType" value="{$data.advancedSettings.threeDSExemptedType|escape:'htmlall':'UTF-8'}"/>
               <label class="control-label col-lg-3 "
                      for="worldlineopAdvancedSettings[threeDSExemptedValue]">
                 <span class="label-tooltip"

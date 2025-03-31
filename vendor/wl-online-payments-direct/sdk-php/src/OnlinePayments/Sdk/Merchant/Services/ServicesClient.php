@@ -5,14 +5,13 @@
 
 namespace OnlinePayments\Sdk\Merchant\Services;
 
-use OnlinePayments\Sdk\ApiResource;
 use OnlinePayments\Sdk\CallContext;
 use OnlinePayments\Sdk\Domain\CalculateSurchargeRequest;
-use OnlinePayments\Sdk\Domain\CurrencyConversionRequest;
 use OnlinePayments\Sdk\Domain\GetIINDetailsRequest;
+use OnlinePayments\Sdk\Resource;
 use OnlinePayments\Sdk\ResponseClassMap;
 
-class ServicesClient extends ApiResource implements ServicesClientInterface
+class ServicesClient extends Resource implements ServicesClientInterface
 {
     /**
      * {@inheritDoc}
@@ -23,22 +22,6 @@ class ServicesClient extends ApiResource implements ServicesClientInterface
         return $this->getCommunicator()->post(
             $responseClassMap,
             $this->instantiateUri('/v2/{merchantId}/services/surchargecalculation'),
-            $this->getClientMetaInfo(),
-            $body,
-            null,
-            $callContext
-        );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getDccRateInquiry(CurrencyConversionRequest $body, CallContext $callContext = null)
-    {
-        $responseClassMap = new ResponseClassMap('\OnlinePayments\Sdk\Domain\CurrencyConversionResponse');
-        return $this->getCommunicator()->post(
-            $responseClassMap,
-            $this->instantiateUri('/v2/{merchantId}/services/dccrate'),
             $this->getClientMetaInfo(),
             $body,
             null,

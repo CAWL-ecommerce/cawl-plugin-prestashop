@@ -2,8 +2,6 @@
 
 namespace OnlinePayments\Sdk;
 
-use CurlHandle;
-use CurlMultiHandle;
 use ErrorException;
 use Exception;
 use UnexpectedValueException;
@@ -15,7 +13,7 @@ use UnexpectedValueException;
  */
 class DefaultConnection implements Connection
 {
-    /** @var resource|CurlMultiHandle|null */
+    /** @var null|resource */
     protected $multiHandle = null;
 
     /** @var CommunicatorLogger|null */
@@ -171,24 +169,24 @@ class DefaultConnection implements Connection
     }
 
     /**
-     * @return resource|CurlHandle
+     * @return resource
      * @throws ErrorException
      */
     protected function getCurlHandle()
     {
-        $curlHandle = curl_init();
-        if ($curlHandle === false) {
+        if (!$curlHandle = curl_init()) {
             throw new ErrorException(sprintf('Cannot initialize cUrl curlHandle'));
         }
         return $curlHandle;
     }
 
     /**
-     * @param resource|CurlMultiHandle $multiHandle
+     * @param resource $multiHandle
      * @throws ErrorException
      */
     private function executeCurlHandleShared($multiHandle)
     {
+        $running = null;
         do {
             $status = curl_multi_exec($multiHandle, $running);
             if ($status > CURLM_OK) {
@@ -211,7 +209,7 @@ class DefaultConnection implements Connection
     }
 
     /**
-     * @param resource|CurlHandle $curlHandle
+     * @param resource $curlHandle
      * @param callable $responseHandler
      * @return ConnectionResponse|null
      * @throws Exception
@@ -261,11 +259,11 @@ class DefaultConnection implements Connection
     }
 
     /**
-     * @param resource|CurlHandle $curlHandle
+     * @param resource $curlHandle
      * @param string $httpMethod
      * @param string $requestUri
      * @param string[] $requestHeaders
-     * @param mixed $body
+     * @param string $body
      * @param ProxyConfiguration|null $proxyConfiguration
      */
     protected function setCurlOptions(
@@ -313,7 +311,7 @@ class DefaultConnection implements Connection
     }
 
     /**
-     * @return resource|CurlMultiHandle
+     * @return resource
      * @throws Exception
      */
     private function getCurlMultiHandle()

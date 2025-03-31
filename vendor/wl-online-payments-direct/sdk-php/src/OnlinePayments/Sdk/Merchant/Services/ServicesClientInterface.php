@@ -11,8 +11,6 @@ use OnlinePayments\Sdk\AuthorizationException;
 use OnlinePayments\Sdk\CallContext;
 use OnlinePayments\Sdk\Domain\CalculateSurchargeRequest;
 use OnlinePayments\Sdk\Domain\CalculateSurchargeResponse;
-use OnlinePayments\Sdk\Domain\CurrencyConversionRequest;
-use OnlinePayments\Sdk\Domain\CurrencyConversionResponse;
 use OnlinePayments\Sdk\Domain\GetIINDetailsRequest;
 use OnlinePayments\Sdk\Domain\GetIINDetailsResponse;
 use OnlinePayments\Sdk\Domain\GetPrivacyPolicyResponse;
@@ -26,7 +24,7 @@ use OnlinePayments\Sdk\ValidationException;
 interface ServicesClientInterface
 {
     /**
-     * ApiResource /v2/{merchantId}/services/surchargecalculation - Surcharge Calculation
+     * Resource /v2/{merchantId}/services/surchargecalculation - Surcharge Calculation
      *
      * @param CalculateSurchargeRequest $body
      * @param CallContext $callContext
@@ -44,25 +42,7 @@ interface ServicesClientInterface
     public function surchargeCalculation(CalculateSurchargeRequest $body, CallContext $callContext = null);
 
     /**
-     * ApiResource /v2/{merchantId}/services/dccrate - Get Dcc Rate Inquiry Api
-     *
-     * @param CurrencyConversionRequest $body
-     * @param CallContext $callContext
-     * @return CurrencyConversionResponse
-     *
-     * @throws ApiException
-     * @throws AuthorizationException
-     * @throws Exception
-     * @throws PaymentPlatformException
-     * @throws IdempotenceException
-     * @throws InvalidResponseException
-     * @throws ReferenceException
-     * @throws ValidationException
-     */
-    public function getDccRateInquiry(CurrencyConversionRequest $body, CallContext $callContext = null);
-
-    /**
-     * ApiResource /v2/{merchantId}/services/privacypolicy - Get Privacy Policy
+     * Resource /v2/{merchantId}/services/privacypolicy - Get Privacy Policy
      *
      * @param GetPrivacyPolicyParams $query
      * @param CallContext $callContext
@@ -80,7 +60,7 @@ interface ServicesClientInterface
     public function getPrivacyPolicy(GetPrivacyPolicyParams $query, CallContext $callContext = null);
 
     /**
-     * ApiResource /v2/{merchantId}/services/testconnection - Test connection
+     * Resource /v2/{merchantId}/services/testconnection - Test connection
      *
      * @param CallContext $callContext
      * @return TestConnection
@@ -97,7 +77,7 @@ interface ServicesClientInterface
     public function testConnection(CallContext $callContext = null);
 
     /**
-     * ApiResource /v2/{merchantId}/services/getIINdetails - Get IIN details
+     * Resource /v2/{merchantId}/services/getIINdetails - Get IIN details
      *
      * @param GetIINDetailsRequest $body
      * @param CallContext $callContext

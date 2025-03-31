@@ -54,7 +54,6 @@ class WebhooksHelper
         $responseClassMap = new ResponseClassMap('');
         $responseClassMap->addResponseClassName(200, '\OnlinePayments\Sdk\Domain\WebhooksEvent');
 
-        /** @var \OnlinePayments\Sdk\Domain\WebhooksEvent $event */
         $event = $this->getResponseFactory()->createResponse($response, $responseClassMap);
         $this->validateApiVersion($event);
         return $event;
@@ -96,7 +95,7 @@ class WebhooksHelper
             if (strlen($expectedSignature) != strlen($signature)) {
                 return false;
             } else {
-                $res = (string) $expectedSignature ^ $signature;
+                $res = $expectedSignature ^ $signature;
                 $ret = 0;
                 for ($i = strlen($res) - 1; $i >= 0; $i--) $ret |= ord($res[$i]);
                 return !$ret;
@@ -109,7 +108,7 @@ class WebhooksHelper
     /**
      * @param WebhooksEvent $event
      */
-    private function validateApiVersion(WebhooksEvent $event)
+    private function validateApiVersion($event)
     {
         if ('v1' !== $event->getApiVersion()) {
             throw new ApiVersionMismatchException($event->getApiVersion(), 'v1');
