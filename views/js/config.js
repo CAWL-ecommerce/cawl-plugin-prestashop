@@ -246,11 +246,11 @@ $(document).ready(function () {
         }
 
         // first check if exempted type and value are already saved
-        let storedType = document.getElementById('databaseStoredExemptedType')?.value;
-        let storedValue = document.getElementById('databaseStoredExemptedValue')?.value;
+        let storedExemptedType = document.getElementById('databaseStoredExemptedType')?.value;
+        let storedExemptedValue = document.getElementById('databaseStoredExemptedValue')?.value;
 
-        if (storedType && storedType === exemptionTypeButtonValue && event.target.tagName.toLowerCase() === 'li') {
-          inputElement.value = storedValue ?? 0;
+        if (storedExemptedType && storedExemptedType === exemptionTypeButtonValue && event.target.tagName.toLowerCase() === 'li') {
+          inputElement.value = storedExemptedValue;
           WorldlineOP.disableSaveForExemptionParams(helpTextExemptionLimitInvalid, shownErrorMessage, inputElement);
           return;
         }
