@@ -171,6 +171,7 @@ class Cawlop extends PaymentModule
                 'alertCapture' => $this->l('Do you confirm the capture of the transaction?'),
                 'alertCancel' => $this->l('Do you confirm the cancellation of the transaction?'),
             ]);
+            $this->context->controller->addCSS($this->getPathUri() . 'views/css/admin_order.css');
         }
         if (Tools::getValue('controller') == 'AdminCawlopConfiguration') {
             $this->context->controller->addJS([
@@ -254,7 +255,7 @@ class Cawlop extends PaymentModule
             $settingsPresenter = $this->getService('cawlop.settings.presenter');
 
             $this->context->smarty->assign([
-                'transactionData' => $transactionPresenter->present($idOrder),
+                'transactionsData' => $transactionPresenter->present($idOrder),
                 'settingsData' => $settingsPresenter->present(),
             ]);
         } catch (Exception $e) {
