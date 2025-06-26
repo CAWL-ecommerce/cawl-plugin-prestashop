@@ -256,11 +256,19 @@ class HostedPaymentRequestBuilder extends AbstractRequestBuilder
         foreach ($shoppingCartPresented['products'] as $product) {
             $item = new LineItem();
             $itemAmount = new AmountOfMoney();
-            $itemAmount->setAmount((int) (string) $product['totalWithTax']);
+            $amount = (int) (string) $product['totalWithTax'];
+            if ((int)$this->idProduct === self::MEALVOUCHER_PRODUCT_ID) {
+                $amount += (int) (string) $shoppingCartPresented['shipping']['priceWithTax'];
+            }
+            $itemAmount->setAmount($amount);
             $itemAmount->setCurrencyCode(Tools::getIsoCurrencyCodeById($shoppingCartPresented['cart']->id_currency));
             $item->setAmountOfMoney($itemAmount);
             $itemLineDetails = new OrderLineDetails();
-            $itemLineDetails->setProductPrice((int) (string) $product['productPrice']);
+            $price = (int) (string) $product['productPrice'];
+            if ((int)$this->idProduct === self::MEALVOUCHER_PRODUCT_ID) {
+                $price += (int) (string) $shoppingCartPresented['shipping']['priceWithTax'];
+            }
+            $itemLineDetails->setProductPrice($price);
             $itemLineDetails->setDiscountAmount((int) (string) $product['discountPrice']);
             $itemLineDetails->setProductCode($product['productCode']);
             $itemLineDetails->setProductName($product['productName']);
