@@ -7,6 +7,7 @@ namespace OnlinePayments\Sdk\Domain;
 
 use OnlinePayments\Sdk\DataObject;
 use UnexpectedValueException;
+use WorldlineOP\PrestaShop\Sdk\Feedbacks;
 
 /**
  * @package OnlinePayments\Sdk\Domain
@@ -43,6 +44,11 @@ class CreatePaymentRequest extends DataObject
      * @var Order
      */
     private $order;
+
+    /**
+     * @var Feedbacks
+     */
+    private $feedbacks;
 
     /**
      * @var RedirectPaymentMethodSpecificInput
@@ -145,6 +151,19 @@ class CreatePaymentRequest extends DataObject
         $this->order = $value;
     }
 
+    public function getFeedbacks()
+    {
+        return $this->feedbacks;
+    }
+
+    /**
+     * @param Feedbacks $value
+     */
+    public function setFeedbacks($value)
+    {
+        $this->feedbacks = $value;
+    }
+
     /**
      * @return RedirectPaymentMethodSpecificInput
      */
@@ -199,6 +218,9 @@ class CreatePaymentRequest extends DataObject
         if ($this->order !== null) {
             $object->order = $this->order->toObject();
         }
+        if ($this->feedbacks !== null) {
+            $object->feedbacks = $this->feedbacks->toObject();
+        }
         if ($this->redirectPaymentMethodSpecificInput !== null) {
             $object->redirectPaymentMethodSpecificInput = $this->redirectPaymentMethodSpecificInput->toObject();
         }
@@ -249,6 +271,13 @@ class CreatePaymentRequest extends DataObject
             }
             $value = new Order();
             $this->order = $value->fromObject($object->order);
+        }
+        if (property_exists($object, 'feedbacks')) {
+            if (!is_object($object->feedbacks)) {
+                throw new UnexpectedValueException('value \'' . print_r($object->feedbacks, true) . '\' is not an object');
+            }
+            $value = new Feedbacks();
+            $this->feedbacks = $value->fromObject($object->feedbacks);
         }
         if (property_exists($object, 'redirectPaymentMethodSpecificInput')) {
             if (!is_object($object->redirectPaymentMethodSpecificInput)) {
