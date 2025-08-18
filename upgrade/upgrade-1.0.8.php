@@ -10,7 +10,7 @@ if (!defined('_PS_VERSION_')) {
     exit;
 }
 
-const ACCOUNT_SETTINGS_COLUMN_NAME = 'WORLDLINEOP_ACCOUNT_SETTINGS';
+const ACCOUNT_SETTINGS_COLUMN_NAME = 'CAWLOP_ACCOUNT_SETTINGS';
 
 /**
  * Updates module to the version 1.0.8

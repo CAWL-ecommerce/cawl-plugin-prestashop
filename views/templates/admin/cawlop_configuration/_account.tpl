@@ -260,7 +260,7 @@
         <!-- Webhooks URL Mode -->
         <div class="form-group worldlineop-webhooks-block">
           <label class="control-label col-lg-3">
-            {l s='Webhook URL Configuration' mod='worldlineop'}
+            {l s='Webhook URL Configuration' mod='cawlop'}
             <i id="js-webhook-mode-tooltip"
                class="icon-info-sign"
                data-toggle="tooltip"
@@ -274,7 +274,7 @@
                    id="worldlineopAccountSettings_automatic"
                    {if $data.accountSettings.webhookMode == 'automatic'}checked="checked"{/if}>
             <label for="worldlineopAccountSettings_automatic" style="white-space: nowrap;">
-                   {l s='Automatic (Recommended)' mod='worldlineop'}
+                   {l s='Automatic (Recommended)' mod='cawlop'}
             </label>
 
             <input type="radio" value="manual"
@@ -282,7 +282,7 @@
                    id="worldlineopAccountSettings_manual"
                    {if $data.accountSettings.webhookMode == 'manual'}checked="checked"{/if}>
             <label for="worldlineopAccountSettings_manual">
-                {l s='Manual' mod='worldlineop'}
+                {l s='Manual' mod='cawlop'}
             </label>
 
             <a class="slide-button btn"></a>
@@ -292,10 +292,10 @@
           <div class="col-lg-offset-3 col-lg-9">
             <div class="help-block">
               <p>
-                <strong>{l s='Automatic:' mod='worldlineop'}</strong>
-                {l s='The plugin automatically sends the webhook URL(s) with each transaction.' mod='worldlineop'}<br>
-                <strong>{l s='Manual:' mod='worldlineop'}</strong>
-                {l s='You must add your store webhook URL in the merchant portal.' mod='worldlineop'}
+                <strong>{l s='Automatic:' mod='cawlop'}</strong>
+                {l s='The plugin automatically sends the webhook URL(s) with each transaction.' mod='cawlop'}<br>
+                <strong>{l s='Manual:' mod='cawlop'}</strong>
+                {l s='You must add your store webhook URL in the merchant portal.' mod='cawlop'}
               </p>
             </div>
           </div>
@@ -303,11 +303,11 @@
 
         <div class="col-lg-12">
           <div class="alert alert-warning mt-2">
-            <strong>{l s='Automatic:' mod='worldlineop'}</strong>
-            {l s='The URL(s) below will be used for transactions from this store, any webhook URL(s) configured in the merchant portal will be ignored.' mod='worldlineop'}<br>
-            <strong>{l s='Manual:' mod='worldlineop'}</strong>
-            {l s='You are fully responsible for adding your store webhook URL in the merchant portal.' mod='worldlineop'}
-            <strong>{l s=' Failure to do so could result in missing or incomplete orders!' mod='worldlineop'}</strong>
+            <strong>{l s='Automatic:' mod='cawlop'}</strong>
+            {l s='The URL(s) below will be used for transactions from this store, any webhook URL(s) configured in the merchant portal will be ignored.' mod='cawlop'}<br>
+            <strong>{l s='Manual:' mod='cawlop'}</strong>
+            {l s='You are fully responsible for adding your store webhook URL in the merchant portal.' mod='cawlop'}
+            <strong>{l s=' Failure to do so could result in missing or incomplete orders!' mod='cawlop'}</strong>
           </div>
         </div>
         <!-- /Webhooks URL Mode -->
@@ -315,7 +315,7 @@
         <!-- Webhooks URL -->
         <div class="form-group worldlineop-webhooks-block">
           <label class="control-label col-lg-3">
-            <span>{l s='Store Webhook URL' mod='worldlineop'}</span>
+            <span>{l s='Store Webhook URL' mod='cawlop'}</span>
             <i id="storeWebhookTooltip"
                class="icon-info-sign"
                data-toggle="tooltip"
@@ -330,7 +330,7 @@
           </div>
           <div class="col-lg-offset-3 col-lg-9">
             <div class="help-block">
-              <p id="js-webhook-help">{l s='This is your store webhook URL, it will be sent with each transaction.' mod='worldlineop'}</p>
+              <p id="js-webhook-help">{l s='This is your store webhook URL, it will be sent with each transaction.' mod='cawlop'}</p>
             </div>
           </div>
         </div>
@@ -339,7 +339,7 @@
         <!-- Automatic -->
         <div class="form-group worldlineop-webhooks-block js-additional-webhooks" style="display: none;">
           <label class="control-label col-lg-3">
-            <span>{l s='Additional Webhook URLs' mod='worldlineop'}</span>
+            <span>{l s='Additional Webhook URLs' mod='cawlop'}</span>
           </label>
           <div class="col-lg-9">
             {assign var="urls" value=$data.accountSettings.additionalWebhookUrls}
@@ -365,7 +365,7 @@
             {/section}
 
             <div class="help-block">
-              <p>{l s='You can add up to 4 additional webhook URLs' mod='worldlineop'}</p>
+              <p>{l s='You can add up to 4 additional webhook URLs' mod='cawlop'}</p>
             </div>
           </div>
 
@@ -377,10 +377,10 @@
       </div>
       <div class="panel-footer">
         <button type="submit" class="btn btn-default pull-right" name="submitSaveAccountForm">
-          <i class="process-icon-save"></i> {l s='Save' mod='worldlineop'}
+          <i class="process-icon-save"></i> {l s='Save' mod='cawlop'}
         </button>
         <button type="submit" class="btn btn-default pull-right" name="submitTestCredentialsForm">
-          <i class="process-icon-ok"></i> {l s='Save & Check credentials' mod='worldlineop'}
+          <i class="process-icon-ok"></i> {l s='Save & Check credentials' mod='cawlop'}
         </button>
       </div>
   </form>
