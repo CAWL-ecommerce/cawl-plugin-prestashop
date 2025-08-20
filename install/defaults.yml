@@ -113,6 +113,8 @@ configuration:
       it: 'Pagare con Cawl Online Payments'
       nl: 'Betaal met Cawl Online Payments'
       de: 'Bezahlen mit Cawl Online Payments'
+    isDefaultGenericLogo: 1
+    isDefaultIframeLogo: 1
     iframeTemplateFilename: ''
     iframeCallToAction:
       fr: 'Payer avec une carte de crédit'
