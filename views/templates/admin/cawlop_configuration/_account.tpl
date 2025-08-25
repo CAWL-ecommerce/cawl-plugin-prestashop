@@ -319,7 +319,7 @@
             <i id="storeWebhookTooltip"
                class="icon-info-sign"
                data-toggle="tooltip"
-               title="This is your store's unique address for receiving payment notifications. The plugin listens at this URL for real-time status updates to create and update your orders accordingly.">
+               title="{l s='This is your store\'s unique address for receiving payment notifications. The plugin listens at this URL for real-time status updates to create and update your orders accordingly.' mod='cawlop'}">
             </i>
           </label>
           <div class="col-lg-9">
@@ -330,7 +330,12 @@
           </div>
           <div class="col-lg-offset-3 col-lg-9">
             <div class="help-block">
-              <p id="js-webhook-help">{l s='This is your store webhook URL, it will be sent with each transaction.' mod='cawlop'}</p>
+              <p id="js-webhook-help-automatic" {if $data.accountSettings.webhookMode != 'automatic'}style="display:none"{/if}>
+                {l s='This is your store webhook URL, it will be sent with each transaction.' mod='cawlop'}
+              </p>
+              <p id="js-webhook-help-manual" {if $data.accountSettings.webhookMode != 'manual'}style="display:none"{/if}>
+                {l s='This is your store webhook URL, you must add it in the merchant portal. Use the "copy" icon to avoid errors.' mod='cawlop'}
+              </p>
             </div>
           </div>
         </div>
@@ -386,6 +391,14 @@
   </form>
 </div>
 
+{addJsDefL name=worldlineop_auto_text}
+{l s='Automatic Mode Explained: The plugin automatically sends the store webhook URL with every payment request, which is the safest and most reliable option. This mode also allows you to add up to 4 additional URLs to send notifications to external services, like accounting or subscription management. Please be aware that in this mode, any webhook URLs configured in your merchant portal will be ignored for transactions originating from this specific store.' mod='cawlop' js=1}
+{/addJsDefL}
+
+{addJsDefL name=worldlineop_manual_text}
+{l s='Manual Mode Explained: You will be required to manually copy the Store Webhook URL and paste it into your merchant portal\'s webhook configuration. Crucially for multistore users, this URL is unique for each store, and this process must be repeated for every single one.' mod='cawlop' js=1}
+{/addJsDefL}
+
 {literal}
   <script type="text/javascript">
     function copyInput($input) {
@@ -423,9 +436,13 @@
         if (automaticRadio.checked) {
           additionalWebhooksBlock.style.display = 'flex';
           copyIcon.style.display = 'none';
+          document.getElementById('js-webhook-help-automatic').style.display = 'block';
+          document.getElementById('js-webhook-help-manual').style.display = 'none';
         } else {
           additionalWebhooksBlock.style.display = 'none';
           copyIcon.style.display = 'inline-block';
+          document.getElementById('js-webhook-help-automatic').style.display = 'none';
+          document.getElementById('js-webhook-help-manual').style.display = 'block';
         }
       }
 
@@ -481,8 +498,8 @@
       const automaticRadio = document.getElementById('worldlineopAccountSettings_automatic');
       const manualRadio = document.getElementById('worldlineopAccountSettings_manual');
 
-      const autoText = "Automatic Mode Explained: The plugin automatically sends the store webhook URL with every payment request, which is the safest and most reliable option. This mode also allows you to add up to 4 additional URLs to send notifications to external services, like accounting or subscription management. Please be aware that in this mode, any webhook URLs configured in your merchant portal will be ignored for transactions originating from this specific store.";
-      const manualText = "Manual Mode Explained: You will be required to manually copy the Store Webhook URL and paste it into your merchant portal's webhook configuration. Crucially for multistore users, this URL is unique for each store, and this process must be repeated for every single one.";
+      const autoText   = window.worldlineop_auto_text  || '';
+      const manualText = window.worldlineop_manual_text || '';
 
       function updateTooltipText() {
         const newText = automaticRadio.checked ? autoText : manualText;
