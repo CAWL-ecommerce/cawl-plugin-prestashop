@@ -353,7 +353,7 @@
             {foreach from=$urls item=url}
               <div class="form-group">
                 <input type="text" class="form-control mb-2 additional-webhook"
-                       placeholder="Optional"
+                       placeholder="{l s='Optional' mod='cawlop'}"
                        name="worldlineopAccountSettings[additionalWebhookUrls][]"
                        value="{$url|escape:'htmlall':'UTF-8'}"
                        maxlength="325" />
@@ -363,7 +363,7 @@
             {section name=i start=$count loop=4}
               <div class="form-group">
                 <input type="text" class="form-control mb-2 additional-webhook"
-                       placeholder="Optional"
+                       placeholder="{l s='Optional' mod='cawlop'}"
                        name="worldlineopAccountSettings[additionalWebhookUrls][]"
                        maxlength="325" />
               </div>
@@ -380,7 +380,8 @@
           <input type="hidden" name="action" value="saveAccountForm"/>
         </div>
       </div>
-      <div class="panel-footer">
+    </div>
+    <div class="panel-footer">
         <button type="submit" class="btn btn-default pull-right" name="submitSaveAccountForm">
           <i class="process-icon-save"></i> {l s='Save' mod='cawlop'}
         </button>

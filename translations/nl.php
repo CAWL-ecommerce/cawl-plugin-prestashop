@@ -229,6 +229,7 @@ $_MODULE['<{cawlop}prestashop>_account_334183355b1daeda1186c12f174c8da2'] = 'Dit
 $_MODULE['<{cawlop}prestashop>_account_902e40b8a1fd8d997397f8262048a084'] = 'Dit is de webhook-URL van uw winkel, deze wordt bij elke transactie meegestuurd.';
 $_MODULE['<{cawlop}prestashop>_account_65b97cf9a1329fb0b30cb9adc1dcc084'] = 'Dit is de webhook-URL van uw winkel, u moet deze toevoegen in het handelaarsportaal. Gebruik het \"kopieer\"-icoon om fouten te vermijden.';
 $_MODULE['<{cawlop}prestashop>_account_c535d4a1c3de661627148a68d77cbacd'] = 'Extra Webhook-URL\'s';
+$_MODULE['<{cawlop}prestashop>_account_ebb061953c0454b2c8ee7b0ac615ebcd'] = 'Optioneel';
 $_MODULE['<{cawlop}prestashop>_account_ed65cd7b3fc26832f73d62fe6fbc9de2'] = 'U kunt tot 4 extra webhook-URL\'s toevoegen';
 $_MODULE['<{cawlop}prestashop>_account_c9cc8cce247e49bae79f15173ce97354'] = 'Opslaan';
 $_MODULE['<{cawlop}prestashop>_account_a0a3752003ee536d18e8fba990b29f02'] = 'Opslaan een aanmeldingsgegevens controleren';

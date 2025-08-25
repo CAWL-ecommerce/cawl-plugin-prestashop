@@ -230,6 +230,7 @@ $_MODULE['<{cawlop}prestashop>_account_334183355b1daeda1186c12f174c8da2'] = 'Die
 $_MODULE['<{cawlop}prestashop>_account_902e40b8a1fd8d997397f8262048a084'] = 'Dies ist die Webhook-URL Ihres Shops, sie wird bei jeder Transaktion gesendet.';
 $_MODULE['<{cawlop}prestashop>_account_65b97cf9a1329fb0b30cb9adc1dcc084'] = 'Dies ist die Webhook-URL Ihres Shops, Sie müssen sie im Händlerportal hinzufügen. Verwenden Sie das \"Kopieren\"-Symbol, um Fehler zu vermeiden.';
 $_MODULE['<{cawlop}prestashop>_account_c535d4a1c3de661627148a68d77cbacd'] = 'Zusätzliche Webhook-URLs';
+$_MODULE['<{cawlop}prestashop>_account_ebb061953c0454b2c8ee7b0ac615ebcd'] = 'Optional';
 $_MODULE['<{cawlop}prestashop>_account_ed65cd7b3fc26832f73d62fe6fbc9de2'] = 'Sie können bis zu 4 zusätzliche Webhook-URLs hinzufügen';
 $_MODULE['<{cawlop}prestashop>_account_c9cc8cce247e49bae79f15173ce97354'] = 'Speichern';
 $_MODULE['<{cawlop}prestashop>_account_a0a3752003ee536d18e8fba990b29f02'] = 'Anmeldedaten speichern & prüfen';

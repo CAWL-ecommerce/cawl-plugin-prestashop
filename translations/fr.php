@@ -229,6 +229,7 @@ $_MODULE['<{cawlop}prestashop>_account_334183355b1daeda1186c12f174c8da2'] = 'Cec
 $_MODULE['<{cawlop}prestashop>_account_902e40b8a1fd8d997397f8262048a084'] = 'Ceci est l\'URL webhook de votre boutique, elle sera envoyée avec chaque transaction.';
 $_MODULE['<{cawlop}prestashop>_account_65b97cf9a1329fb0b30cb9adc1dcc084'] = 'Ceci est l\'URL webhook de votre boutique, vous devez l\'ajouter dans le portail marchand. Utilisez l\'icône \"copier\" pour éviter les erreurs.';
 $_MODULE['<{cawlop}prestashop>_account_c535d4a1c3de661627148a68d77cbacd'] = 'URL de Webhook supplémentaires';
+$_MODULE['<{cawlop}prestashop>_account_ebb061953c0454b2c8ee7b0ac615ebcd'] = 'Optionnel';
 $_MODULE['<{cawlop}prestashop>_account_ed65cd7b3fc26832f73d62fe6fbc9de2'] = 'Vous pouvez ajouter jusqu\'à 4 URL de webhook supplémentaires';
 $_MODULE['<{cawlop}prestashop>_account_c9cc8cce247e49bae79f15173ce97354'] = 'Sauvegarder';
 $_MODULE['<{cawlop}prestashop>_account_a0a3752003ee536d18e8fba990b29f02'] = 'Sauvegarder et vérifier les identifiants';
