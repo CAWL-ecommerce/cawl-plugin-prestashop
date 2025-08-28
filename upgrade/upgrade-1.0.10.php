@@ -13,12 +13,12 @@ if (!defined('_PS_VERSION_')) {
 const ACCOUNT_SETTINGS_COLUMN_NAME = 'CAWLOP_ACCOUNT_SETTINGS';
 
 /**
- * Updates module to the version 1.0.8
+ * Updates module to the version 1.0.10
  * - If 'webhookMode' is missing => set 'manual'
  * - If 'additionalWebhookUrls' is missing => set []
  * - Preserve existing values otherwise
  */
-function upgrade_module_1_0_8()
+function upgrade_module_1_0_10()
 {
     $previousShopContext = Shop::getContext();
     Shop::setContext(Shop::CONTEXT_ALL);
