@@ -264,7 +264,8 @@
             <i id="js-webhook-mode-tooltip"
                class="icon-info-sign"
                data-toggle="tooltip"
-               data-original-title=""></i>
+               title="{l s='Webhooks are the primary method your store uses to receive real-time payment notifications (e.g., paid, failed, refunded), which are essential for creating and updating your orders. Automatic Mode Explained: The plugin automatically sends the store webhook URL with every payment request, which is the safest and most reliable option. This mode also allows you to add up to 4 additional URLs to send notifications to external services, like accounting or subscription management. Please be aware that in this mode, any webhook URLs configured in your merchant portal will be ignored for transactions originating from this specific store. Manual Mode Explained: You will be required to manually copy the Store Webhook URL and paste it into your merchant portal\'s webhook configuration. Crucially for multistore users, this URL is unique for each store, and this process must be repeated for every single one.' mod='cawlop'}">
+            </i>
           </label>
 
           <div class="col-lg-9">
@@ -345,6 +346,11 @@
         <div class="form-group worldlineop-webhooks-block js-additional-webhooks" style="display: none;">
           <label class="control-label col-lg-3">
             <span>{l s='Additional Webhook URLs' mod='cawlop'}</span>
+            <i id="additionalWebhooksTooltip"
+               class="icon-info-sign"
+               data-toggle="tooltip"
+               title="{l s='Specify up to four additional URLs to receive a copy of every webhook event. This is an advanced feature for synchronizing payment data across multiple platforms (e.g., accounting software, fulfillment services). Each URL must be a valid and accessible HTTPS URL capable of receiving POST requests.' mod='cawlop'}">
+            </i>
           </label>
           <div class="col-lg-9">
             {assign var="urls" value=$data.accountSettings.additionalWebhookUrls}
@@ -392,14 +398,6 @@
   </form>
 </div>
 
-{addJsDefL name=worldlineop_auto_text}
-{l s='Automatic Mode Explained: The plugin automatically sends the store webhook URL with every payment request, which is the safest and most reliable option. This mode also allows you to add up to 4 additional URLs to send notifications to external services, like accounting or subscription management. Please be aware that in this mode, any webhook URLs configured in your merchant portal will be ignored for transactions originating from this specific store.' mod='cawlop' js=1}
-{/addJsDefL}
-
-{addJsDefL name=worldlineop_manual_text}
-{l s='Manual Mode Explained: You will be required to manually copy the Store Webhook URL and paste it into your merchant portal\'s webhook configuration. Crucially for multistore users, this URL is unique for each store, and this process must be repeated for every single one.' mod='cawlop' js=1}
-{/addJsDefL}
-
 {literal}
   <script type="text/javascript">
     function copyInput($input) {
@@ -431,7 +429,7 @@
       const additionalWebhooksBlock = document.querySelector('.js-additional-webhooks');
       const copyIcon = document.querySelector('.js-icon-copy');
       const saveButtons = document.querySelectorAll('button[name="submitSaveAccountForm"], button[name="submitTestCredentialsForm"]');
-      const regex = /^https:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/.*)?$/;
+      const regex = /^https:\/\/[a-zA-Z0-9-]{1,63}(\.[a-zA-Z0-9-]{1,63})+(\.[a-zA-Z]{2,})?(\/.*)?$/;
 
       function toggleAdditionalWebhooks() {
         if (automaticRadio.checked) {
@@ -495,26 +493,9 @@
     });
 
     document.addEventListener('DOMContentLoaded', function () {
-      const tooltipIcon = document.getElementById('js-webhook-mode-tooltip');
-      const automaticRadio = document.getElementById('worldlineopAccountSettings_automatic');
-      const manualRadio = document.getElementById('worldlineopAccountSettings_manual');
-
-      const autoText   = window.worldlineop_auto_text  || '';
-      const manualText = window.worldlineop_manual_text || '';
-
-      function updateTooltipText() {
-        const newText = automaticRadio.checked ? autoText : manualText;
-        $(tooltipIcon)
-                .attr('data-original-title', newText)
-                .tooltip('dispose')
-                .tooltip({ title: newText, placement: 'right' });
-      }
-
-      $(tooltipIcon).tooltip({ title: autoText, placement: 'right' });
+      $('#js-webhook-mode-tooltip').tooltip();
       $('#storeWebhookTooltip').tooltip();
-
-      automaticRadio.addEventListener('change', updateTooltipText);
-      manualRadio.addEventListener('change', updateTooltipText);
+      $('#additionalWebhooksTooltip').tooltip();
     });
 
   </script>
