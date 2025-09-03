@@ -69,6 +69,8 @@ class PaymentRequestDirector
         }
         $hostedCheckoutRequest->setOrder($this->builder->buildOrder());
 
+        $hostedCheckoutRequest->setFeedbacks($this->builder->buildFeedbacks());
+
         return $hostedCheckoutRequest;
     }
 
@@ -89,6 +91,8 @@ class PaymentRequestDirector
             $this->builder->buildCardPaymentMethodSpecificInput()
         );
         $paymentRequest->setOrder($this->builder->buildOrder());
+
+        $paymentRequest->setFeedbacks($this->builder->buildFeedbacks());
 
         return $paymentRequest;
     }
