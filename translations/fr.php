@@ -1,8 +1,5 @@
 <?php
 
-if (!defined('_PS_VERSION_')) {
-    exit;
-}
 global $_MODULE;
 $_MODULE = array();
 $_MODULE['<{cawlop}prestashop>cawlop_a9928cf14ad15878c88657a133832f4b'] = 'Ce module propose une intégration en un clic pour commencer à accepter des paiements avec les API (interfaces de programmation d’application) Cawl Direct (ancien Ingenico-Ogone). Augmentez vos recettes en proposant à vos clients des méthodes de paiement mondiales et régionales pour vendre dans toute l’Europe.';
@@ -171,8 +168,25 @@ $_MODULE['<{cawlop}prestashop>_account_b232ac8275cdc806dca23adb7c5b12a7'] = 'Cl�
 $_MODULE['<{cawlop}prestashop>_account_b10dd6ea1a32fb6f635fb218dde2b8d7'] = 'Secret API prod';
 $_MODULE['<{cawlop}prestashop>_account_708ce17caa0e0ddf0223b5ccf3b86ff2'] = 'Clé webhooks prod';
 $_MODULE['<{cawlop}prestashop>_account_a85cd91c822649f170d1bcfdfc8b05db'] = 'Secret webhooks prod';
-$_MODULE['<{cawlop}prestashop>_account_aaa2404d7b1b8fa0655b59ad4e5ebe94'] = 'URL webhooks';
-$_MODULE['<{cawlop}prestashop>_account_29a0d059c6b89ad88830e8f38c47b4f6'] = 'Pour éviter tout soucis de copier/coller, veuillez utiliser le bouton \"copier\" pour copier l\'URL';
+$_MODULE['<{cawlop}prestashop>_account_829ad0dd56f780b533e5b7312c49ce1b'] = 'Configuration de l\'URL du Webhook';
+$_MODULE['<{cawlop}prestashop>_account_0d30f3f1862985637a538db80de47b64'] = 'Les webhooks sont la méthode principale utilisée par votre boutique pour recevoir des notifications de paiement en temps réel (ex: payé, échoué, remboursé), essentielles pour créer et mettre à jour vos commandes. Explication du Mode Automatique : Le plugin envoie automatiquement l\'URL du webhook de la boutique à chaque requête de paiement, ce qui est l\'option la plus sûre et la plus fiable. Ce mode vous permet également d\'ajouter jusqu\'à 4 URL supplémentaires pour envoyer des notifications à des services externes, comme la comptabilité ou la gestion d\'abonnements. Notez que dans ce mode, toute URL de webhook configurée dans votre portail marchand sera ignorée pour les transactions provenant de cette boutique. Explication du Mode Manuelle : Vous devrez copier manuellement l\'URL du Webhook de la boutique et la coller dans la configuration des webhooks de votre portail marchand. Crucial pour les utilisateurs de multiboutique, cette URL est unique pour chaque boutique, et ce processus doit être répété pour chacune d\'entre elles.';
+$_MODULE['<{cawlop}prestashop>_account_be318d7806111428185ad35d86c12305'] = 'Automatique (Recommandé)';
+$_MODULE['<{cawlop}prestashop>_account_e1ba155a9f2e8c3be94020eef32a0301'] = 'Manuelle';
+$_MODULE['<{cawlop}prestashop>_account_81df417c2942e97e8527167cacfd094a'] = 'Automatique:';
+$_MODULE['<{cawlop}prestashop>_account_1f66738c8be987b2a2a8a5de0ccddab1'] = 'Le plugin envoie automatiquement la ou les URL de webhook à chaque   transaction.';
+$_MODULE['<{cawlop}prestashop>_account_4c0942bd34c3a6dee1a430fe7acec09d'] = 'Manuelle:';
+$_MODULE['<{cawlop}prestashop>_account_7b7909ac3d9d3f897745dab6ac6b4791'] = 'Vous devez ajouter l\'URL du webhook de votre boutique dans le portail marchand.';
+$_MODULE['<{cawlop}prestashop>_account_7686f2acb31d5d32faac85d3b911bd27'] = 'Les URL ci-dessous seront utilisées pour les transactions de cette boutique, toute URL de webhook configurée dans le portail marchand sera ignorée.';
+$_MODULE['<{cawlop}prestashop>_account_70b6adcaed75bc898fe1533adefc62bf'] = 'Vous êtes entièrement responsable de l\'ajout de l\'URL du webhook de votre boutique dans le portail marchand.';
+$_MODULE['<{cawlop}prestashop>_account_5d9f2d97184b006eceaf37a551a50a2b'] = 'Un oubli de votre part pourrait entraîner des commandes manquantes ou incomplètes!  ';
+$_MODULE['<{cawlop}prestashop>_account_0f0783f2416a677cbce4e3a81fe89f20'] = 'URL Webhook de la boutique';
+$_MODULE['<{cawlop}prestashop>_account_334183355b1daeda1186c12f174c8da2'] = 'Ceci est l\'adresse unique de votre boutique pour recevoir les notifications de paiement. Le plugin écoute cette URL pour les mises à jour de statut en temps réel afin de créer et mettre à jour vos commandes.';
+$_MODULE['<{cawlop}prestashop>_account_902e40b8a1fd8d997397f8262048a084'] = 'Ceci est l\'URL webhook de votre boutique, elle sera envoyée avec chaque transaction.';
+$_MODULE['<{cawlop}prestashop>_account_65b97cf9a1329fb0b30cb9adc1dcc084'] = 'Ceci est l\'URL webhook de votre boutique, vous devez l\'ajouter dans le portail marchand. Utilisez l\'icône \"copier\" pour éviter les erreurs.';
+$_MODULE['<{cawlop}prestashop>_account_c535d4a1c3de661627148a68d77cbacd'] = 'URL de Webhook supplémentaires';
+$_MODULE['<{cawlop}prestashop>_account_2ab2f3863455f4418d8f27d67e2c93c9'] = 'Spécifiez jusqu\'à quatre URL supplémentaires pour recevoir une copie de chaque événement webhook. C\'est une fonctionnalité avancée pour synchroniser les données de paiement sur plusieurs plateformes (ex: logiciel comptable, services de traitement des commandes). Chaque URL doit être une URL HTTPS valide et accessible, capable de recevoir des requêtes POST.';
+$_MODULE['<{cawlop}prestashop>_account_ebb061953c0454b2c8ee7b0ac615ebcd'] = 'Optionnel';
+$_MODULE['<{cawlop}prestashop>_account_ed65cd7b3fc26832f73d62fe6fbc9de2'] = 'Vous pouvez ajouter jusqu\'à 4 URL de webhook supplémentaires';
 $_MODULE['<{cawlop}prestashop>_account_c9cc8cce247e49bae79f15173ce97354'] = 'Sauvegarder';
 $_MODULE['<{cawlop}prestashop>_account_a0a3752003ee536d18e8fba990b29f02'] = 'Sauvegarder et vérifier les identifiants';
 $_MODULE['<{cawlop}prestashop>_advancedsettings_d5815623c49bc79327917762848902f0'] = 'Paramètres de paiement';
