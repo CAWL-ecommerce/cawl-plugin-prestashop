@@ -72,6 +72,27 @@ class CawlopWebhookModuleFrontController extends ModuleFrontController
         //header('HTTP/1.1 200 OK');
         $this->respondOK();
 
+        $payment = $event->getPayment();
+        $cartId = null;
+
+        if ($payment !== null) {
+            $paymentOutput = $payment->getPaymentOutput();
+            if ($paymentOutput !== null) {
+                $references = $paymentOutput->getReferences();
+                if ($references !== null) {
+                    $cartId = $references->getMerchantReference();
+                }
+            }
+        }
+
+        if ($cartId) {
+            $cart = new Cart($cartId);
+            if (Validate::isLoadedObject($cart)) {
+                $currency = new Currency($cart->id_currency);
+                $this->context->currency = $currency;
+            }
+        }
+
         /** @var \WorldlineOP\PrestaShop\Presenter\WebhookEventPresenter $eventPresenter */
         $eventPresenter = $this->module->getService('cawlop.event.presenter');
         try {
