@@ -17,6 +17,7 @@ if (!defined('_PS_VERSION_')) {
 
 use Monolog\Logger;
 use PrestaShop\ModuleLibServiceContainer\DependencyInjection\ServiceContainer;
+use WorldlineOP\PrestaShop\Utils\Tools as ToolsWorldline;
 
 /**
  * Class Cawlop
@@ -41,7 +42,7 @@ class Cawlop extends PaymentModule
 
         $this->name = 'cawlop';
         $this->author = 'Cawl Online Payments';
-        $this->version = '1.0.10';
+        $this->version = '1.0.11';
         $this->tab = 'payments_gateways';
         // $this->module_key = '089d13d0218de8085259e542483f4438'; TODO: UPDATE MODULE KEY WHEN MODULE IS RELEASING
         $this->currencies = true;
@@ -95,12 +96,25 @@ class Cawlop extends PaymentModule
      */
     public function uninstall()
     {
-        Configuration::deleteByName('CAWLOP_ACCOUNT_SETTINGS');
-        Configuration::deleteByName('CAWLOP_ADVANCED_SETTINGS');
-        Configuration::deleteByName('CAWLOP_PAYMENT_METHODS_SETTINGS');
-        Configuration::deleteByName('CAWLOP_SHOW_ADVANCED_SETTINGS');
+        if (parent::uninstall()) {
+            Configuration::deleteByName('CAWLOP_ACCOUNT_SETTINGS');
+            Configuration::deleteByName('CAWLOP_ADVANCED_SETTINGS');
+            Configuration::deleteByName('CAWLOP_PAYMENT_METHODS_SETTINGS');
+            Configuration::deleteByName('CAWLOP_SHOW_ADVANCED_SETTINGS');
+            ToolsWorldline::removeSymfonyCache();
+            return true;
+        }
 
-        return parent::uninstall();
+        return false;
+    }
+
+    public function disable($force_all = false)
+    {
+        if (parent::disable($force_all)) {
+            ToolsWorldline::removeSymfonyCache();
+            return true;
+        }
+        return false;
     }
 
     /**
