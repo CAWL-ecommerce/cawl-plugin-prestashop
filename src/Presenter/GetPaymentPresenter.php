@@ -220,7 +220,7 @@ class GetPaymentPresenter implements PresenterInterface
 
             return;
         }
-        $transactionId = strstr($paymentResponse->getId(), '_', true);
+        $transactionId = substr($paymentResponse->getId(), 0, -3);
         if (false === $transactionId) {
             $transactionId = $paymentResponse->getId();
         }
@@ -259,13 +259,13 @@ class GetPaymentPresenter implements PresenterInterface
         $transactionRepository = $this->module->getService('cawlop.repository.transaction');
         /** @var \WorldlineopTransaction $transaction */
         $transaction = $transactionRepository->findByIdOrder($order->id);
-        $merchantReference = strstr($paymentResponse->getId(), '_', true);
+        $merchantReference = substr($paymentResponse->getId(), 0, -3);
         if (false === $merchantReference) {
             $merchantReference = $paymentResponse->getId();
         }
         $idShop = $this->cart->id_shop;
         $settings = $this->settingsLoader->setContext($idShop);
-        $transactionReference = strstr($transaction->reference, '_', true);
+        $transactionReference = substr($transaction->reference, 0, -3);
         if (false === $transactionReference) {
             $transactionReference = $transaction->reference;
         }
@@ -355,7 +355,7 @@ class GetPaymentPresenter implements PresenterInterface
                     return;
                 }
             }
-            $merchantReference = strstr($transaction->reference, '_', true);
+            $merchantReference = substr($transaction->reference, 0, -3);
             if (false === $merchantReference) {
                 $merchantReference = $transaction->reference;
             }
