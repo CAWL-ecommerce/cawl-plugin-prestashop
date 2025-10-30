@@ -87,11 +87,11 @@ class GetRefundPresenter implements PresenterInterface
         $transactionRepository = $this->module->getService('cawlop.repository.transaction');
         /** @var \WorldlineopTransaction $transaction */
         $transaction = $transactionRepository->findByIdOrder($order->id);
-        $merchantReference = strstr($refundResponse->getId(), '_', true);
+        $merchantReference = substr($refundResponse->getId(), 0, -3);
         if (false === $merchantReference) {
             $merchantReference = $refundResponse->getId();
         }
-        $transactionReference = strstr($transaction->reference, '_', true);
+        $transactionReference = substr($transaction->reference, 0, -3);
         if (false === $transactionReference) {
             $transactionReference = $transaction->reference;
         }
