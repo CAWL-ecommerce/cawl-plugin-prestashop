@@ -42,7 +42,7 @@ class Cawlop extends PaymentModule
 
         $this->name = 'cawlop';
         $this->author = 'Cawl Online Payments';
-        $this->version = '1.0.11';
+        $this->version = '1.0.12';
         $this->tab = 'payments_gateways';
         // $this->module_key = '089d13d0218de8085259e542483f4438'; TODO: UPDATE MODULE KEY WHEN MODULE IS RELEASING
         $this->currencies = true;
@@ -347,7 +347,7 @@ class Cawlop extends PaymentModule
         if (false === $transaction) {
             return '';
         }
-        $transactionId = strstr($transaction->reference, '_', true);
+        $transactionId = substr($transaction->reference, 0, -3);
         if (false === $transactionId) {
             $transactionId = $transaction->reference;
         }
