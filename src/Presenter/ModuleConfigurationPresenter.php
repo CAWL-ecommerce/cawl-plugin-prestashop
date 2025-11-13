@@ -29,6 +29,30 @@ class ModuleConfigurationPresenter implements PresenterInterface
     const PENDING_CRON = '*/30 * * * * wget -O /dev/null ';
     const CAPTURE_CRON = '0 */6 * * * wget -O /dev/null ';
 
+    /** @var string[] */
+    private const HIDDEN_FIELDS = [
+        'testApiSecret',
+        'testWebhooksSecret',
+        'prodApiSecret',
+        'prodWebhooksSecret',
+    ];
+
+    private const TEST_FIELDS = [
+        'testPspid',
+        'testApiKey',
+        'testApiSecret',
+        'testWebhooksKey',
+        'testWebhooksSecret'
+    ];
+
+    private const PROD_FIELDS = [
+        'prodPspid',
+        'prodApiKey',
+        'prodApiSecret',
+        'prodWebhooksKey',
+        'prodWebhooksSecret'
+    ];
+
     /** @var SettingsLoader */
     private $settingsLoader;
 
@@ -55,6 +79,7 @@ class ModuleConfigurationPresenter implements PresenterInterface
     public function present()
     {
         $settings = $this->settingsLoader->normalize();
+        $this->hideSecrets($settings);
         $settings['extra'] = [
             'moduleVersion' => $this->module->version,
             'advancedSettingsEnabled' => \Configuration::getGlobalValue('CAWLOP_SHOW_ADVANCED_SETTINGS'),
@@ -96,5 +121,75 @@ class ModuleConfigurationPresenter implements PresenterInterface
         ];
 
         return $settings;
+    }
+
+    /**
+     * @param array $postedData
+     *
+     * @return array
+     *
+     * @throws \PrestaShopException
+     */
+    public function presentWithPostedData(array $postedData): array
+    {
+        $settings = $this->present();
+        $settings = array_replace_recursive($settings, $postedData);
+        if (!$this->areFieldsEmpty($settings)) {
+            $this->hideSecrets($settings);
+        }
+
+        return $settings;
+    }
+
+    /**
+     * @param array $settings
+     *
+     * @return bool
+     */
+    private function areFieldsEmpty(array $settings): bool
+    {
+        $fields = $settings['accountSettings']['environment'] === 'test'
+            ? self::TEST_FIELDS
+            : self::PROD_FIELDS;
+
+        foreach ($fields as $field) {
+            if (empty($settings['accountSettings'][$field])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param array $settings
+     * @return void
+     */
+    private function hideSecrets(array &$settings): void
+    {
+        if (!array_key_exists('accountSettings', $settings)) {
+            return;
+        }
+
+        foreach (self::HIDDEN_FIELDS as $field) {
+            if (array_key_exists($field, $settings['accountSettings'])) {
+                $settings['accountSettings'][$field] = $this->maskString($settings['accountSettings'][$field]);
+            }
+        }
+    }
+
+    /**
+     * Mask a secret field
+     *
+     * @param string $input
+     * @return string
+     */
+    private function maskString(string $input): string
+    {
+        if (empty($input)) {
+            return '';
+        }
+
+        return substr($input, 0, 6) . str_repeat('*', 10);
     }
 }

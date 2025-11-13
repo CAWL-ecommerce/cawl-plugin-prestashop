@@ -96,11 +96,10 @@ class AdminCawlopConfigurationController extends ModuleAdminController
         $this->setModals();
         /** @var \WorldlineOP\PrestaShop\Presenter\ModuleConfigurationPresenter $presenter */
         $presenter = $this->module->getService('cawlop.settings.presenter');
-        $data = $presenter->present();
+        $data = empty($this->postedData)
+            ? $presenter->present()
+            : $presenter->presentWithPostedData($this->postedData);
         $data['activeTab'] = $this->activeTab;
-        if (!empty($this->postedData)) {
-            $data = array_replace_recursive($data, $this->postedData);
-        }
         $this->context->smarty->assign([
             'data' => $data,
             'languages' => $this->getLanguages(),
@@ -135,6 +134,8 @@ class AdminCawlopConfigurationController extends ModuleAdminController
         $form = Tools::getValue('worldlineopAccountSettings');
 
         $form['webhookMode'] = ($form['webhookMode'] === '1') ? 'automatic' : (($form['webhookMode'] === '0') ? 'manual' : $form['webhookMode']);
+
+        $form = $updater->forceResolve($form);
 
         try {
             $updater->update($form);
