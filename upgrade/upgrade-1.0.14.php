@@ -86,13 +86,13 @@ function update_payment_methods_settings_1_0_14()
 
     $changed = false;
 
-    if (!array_key_exists('isDefaultGenericLogo', $settings)) {
+    if (!array_key_exists('isDefaultGenericLogo', $settings) || $settings['isDefaultGenericLogo'] === null) {
         $currentGenericLogo = isset($settings['genericLogoFilename']) ? $settings['genericLogoFilename'] : '';
         $settings['isDefaultGenericLogo'] = (empty($currentGenericLogo) || $currentGenericLogo === DEFAULT_GENERIC_LOGO_FILENAME);
         $changed = true;
     }
 
-    if (!array_key_exists('isDefaultIframeLogo', $settings)) {
+    if (!array_key_exists('isDefaultIframeLogo', $settings) || $settings['isDefaultIframeLogo'] === null) {
         $currentIframeLogo = isset($settings['iframeLogoFilename']) ? $settings['iframeLogoFilename'] : '';
         $settings['isDefaultIframeLogo'] = (empty($currentIframeLogo) || $currentIframeLogo === DEFAULT_IFRAME_LOGO_FILENAME);
         $changed = true;
