@@ -126,7 +126,7 @@ $_MODULE['<{cawlop}prestashop>_paymentmethodssettings_93cba07454f06a4a960172bbd6
 $_MODULE['<{cawlop}prestashop>_paymentmethodssettings_bafd7322c6e97d25b6299b5d6fe8920b'] = 'Non';
 $_MODULE['<{cawlop}prestashop>_paymentmethodssettings_ffaaab40fc54c578836d4ae92238718c'] = 'Logo générique affiché sur votre page de paiement';
 $_MODULE['<{cawlop}prestashop>_paymentmethodssettings_91412465ea9169dfd901dd5e7c96dd99'] = 'Télécharger';
-$_MODULE['<{cawlop}prestashop>_paymentmethodssettings_8de30aa607e33f41413c50be107e0c6c'] = 'Supprimer le logo actuel';
+$_MODULE['<{cawlop}prestashop>_paymentmethodssettings_0a7aa3e6a43a0a1406e4169ae2be963a'] = 'Restaurer le logo par défaut';
 $_MODULE['<{cawlop}prestashop>_paymentmethodssettings_254ad5cf512e99709dbcb70646ed7b6d'] = 'Vous pouvez télécharger un nouveau logo ici (les types de fichier acceptés pour les logos sont uniquement : .png .gif .jpg)';
 $_MODULE['<{cawlop}prestashop>_paymentmethodssettings_ff76e4c4c9abdc7de325c97912ffb8cd'] = 'Nous vous recommandons d’utiliser des images ayant une hauteur maximale de 20 px et une longueur maximale de 120 px';
 $_MODULE['<{cawlop}prestashop>_paymentmethodssettings_3c8990c77ed9e1634b5cdd133c6e0993'] = 'Titre du bouton de paiement';
