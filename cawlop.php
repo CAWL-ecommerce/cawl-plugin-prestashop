@@ -143,7 +143,7 @@ class Cawlop extends PaymentModule
             case 'order':
                 $this->context->controller->registerJavascript(
                     'worldineoc-js-sdk',
-                    'https://payment.preprod.cawl-solutions.fr/hostedtokenization/js/client/tokenizer.min.js',
+                    'https://payment.cawl-solutions.fr/hostedtokenization/js/client/tokenizer.min.js',
                     ['server' => 'remote', 'priority' => 1, 'position' => 'head', 'attribute' => 'defer']
                 );
                 $this->context->controller->registerStylesheet(
