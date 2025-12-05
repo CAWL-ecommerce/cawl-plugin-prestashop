@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.15] - 2025-01-12
 ### Added
 - Add new payment method : Pledg
+- Manage exemption for FR markets
 ### Fixed
 - Fix iframe rendering on mobile phones
 - Fix order total not being updated when customer adds/removes gift wrapping
