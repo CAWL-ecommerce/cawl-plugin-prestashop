@@ -230,21 +230,22 @@ class HostedPaymentRequestBuilder extends AbstractRequestBuilder
                 $gPayThreeDSecure->setChallengeIndicator(self::CHALLENGE_INDICATOR_REQUIRED);
                 $gPayThreeDSecure->setSkipAuthentication(false);
             } elseif ($this->settings->advancedSettings->threeDSExempted) {
+                $gPayThreeDSecure->setSkipAuthentication(false);
                 $threeDSExemptionType = $this->settings->advancedSettings->threeDSExemptedType;
                 $threeDSExemptionValue = $this->settings->advancedSettings->threeDSExemptedValue;
-                switch ($threeDSExemptionType) {
-                    case self::TRANSACTION_RISK_ANALYSIS_EXEMPTION:
-                        $gPayThreeDSecure->setChallengeIndicator(self::NO_CHALLENGE_REQUESTED_RISK_ANALYSIS_PERFORMED);
-                        break;
-                    case self::LOW_VALUE_EXEMPTION:
-                        $gPayThreeDSecure->setChallengeIndicator(self::NO_CHALLENGE_REQUESTED);
-                        break;
-                }
                 $orderTotalInEuros = Tools::getAmountInEuros($this->context->cart->getOrderTotal(),
                     new \Currency($this->context->cart->id_currency));
-                $gPayThreeDSecure->setSkipAuthentication(false);
+
                 if ($threeDSExemptionValue >= $orderTotalInEuros) {
                     $gPayThreeDSecure->setExemptionRequest($threeDSExemptionType);
+                    switch ($threeDSExemptionType) {
+                        case self::TRANSACTION_RISK_ANALYSIS_EXEMPTION:
+                            $gPayThreeDSecure->setChallengeIndicator(self::NO_CHALLENGE_REQUESTED_RISK_ANALYSIS_PERFORMED);
+                            break;
+                        case self::LOW_VALUE_EXEMPTION:
+                            $gPayThreeDSecure->setChallengeIndicator(self::NO_CHALLENGE_REQUESTED);
+                            break;
+                    }
                 }
             }
             $gPayRedirectionData = new RedirectionData();
