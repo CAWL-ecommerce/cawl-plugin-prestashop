@@ -155,7 +155,7 @@ class TransactionPresenter implements PresenterInterface
                             ];
                         }
                     }
-                    $refundableAmount = !$paymentDetails->getStatusOutput()->getIsRefundable() ? 0 : Tools::getRoundedAmountFromCents($totalCaptured - $totalRefunded + $totalPendingRefund, $currencyCode);
+                    $refundableAmount = !$paymentDetails->getStatusOutput()->getIsRefundable() ? 0 : Tools::getRoundedAmountFromCents($totalCaptured - $totalRefunded - $totalPendingRefund, $currencyCode);
                     $apiErrors = $paymentDetails->getStatusOutput()->getErrors() ?: [];
                     $errors = [];
                     foreach ($apiErrors as $apiError) {
