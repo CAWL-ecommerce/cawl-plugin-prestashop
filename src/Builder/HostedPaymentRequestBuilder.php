@@ -192,12 +192,17 @@ class HostedPaymentRequestBuilder extends AbstractRequestBuilder
                         $threeDSecure->setSkipAuthentication(false);
                         $threeDSecure->setExemptionRequest($threeDSExemptedType);
                         $threeDSecure->setSkipSoftDecline(false);
-                        $threeDSecure->setChallengeIndicator(
-                            match ($threeDSExemptedType) {
-                                self::TRANSACTION_RISK_ANALYSIS_EXEMPTION => self::NO_CHALLENGE_REQUESTED_RISK_ANALYSIS_PERFORMED,
-                                self::LOW_VALUE_EXEMPTION => self::NO_CHALLENGE_REQUESTED,
-                            }
-                        );
+                        switch ($threeDSExemptedType) {
+                            case self::TRANSACTION_RISK_ANALYSIS_EXEMPTION:
+                                $threeDSecure->setChallengeIndicator(self::NO_CHALLENGE_REQUESTED_RISK_ANALYSIS_PERFORMED);
+                                break;
+                            case self::LOW_VALUE_EXEMPTION:
+                                $threeDSecure->setChallengeIndicator(self::NO_CHALLENGE_REQUESTED);
+                                break;
+                            default:
+                                $threeDSecure->setChallengeIndicator(self::NO_CHALLENGE_REQUESTED);
+                                break;
+                        }
                     }
                 } else {
                     $paymentProduct130ThreeDSecure->setAcquirerExemption(false);
