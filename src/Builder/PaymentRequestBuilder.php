@@ -18,8 +18,6 @@ use OnlinePayments\Sdk\Domain\CardPaymentMethodSpecificInput;
 use OnlinePayments\Sdk\Domain\MobilePaymentMethodSpecificInput;
 use OnlinePayments\Sdk\Domain\PaymentProduct130SpecificInput;
 use OnlinePayments\Sdk\Domain\PaymentProduct130SpecificThreeDSecure;
-use OnlinePayments\Sdk\Domain\PaymentProduct320SpecificInput;
-use OnlinePayments\Sdk\Domain\PaymentProduct320SpecificThreeDSecure;
 use OnlinePayments\Sdk\Domain\RedirectionData;
 use OnlinePayments\Sdk\Domain\ThreeDSecure;
 use WorldlineOP\PrestaShop\Utils\Tools;
@@ -137,17 +135,6 @@ class PaymentRequestBuilder extends AbstractRequestBuilder
             }
             $paymentProduct130SpecificInput->setThreeDSecure($paymentProduct130ThreeDSecure);
             $cardPaymentMethodSpecificInput->setPaymentProduct130SpecificInput($paymentProduct130SpecificInput);
-        }
-
-        if ($isNoChallengePreference) {
-            $paymentProduct320SpecificInput = new PaymentProduct320SpecificInput();
-            $paymentProduct320ThreeDSecure = new PaymentProduct320SpecificThreeDSecure();
-
-            $paymentProduct320ThreeDSecure->setChallengeIndicator(self::NO_CHALLENGE_REQUESTED);
-            $paymentProduct320ThreeDSecure->setSkipAuthentication(false);
-
-            $paymentProduct320SpecificInput->setThreeDSecure($paymentProduct320ThreeDSecure);
-            $cardPaymentMethodSpecificInput->setPaymentProduct320SpecificInput($paymentProduct320SpecificInput);
         }
 
         return $cardPaymentMethodSpecificInput;
