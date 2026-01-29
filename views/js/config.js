@@ -178,9 +178,14 @@ $(document).ready(function () {
         }
       },
       toggle3DSExemptionType: function (event) {
+          var $li = $(event.target).closest('li');
         var exemptionTypeButtonTextEl = $('.js-worldlineop-select-3ds-exemption-type-button-text');
         var helpTextExemptionLimit30 = $('#js-worldlineop-select-3ds-exemption-limit-30');
         var helpTextExemptionLimit100 = $('#js-worldlineop-select-3ds-exemption-limit-100');
+
+        if (!$li.length) {
+            return;
+        }
 
         if (exemptionTypeButtonTextEl && exemptionTypeButtonTextEl[0]) {
           exemptionTypeButtonTextEl[0].innerText = event.target.innerText;
