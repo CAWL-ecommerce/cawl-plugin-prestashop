@@ -1,5 +1,5 @@
 {**
- * 2021 Worldline Online Payments
+ * 2021 CAWL Online Payments
  *
  * NOTICE OF LICENSE
  *
@@ -7,7 +7,7 @@
  * It is also available through the world-wide-web at this URL: https://opensource.org/licenses/AFL-3.0
  *
  * @author    PrestaShop / PrestaShop partner
- * @copyright 2020-2021 Worldline Online Payments
+ * @copyright 2020-2021 CAWL Online Payments
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *
  *}

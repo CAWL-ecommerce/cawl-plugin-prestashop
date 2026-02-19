@@ -1,6 +1,6 @@
 <?php
 /**
- * 2021 Worldline Online Payments
+ * 2021 CAWL Online Payments
  *
  * NOTICE OF LICENSE
  * This source file is subject to the Academic Free License 3.0 (AFL-3.0)
