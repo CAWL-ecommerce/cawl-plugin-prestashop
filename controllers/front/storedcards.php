@@ -104,6 +104,10 @@ class CawlopStoredCardsModuleFrontController extends ModuleFrontController
         /** @var \OnlinePayments\Sdk\Merchant\MerchantClient $merchantClient */
         $merchantClient = $this->module->getService('cawlop.sdk.client');
         try {
+            $this->module->logger->debug(
+                'Deleting stored card token',
+                ['request' => ['tokenId' => $storedCard->value]]
+            );
             $merchantClient->tokens()->deleteToken($storedCard->value);
             $delete = $tokenRepository->delete($storedCard);
         } catch (Exception $e) {
@@ -113,6 +117,7 @@ class CawlopStoredCardsModuleFrontController extends ModuleFrontController
             return false;
         }
         if ($delete) {
+            $this->module->logger->info('Deleted stored card:' .$storedCard->card_number);
             $this->success[] = $this->module->l('Card deleted successfully.', 'storedcards');
             $this->redirectStoredCards = true;
 
