@@ -14,11 +14,11 @@
 
 <h1>
   {l s='What\'s new in version' mod='cawlop'}
-  1.0.21
+  1.0.22
 </h1>
 <br>
 <ul>
-  <li>{l s='Update plugin translations' mod='cawlop'}</li>
+  <li>{l s='Fix order incorrectly set to Payment error when delayed payment confirmation webhook arrives for an already created order' mod='cawlop'}</li>
 </ul>
 <br>
 <hr>
