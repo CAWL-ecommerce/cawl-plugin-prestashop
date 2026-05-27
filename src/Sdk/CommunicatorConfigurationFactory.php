@@ -14,6 +14,10 @@
 
 namespace WorldlineOP\PrestaShop\Sdk;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 use OnlinePayments\Sdk\CommunicatorConfiguration;
 use OnlinePayments\Sdk\Domain\ShoppingCartExtension;
 use Cawlop;

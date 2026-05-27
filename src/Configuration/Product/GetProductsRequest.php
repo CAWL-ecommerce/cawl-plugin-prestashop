@@ -14,6 +14,10 @@
 
 namespace WorldlineOP\PrestaShop\Configuration\Product;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 use Configuration;
 use Country;
 use Currency;

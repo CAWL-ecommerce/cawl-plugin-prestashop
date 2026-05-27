@@ -14,6 +14,10 @@
 
 namespace WorldlineOP\PrestaShop\Presenter;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 use Cart;
 use OnlinePayments\Sdk\Domain\RefundResponse;
 use Order;
@@ -53,8 +57,8 @@ class GetRefundPresenter implements PresenterInterface
     }
 
     /**
-     * @param RefundResponse $refundResponse
-     * @param int $idShop
+     * @param RefundResponse|false $refundResponse
+     * @param int|false $idShop
      *
      * @return TransactionPresented
      *
@@ -85,17 +89,17 @@ class GetRefundPresenter implements PresenterInterface
         }
         /** @var TransactionRepository $transactionRepository */
         $transactionRepository = $this->module->getService('cawlop.repository.transaction');
-        /** @var \WorldlineopTransaction $transaction */
+        /** @var \WorldlineopTransaction|false $transaction */
         $transaction = $transactionRepository->findByIdOrder($order->id);
         $merchantReference = substr($refundResponse->getId(), 0, -3);
-        if (false === $merchantReference) {
+        if (empty($merchantReference)) {
             $merchantReference = $refundResponse->getId();
         }
         $transactionReference = substr($transaction->reference, 0, -3);
-        if (false === $transactionReference) {
+        if (empty($transactionReference)) {
             $transactionReference = $transaction->reference;
         }
-        if (false === $transaction || ($transactionReference !== $merchantReference && false !== $merchantReference)) {
+        if (!$transaction || ($transactionReference !== $merchantReference && !empty($merchantReference))) {
             $this->logger->error('Could not find transaction', ['merchantReference' => $merchantReferenceFull]);
 
             return $this->presentedData;
@@ -103,7 +107,7 @@ class GetRefundPresenter implements PresenterInterface
 
         $this->presentedData->updateStatus = true;
         $this->presentedData->order['ids'] = Tools::getOrderIdsByIdCart($order->id_cart);
-        $this->presentedData->idOrderState = \Configuration::get('PS_OS_REFUND');
+        $this->presentedData->idOrderState = (int) \Configuration::get('PS_OS_REFUND');
         $this->presentedData->sendMail = \Configuration::getGlobalValue('WOP_AWAITING_CAPTURE_STATUS_ID') == \Configuration::get('PS_OS_REFUND');
         $this->presentedData->payments['hasPayments'] = $order->getOrderPayments();
         $this->presentedData->payments['merchantReference'] = $merchantReference;

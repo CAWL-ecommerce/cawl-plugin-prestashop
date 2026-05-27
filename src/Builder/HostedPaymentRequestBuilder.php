@@ -14,6 +14,10 @@
 
 namespace WorldlineOP\PrestaShop\Builder;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 use Language;
 use OnlinePayments\Sdk\Domain\AmountOfMoney;
 use OnlinePayments\Sdk\Domain\CardPaymentMethodSpecificInput;
@@ -341,6 +345,14 @@ class HostedPaymentRequestBuilder extends AbstractRequestBuilder
         } catch (\Exception $e) {
             return $order;
         }
+
+        if ((int)$this->idProduct !== self::MEALVOUCHER_PRODUCT_ID) {
+            $shipping = $order->getShipping();
+            $shipping->setShippingCost((int)(string)$shoppingCartPresented['shipping']['priceWithoutTax']);
+            $shipping->setShippingCostTax((int)(string)$shoppingCartPresented['shipping']['tax']);
+            $order->setShipping($shipping);
+        }
+
         $shoppingCart = new ShoppingCart();
         $items = $this->buildGroupedLineItems($shoppingCartPresented);
         foreach ($shoppingCartPresented['products'] as $product) {
@@ -369,24 +381,7 @@ class HostedPaymentRequestBuilder extends AbstractRequestBuilder
             $item->setOrderLineDetails($itemLineDetails);
             $items = $this->buildGroupedLineItems($shoppingCartPresented);
         }
-        if ((int)$this->idProduct !== self::MEALVOUCHER_PRODUCT_ID) {
-            $shippingItem = new LineItem();
-            $shippingItemAmount = new AmountOfMoney();
-            $shippingItemAmount->setAmount((int) (string) $shoppingCartPresented['shipping']['priceWithTax']);
-            $shippingItemAmount->setCurrencyCode(Tools::getIsoCurrencyCodeById($shoppingCartPresented['cart']->id_currency));
-            $shippingItem->setAmountOfMoney($shippingItemAmount);
-            $shippingItemLineDetails = new OrderLineDetails();
-            $shippingItemLineDetails->setProductPrice((int) (string) $shoppingCartPresented['shipping']['priceWithoutTax']);
-            $shippingItemLineDetails->setDiscountAmount((int) (string) $shoppingCartPresented['shipping']['discountPrice']);
-            $shippingItemLineDetails->setProductCode('SHIPPING');
-            $shippingItemLineDetails->setProductName($this->module->l('Shipping cost'));
-            $shippingItemLineDetails->setQuantity(1);
-            $shippingItemLineDetails->setTaxAmount((int) (string) $shoppingCartPresented['shipping']['tax']);
-            $shippingItemLineDetails->setUnit('piece');
-            $shippingItemLineDetails->setProductType($shoppingCartPresented['shipping']['type']);
-            $shippingItem->setOrderLineDetails($shippingItemLineDetails);
-            $items[] = $shippingItem;
-        }
+
         $shoppingCart->setItems($items);
         if (!$this->settings->advancedSettings->omitOrderItemDetails) {
             $order->setShoppingCart($shoppingCart);
@@ -395,7 +390,7 @@ class HostedPaymentRequestBuilder extends AbstractRequestBuilder
         return $order;
     }
 
-    function buildGroupedLineItems(array $shoppingCartPresented): array
+    private function buildGroupedLineItems(array $shoppingCartPresented): array
     {
         $itemsByGroupKey = [];
 

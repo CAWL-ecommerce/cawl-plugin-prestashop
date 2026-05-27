@@ -14,6 +14,10 @@
 
 namespace WorldlineOP\PrestaShop\Processor;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 use Context;
 use Order;
 use Symfony\Component\Lock\Factory;

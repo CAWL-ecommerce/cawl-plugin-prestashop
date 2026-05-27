@@ -14,6 +14,10 @@
 
 namespace WorldlineOP\PrestaShop\Builder;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 use OnlinePayments\Sdk\Domain\CardPaymentMethodSpecificInput;
 use OnlinePayments\Sdk\Domain\MobilePaymentMethodSpecificInput;
 use OnlinePayments\Sdk\Domain\PaymentProduct130SpecificInput;

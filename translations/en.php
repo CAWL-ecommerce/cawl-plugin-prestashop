@@ -5,7 +5,8 @@ if (!defined('_PS_VERSION_')) {
 }
 global $_MODULE;
 $_MODULE = [];
-$_MODULE['<{cawlop}prestashop>cawlop_a9928cf14ad15878c88657a133832f4b'] = 'This module offers a 1-click integration to start accepting payments with the Cawl Direct APIs (former Ingenico-Ogone). Grow your revenues by offering your customers with global and regional payment methods to sell across Europe.';
+$_MODULE['<{cawlop}prestashop>cawlop_16a923262df766a6c43e2df7982f105a'] = 'CAWL e-commerce';
+$_MODULE['<{cawlop}prestashop>cawlop_eda7346a0da4b89f43a5fc592b67a829'] = 'This module offers a 1-click integration to start accepting payments with the Cawl e-commerce APIs. Grow your revenues by offering your customers with global and regional payment methods to sell across Europe.';
 $_MODULE['<{cawlop}prestashop>advancedsettingsupdater_9a2dda2e822a0b696c747714dc396a36'] = 'Error while uploading logo';
 $_MODULE['<{cawlop}prestashop>paymentmethodssettingsupdater_9a2dda2e822a0b696c747714dc396a36'] = 'Error while uploading the logo';
 $_MODULE['<{cawlop}prestashop>paymentmethodsvalidationdata_7f11141dcf0805c283ec31580c13c6f0'] = 'Please fill a valid iframe template filename (Eg. Filename.html)';

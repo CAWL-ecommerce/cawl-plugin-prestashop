@@ -55,6 +55,7 @@ class AdminCawlopAjaxController extends ModuleAdminController
         $paymentType = Tools::getValue('type');
         /** @var \WorldlineOP\PrestaShop\Configuration\Product\GetProductsRequest $productRequest */
         $productRequest = $this->module->getService('cawlop.settings.get_products');
+        $paymentMethods = [];
         try {
             $paymentMethods = $productRequest->request($paymentType);
         } catch (Exception $e) {

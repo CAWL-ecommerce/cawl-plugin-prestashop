@@ -11,7 +11,6 @@
  * @copyright 2021 CAWL Online Payments
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
-
 if (!defined('_PS_VERSION_')) {
     exit;
 }
@@ -26,7 +25,7 @@ const DEFAULT_IFRAME_LOGO_FILENAME = 'cb_visa_mc_amex.svg';
  * - If 'isDefaultIframeLogo' is missing => check if current logo is default and set flag accordingly
  * - Preserve existing values otherwise
  *
- * @param Worldlineop $module
+ * @param Cawlop $module
  *
  * @return bool
  */
@@ -36,7 +35,7 @@ function upgrade_module_1_0_14($module)
     $logger->info('Upgrade to v1.0.14 started');
 
     Shop::setContext(Shop::CONTEXT_ALL);
-    if (Configuration::hasContext(PAYMENT_METHODS_SETTINGS_COLUMN_NAME, null, Shop::getContext())) {
+    if (Configuration::hasContext(PAYMENT_METHODS_SETTINGS_COLUMN_NAME, 0, Shop::getContext())) {
         try {
             update_payment_methods_settings_1_0_14();
             $logger->info('Updated payment methods settings for all shops');

@@ -2,7 +2,8 @@
 
 global $_MODULE;
 $_MODULE = array();
-$_MODULE['<{cawlop}prestashop>cawlop_a9928cf14ad15878c88657a133832f4b'] = 'Dieses Modul bietet eine 1-Klick-Integration für den Beginn der Annahme von Zahlungen mit den Cawl Direct APIs (früher Ingenico-Ogone). Steigern Sie Ihren Umsatz, indem Sie Ihren Kunden globale und regionale Zahlungsmethoden für den europaweiten Verkauf anbieten.';
+$_MODULE['<{cawlop}prestashop>cawlop_16a923262df766a6c43e2df7982f105a'] = 'CAWL E-Commerce';
+$_MODULE['<{cawlop}prestashop>cawlop_eda7346a0da4b89f43a5fc592b67a829'] = 'Dieses Modul ermöglicht die Integration mit nur einem Klick, um Zahlungen über die Cawl E-Commerce-APIs zu akzeptieren. Steigern Sie Ihren Umsatz, indem Sie Ihren Kunden globale und regionale Zahlungsmethoden für den Verkauf in ganz Europa anbieten.';
 $_MODULE['<{cawlop}prestashop>cawlop_35eedfe47e1e044854d5f05bdaaca80c'] = 'Bei der Bearbeitung Ihrer Anfrage ist ein Fehler aufgetreten. Versuchen Sie es noch einmal.';
 $_MODULE['<{cawlop}prestashop>cawlop_97b2ab491f2b6cb5af9a361aa94e6239'] = 'Bestätigen Sie die Erstattung der Geldmittel?';
 $_MODULE['<{cawlop}prestashop>cawlop_ea70ced75c5a05889a136ee4601a4cdc'] = 'Bestätigen Sie die Erfassung der Transaktion? ';

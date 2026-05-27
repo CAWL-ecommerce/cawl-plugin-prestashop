@@ -118,7 +118,7 @@ class CawlopCronCaptureModuleFrontController extends ModuleFrontController
             ->where('wt.id_order IS NOT NULL')
             ->having('o.id_order NOT IN(' . $subQuery1->build() . ') AND o.id_order IN(' . $subQuery2->build() . ')');
 
-        $rows = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($dbQuery);
+        $rows = Db::getInstance((bool) _PS_USE_SQL_SLAVE_)->executeS($dbQuery);
         if (!$rows) {
             $this->printDebug('No orders eligible');
             exit;
@@ -166,9 +166,9 @@ class CawlopCronCaptureModuleFrontController extends ModuleFrontController
                 $this->printOrderDebug('Transaction is older than 32 days');
                 continue;
             }
-            /** @var WorldlineopTransaction $transaction */
+            /** @var WorldlineopTransaction|false $transaction */
             $transaction = $transactionRepository->findByIdOrder((int) $idOrder);
-            if (false === $transaction) {
+            if (!$transaction) {
                 $this->printOrderDebug('Cannot find transaction');
                 continue;
             }

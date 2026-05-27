@@ -14,6 +14,10 @@
 
 namespace WorldlineOP\PrestaShop\Utils;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 use Alcohol\ISO4217;
 use Currency;
 use Customer;
@@ -94,7 +98,7 @@ class Tools
             ->from('currency')
             ->where('iso_code = "' . pSQL($isoCode) . '"');
 
-        $idCurrency = \Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue($dbQuery);
+        $idCurrency = \Db::getInstance((bool) _PS_USE_SQL_SLAVE_)->getValue($dbQuery);
         $currency = new Currency((int) $idCurrency);
 
         return \Validate::isLoadedObject($currency) ? $currency : false;
@@ -134,9 +138,6 @@ class Tools
     public static function getAmountInCents($amount, $isoCurrency)
     {
         $pow = self::getCurrencyDecimalByIso($isoCurrency);
-        if (false === $pow) {
-            return $amount;
-        }
 
         return (string) Decimal::multiply((string) $amount, (string) pow(10, $pow))->getIntegerPart();
     }
@@ -150,9 +151,6 @@ class Tools
     public static function getRoundedAmountInCents($amount, $isoCurrency)
     {
         $pow = self::getCurrencyDecimalByIso($isoCurrency);
-        if (false === $pow) {
-            return $amount;
-        }
 
         return (string) Decimal::multiply((string) \Tools::ps_round($amount, $pow), (string) pow(10, $pow))->getIntegerPart();
     }
@@ -168,11 +166,8 @@ class Tools
     public static function getRoundedAmountFromCents($amount, $isoCurrency)
     {
         $pow = self::getCurrencyDecimalByIso($isoCurrency);
-        if (false === $pow) {
-            return $amount;
-        }
 
-        return number_format((string) Decimal::divide((string) $amount, (string) pow(10, $pow)), $pow, '.', '');
+        return number_format((float) (string) Decimal::divide((string) $amount, (string) pow(10, $pow)), $pow, '.', '');
     }
 
     /**
@@ -184,9 +179,6 @@ class Tools
     public static function getRoundedAmount($amount, $isoCurrency)
     {
         $pow = self::getCurrencyDecimalByIso($isoCurrency);
-        if (false === $pow) {
-            return $amount;
-        }
 
         return \Tools::ps_round($amount, $pow);
     }
@@ -265,7 +257,7 @@ class Tools
      * @param float $amount
      * @param \Currency $currencyFrom
      *
-     * @return float
+     * @return string
      *
      * @throws \Exception
      */

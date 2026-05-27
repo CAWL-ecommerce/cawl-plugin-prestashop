@@ -26,17 +26,11 @@ class CawlopStoredCardsModuleFrontController extends ModuleFrontController
     /** @var bool */
     protected $redirectStoredCards = false;
 
-    /** @var \Monolog\Logger */
-    private $logger;
-
     /**
      * @throws PrestaShopException
      */
     public function initContent()
     {
-        /** @var \WorldlineOP\PrestaShop\Logger\LoggerFactory $loggerFactory */
-        $loggerFactory = $this->module->getService('cawlop.logger.factory');
-        $this->logger = $loggerFactory->setChannel('StoredCards');
         if ($this->redirectStoredCards) {
             $this->redirectWithNotifications($this->context->link->getModuleLink('cawlop', 'storedcards', []));
         }

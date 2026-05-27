@@ -11,7 +11,6 @@
  * @copyright 2021 CAWL Online Payments
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
-
 if (!defined('_PS_VERSION_')) {
     exit;
 }
@@ -36,14 +35,14 @@ function upgrade_module_1_0_1()
         $advancedSettingsArray = json_decode($result['value'], true);
         $shouldUpdate = false;
 
-        if (array_key_exists('testEndpoint', $advancedSettingsArray) &&
-            $advancedSettingsArray['testEndpoint'] == 'https://payment.preprod.ca.cawl-solutions.fr') {
+        if (array_key_exists('testEndpoint', $advancedSettingsArray)
+            && $advancedSettingsArray['testEndpoint'] == 'https://payment.preprod.ca.cawl-solutions.fr') {
             $advancedSettingsArray['testEndpoint'] = 'https://payment.preprod.cawl-solutions.fr';
             $shouldUpdate = true;
         }
 
-        if (array_key_exists('prodEndpoint', $advancedSettingsArray) &&
-            $advancedSettingsArray['prodEndpoint'] == 'https://payment.ca.cawl-solutions.fr') {
+        if (array_key_exists('prodEndpoint', $advancedSettingsArray)
+            && $advancedSettingsArray['prodEndpoint'] == 'https://payment.ca.cawl-solutions.fr') {
             $advancedSettingsArray['prodEndpoint'] = 'https://payment.cawl-solutions.fr';
             $shouldUpdate = true;
         }

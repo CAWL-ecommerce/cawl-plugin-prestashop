@@ -14,6 +14,10 @@
 
 namespace WorldlineOP\PrestaShop\Presenter;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 use OnlinePayments\Sdk\Domain\WebhooksEvent;
 use WorldlineOP\PrestaShop\Configuration\Entity\Settings;
 use WorldlineOP\PrestaShop\Logger\LoggerFactory;
@@ -25,6 +29,7 @@ class WebhookEventPresenter implements PresenterInterface
 {
     const CVCO_PRODUCT_ID = 5403;
     const MEALVOUCHER_PRODUCT_ID = 5402;
+    const ILLICADO_PRODUCT_ID = 3112;
     const EVENTS_PAYMENT_AUTHORIZED = [
         'payment.pending_approval',
         'payment.pending_completion',
@@ -75,7 +80,9 @@ class WebhookEventPresenter implements PresenterInterface
         );
 
         if (in_array($event->getType(), $paymentEvents)) {
-            $this->logger->debug('Sleeeeep', ['time' => $settings->advancedSettings->paymentSettings->safetyDelay]);
+            $this->logger->debug(
+                sprintf('Putting webhook of type %s to sleep', $event->getType()),
+                ['time' => $settings->advancedSettings->paymentSettings->safetyDelay]);
             sleep($settings->advancedSettings->paymentSettings->safetyDelay);
         }
     }
@@ -116,14 +123,23 @@ class WebhookEventPresenter implements PresenterInterface
      */
     private function shouldHandleEvent($event)
     {
-        $payment = $event->getPayment() ?: null;
+        /** @var \OnlinePayments\Sdk\Domain\PaymentResponse|null $payment */
+        $payment = $event->getPayment();
+        /** @var \OnlinePayments\Sdk\Domain\PaymentOutput|null $paymentOutput */
         $paymentOutput = $payment ? $payment->getPaymentOutput() : null;
+        /** @var \OnlinePayments\Sdk\Domain\RedirectPaymentMethodSpecificOutput|null $redirectMethodSpecificInput */
         $redirectMethodSpecificInput = $paymentOutput ? $paymentOutput->getRedirectPaymentMethodSpecificOutput() : null;
         $paymentProductId = $redirectMethodSpecificInput ? $redirectMethodSpecificInput->getPaymentProductId() : null;
-        $amountOfMoney = $paymentOutput->getAmountOfMoney() ? $paymentOutput->getAmountOfMoney()->getAmount() : null;
-        $acquiredAmount = $paymentOutput->getAcquiredAmount() ? $paymentOutput->getAcquiredAmount()->getAmount() : null;
+        /** @var \OnlinePayments\Sdk\Domain\AmountOfMoney|null $amountOfMoneyObj */
+        $amountOfMoneyObj = $paymentOutput ? $paymentOutput->getAmountOfMoney() : null;
+        $amountOfMoney = $amountOfMoneyObj ? $amountOfMoneyObj->getAmount() : null;
+        /** @var \OnlinePayments\Sdk\Domain\AmountOfMoney|null $acquiredAmountObj */
+        $acquiredAmountObj = $paymentOutput ? $paymentOutput->getAcquiredAmount() : null;
+        $acquiredAmount = $acquiredAmountObj ? $acquiredAmountObj->getAmount() : null;
 
-        if ($paymentProductId === self::CVCO_PRODUCT_ID || $paymentProductId === self::MEALVOUCHER_PRODUCT_ID) {
+        if ($paymentProductId === self::CVCO_PRODUCT_ID
+            || $paymentProductId === self::MEALVOUCHER_PRODUCT_ID
+            || $paymentProductId === self::ILLICADO_PRODUCT_ID) {
             return $amountOfMoney && $acquiredAmount && ($amountOfMoney === $acquiredAmount);
         }
 

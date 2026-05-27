@@ -14,6 +14,10 @@
 
 namespace WorldlineOP\PrestaShop\Presenter;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 use Configuration;
 use Context;
 use Country;
@@ -84,7 +88,7 @@ class StoredCardsPresenter implements PresenterInterface
                 $query->setCurrencyCode($defaultCurrency instanceof Currency ? $defaultCurrency->iso_code : 'EUR');
                 $query->setCountryCode(Country::getIsoById((int) Configuration::get('PS_COUNTRY_DEFAULT')));
                 try {
-                    $productDetails = $this->merchantClient->products()->getPaymentProduct($token->product_id, $query);
+                    $productDetails = $this->merchantClient->products()->getPaymentProduct((int) $token->product_id, $query);
                 } catch (\Exception $e) {
                     continue;
                 }

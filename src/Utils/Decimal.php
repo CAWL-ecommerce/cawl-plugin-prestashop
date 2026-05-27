@@ -14,8 +14,11 @@
 
 namespace WorldlineOP\PrestaShop\Utils;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 use PrestaShop\Decimal\DecimalNumber;
-use PrestaShop\Decimal\Number;
 
 /**
  * Class Decimal
@@ -30,8 +33,8 @@ class Decimal
      */
     public static function multiply($a, $b)
     {
-        $decimalA = new Number($a);
-        $decimalB = new Number($b);
+        $decimalA = new DecimalNumber($a);
+        $decimalB = new DecimalNumber($b);
 
         return $decimalA->times($decimalB);
     }
@@ -46,8 +49,8 @@ class Decimal
      */
     public static function divide($a, $b)
     {
-        $decimalA = new Number($a);
-        $decimalB = new Number($b);
+        $decimalA = new DecimalNumber($a);
+        $decimalB = new DecimalNumber($b);
 
         return $decimalA->dividedBy($decimalB);
     }

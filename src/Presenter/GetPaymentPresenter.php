@@ -14,6 +14,10 @@
 
 namespace WorldlineOP\PrestaShop\Presenter;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 use Address;
 use Cart;
 use Country;
@@ -47,7 +51,7 @@ class GetPaymentPresenter implements PresenterInterface
 
     const STATUS_ACCEPTED = ['CAPTURED'];
     const STATUS_AUTHORIZED = ['PENDING_CAPTURE'];
-    const STATUS_PENDING = ['AUTHORIZATION_REQUESTED', 'CAPTURE_REQUESTED'];
+    const STATUS_PENDING = ['AUTHORIZATION_REQUESTED', 'CAPTURE_REQUESTED', 'PENDING_COMPLETION'];
     const STATUS_CANCELLED = ['CANCELLED'];
     const STATUS_REJECTED = ['REJECTED'];
 
@@ -80,10 +84,10 @@ class GetPaymentPresenter implements PresenterInterface
      * @param LoggerFactory $loggerFactory
      */
     public function __construct(
-        Cawlop         $module,
-        ClientFactory  $merchantClientFactory,
+        Cawlop $module,
+        ClientFactory $merchantClientFactory,
         SettingsLoader $settingsLoader,
-        LoggerFactory  $loggerFactory
+        LoggerFactory $loggerFactory
     ) {
         $this->module = $module;
         $this->merchantClientFactory = $merchantClientFactory;
@@ -93,8 +97,8 @@ class GetPaymentPresenter implements PresenterInterface
     }
 
     /**
-     * @param PaymentResponse $paymentResponse
-     * @param int $idShop
+     * @param PaymentResponse|false $paymentResponse
+     * @param int|false $idShop
      *
      * @return TransactionPresented
      *
@@ -158,23 +162,31 @@ class GetPaymentPresenter implements PresenterInterface
         } else {
             return $this->presentedData;
         }
+
+        $totalReceived = $paymentResponse->getPaymentOutput()->getAmountOfMoney()->getAmount();
+        $totalPrestaShop = Tools::getRoundedAmountInCents($this->cart->getOrderTotal(true, Cart::BOTH, null, null, false, true), $paymentResponse->getPaymentOutput()->getAmountOfMoney()->getCurrencyCode());
+        $amountsNotMatching = false;
+
+        if ($totalPrestaShop != $totalReceived) {
+            $this->logger->debug('Amounts received/calculated does not match', ['received' => $totalReceived, 'calculated' => $totalPrestaShop]);
+            $amountsNotMatching = true;
+        }
+
         if (Validate::isLoadedObject($order)) {
             $this->logger->debug('Order already exists', ['id_order' => $order->id]);
-            $this->presentExistingOrder($order, $idOrderState, $paymentResponse);
+            $this->presentExistingOrder($order, $idOrderState, $paymentResponse, $amountsNotMatching);
         } else {
-            $totalReceived = $paymentResponse->getPaymentOutput()->getAmountOfMoney()->getAmount();
-            $totalPrestaShop = Tools::getRoundedAmountInCents($this->cart->getOrderTotal(true, Cart::BOTH, null, null, false, true), $paymentResponse->getPaymentOutput()->getAmountOfMoney()->getCurrencyCode());
-            if ($totalPrestaShop != $totalReceived) {
-                $this->logger->error('Amounts received/calculated does not match', ['received' => $totalReceived, 'calculated' => $totalPrestaShop]);
-                $idOrderState = $settings->advancedSettings->paymentSettings->errorOrderStateId;
-            }
-
             $this->logger->debug('Order does not exist', ['merchantReference' => $merchantReferenceFull]);
             if (in_array($paymentStatus, array_merge(self::STATUS_CANCELLED, self::STATUS_REJECTED))) {
                 $this->logger->debug('Cancellation or rejection without order');
 
                 return $this->presentedData;
             }
+
+            if ($amountsNotMatching) {
+                $idOrderState = $settings->advancedSettings->paymentSettings->errorOrderStateId;
+            }
+
             $this->presentNewOrder($idOrderState, $paymentResponse);
         }
 
@@ -200,6 +212,23 @@ class GetPaymentPresenter implements PresenterInterface
         $currencyCode = $paymentOutput->getAmountOfMoney()->getCurrencyCode();
         $paymentSpecificOutput = $this->getPaymentSpecificOutput($paymentOutput->getPaymentMethod(), $paymentOutput);
         $productId = $paymentSpecificOutput->getPaymentProductId();
+
+        try {
+            $paymentDetails = $merchantClient->payments()->getPaymentDetails($paymentResponse->getId());
+            $operations = $paymentDetails->getOperations();
+            if (!empty($operations) && count($operations) > 1) {
+                $firstOperation = $operations[0];
+                $firstPayment = $merchantClient->payments()->getPayment($firstOperation->getId());
+                $firstPaymentOutput = $firstPayment->getPaymentOutput();
+                $firstSpecificOutput = $this->getPaymentSpecificOutput(
+                    $firstPaymentOutput->getPaymentMethod(),
+                    $firstPaymentOutput
+                );
+                $productId = $firstSpecificOutput->getPaymentProductId();
+            }
+        } catch (\Throwable $e) {
+            $this->logger->error('Could not determine initiating payment product', ['message' => $e->getMessage()]);
+        }
         $paymentProductParams = new GetPaymentProductParams();
         $paymentProductParams->setCurrencyCode($currencyCode);
         $paymentProductParams->setCountryCode(
@@ -218,9 +247,9 @@ class GetPaymentPresenter implements PresenterInterface
         /** @var \WorldlineOP\PrestaShop\Repository\CreatedPaymentRepository $createdPaymentRepository */
         $createdPaymentRepository = $this->module->getService('cawlop.repository.created_payment');
 
-        /** @var HostedCheckout $hostedCheckout */
+        /** @var HostedCheckout|false $hostedCheckout */
         $hostedCheckout = $hostedCheckoutRepository->findByMerchantReference($merchantReference);
-        /** @var CreatedPayment $createdPayment */
+        /** @var CreatedPayment|false $createdPayment */
         $createdPayment = $createdPaymentRepository->findByMerchantReference($merchantReference);
 
         if (!$hostedCheckout && !$createdPayment) {
@@ -232,16 +261,12 @@ class GetPaymentPresenter implements PresenterInterface
             $this->logger->debug('Payment has been made through Hosted Checkout Page');
             $this->logger->debug('Checkout Session found');
             $token = $this->getTokenData($paymentOutput, $paymentSpecificOutput);
-        } elseif ($createdPayment) {
+        } else {
             $this->logger->debug('Payment has been made through Tokenization Page');
             $this->logger->debug('CreatedPayment found');
-        } else {
-            $this->logger->debug('Could not find hosted or htp', ['merchantReference' => $merchantReference]);
-
-            return;
         }
         $transactionId = substr($paymentResponse->getId(), 0, -3);
-        if (false === $transactionId) {
+        if (empty($transactionId)) {
             $transactionId = $paymentResponse->getId();
         }
         $pow = Tools::getCurrencyDecimalByIso($currencyCode);
@@ -265,6 +290,7 @@ class GetPaymentPresenter implements PresenterInterface
      * @param Order $order
      * @param int $idOrderState
      * @param PaymentResponse $paymentResponse
+     * @param bool $amountsNotMatching
      *
      * @return void
      *
@@ -272,43 +298,58 @@ class GetPaymentPresenter implements PresenterInterface
      * @throws \PrestaShopException
      * @throws \PrestaShop\Decimal\Exception\DivisionByZeroException
      */
-    private function presentExistingOrder($order, $idOrderState, $paymentResponse)
+    private function presentExistingOrder($order, $idOrderState, $paymentResponse, $amountsNotMatching)
     {
         $merchantClient = $this->merchantClientFactory->getMerchant();
         /** @var TransactionRepository $transactionRepository */
         $transactionRepository = $this->module->getService('cawlop.repository.transaction');
         /** @var \WorldlineopTransaction $transaction */
         $transaction = $transactionRepository->findByIdOrder($order->id);
+        $maxRetries = 8;
+        $retryCount = 0;
+        while (false === $transaction && $retryCount < $maxRetries) {
+            $retryCount++;
+            $this->logger->warning(sprintf(
+                'Transaction not found for order %d, webhook sleeping for 15 seconds (attempt %d/%d)',
+                $order->id,
+                $retryCount,
+                $maxRetries
+            ));
+            sleep(15);
+            $transaction = $transactionRepository->findByIdOrder($order->id);
+        }
         $merchantReference = substr($paymentResponse->getId(), 0, -3);
-        if (false === $merchantReference) {
+        if (empty($merchantReference)) {
             $merchantReference = $paymentResponse->getId();
         }
         $idShop = $this->cart->id_shop;
         $settings = $this->settingsLoader->setContext($idShop);
         $transactionReference = substr($transaction->reference, 0, -3);
-        if (false === $transactionReference) {
+        if (empty($transactionReference)) {
             $transactionReference = $transaction->reference;
         }
-        if (false === $transaction || ($transactionReference !== $merchantReference && false !== $merchantReference)) {
+        if (!$transaction || ($transactionReference !== $merchantReference && !empty($merchantReference))) {
             $this->logger->error('Cannot find transaction for order ' . $order->id);
 
             return;
         }
+
+        try {
+            $paymentDetails = $merchantClient->payments()->getPaymentDetails($transaction->reference);
+        } catch (\Exception $e) {
+            $this->logger->error($e->getMessage());
+
+            return;
+        }
+
         if (\Configuration::getGlobalValue('PS_OS_CANCELED') == $order->current_state) {
-            $cancelState = $order->getHistory(null, $order->current_state);
+            $cancelState = $order->getHistory((int) $this->cart->id_lang, $order->current_state);
             $cancelledDate = $cancelState[0]['date_add'];
             $now = date('Y-m-d H:i:s');
             $datetime1 = new \DateTime($cancelledDate);
             $datetime2 = new \DateTime($now);
             $interval = $datetime1->diff($datetime2);
             if ($interval->format('%a') >= self::MAX_DELAY_BEFORE_REFUND) {
-                try {
-                    $paymentDetails = $merchantClient->payments()->getPaymentDetails($transaction->reference);
-                } catch (\Exception $e) {
-                    $this->logger->error($e->getMessage());
-
-                    return;
-                }
                 if ($paymentDetails->getStatusOutput()->getIsRefundable()) {
                     $refundRequest = new RefundRequest();
                     $amountOfMoney = new AmountOfMoney();
@@ -330,14 +371,20 @@ class GetPaymentPresenter implements PresenterInterface
                 }
             }
         }
+
+        if ($amountsNotMatching && $this->getCapturableAmount($paymentDetails) != 0) {
+            $idOrderState = $order->getCurrentState();
+        }
+
         if (!count($order->getHistory($this->cart->id_lang, $idOrderState)) &&
             !in_array($paymentResponse->getStatus(), self::STATUS_PENDING)
         ) {
             /** @var TransactionRepository $transactionRepository */
             $transactionRepository = $this->module->getService('cawlop.repository.transaction');
-            /** @var \WorldlineopTransaction $transaction */
+            /** @var \WorldlineopTransaction|false $transaction */
             $transaction = $transactionRepository->findByIdOrder($order->id);
-            if (false === $transaction) {
+
+            if (!$transaction) {
                 $this->logger->error('Transaction cannot be retrieved');
 
                 return;
@@ -363,22 +410,29 @@ class GetPaymentPresenter implements PresenterInterface
                 $transaction->reference = pSQL($paymentResponse->getId());
                 $transactionRepository->save($transaction);
             }
+
             $paymentOutput = $paymentResponse->getPaymentOutput();
+
             if (in_array($paymentResponse->getStatus(), array_merge(self::STATUS_ACCEPTED, self::STATUS_AUTHORIZED))) {
                 $this->presentedData->token = $this->getTokenData($paymentOutput, $this->getPaymentSpecificOutput($paymentOutput->getPaymentMethod(), $paymentOutput));
                 $this->presentedData->cardDetails['secureKey'] = $this->cart->secure_key;
             }
             if (in_array($paymentResponse->getStatus(), self::STATUS_ACCEPTED)) {
-                if (($paymentOutput->getAcquiredAmount()->getAmount() !== $paymentOutput->getAmountOfMoney()->getAmount()) && ($paymentOutput->getSurchargeSpecificOutput() === null)) {
+                /** @var \OnlinePayments\Sdk\Domain\SurchargeSpecificOutput|null $surchargeOutput */
+                $surchargeOutput = $paymentOutput->getSurchargeSpecificOutput();
+                if (($paymentOutput->getAcquiredAmount()->getAmount() !== $paymentOutput->getAmountOfMoney()->getAmount()) && $surchargeOutput === null) {
                     $this->logger->debug('Captured event for an incomplete partial payment');
 
                     return;
                 }
             }
+
             $merchantReference = substr($transaction->reference, 0, -3);
-            if (false === $merchantReference) {
+
+            if (empty($merchantReference)) {
                 $merchantReference = $transaction->reference;
             }
+
             $this->presentedData->updateStatus = true;
             $this->presentedData->order['ids'] = Tools::getOrderIdsByIdCart($order->id_cart);
             $this->presentedData->idOrderState = $idOrderState;
@@ -432,6 +486,54 @@ class GetPaymentPresenter implements PresenterInterface
         }
 
         return $token;
+    }
+
+    /**
+     * @param $paymentDetails
+     * @return float|string
+     * @throws \PrestaShop\Decimal\Exception\DivisionByZeroException
+ */
+    public function getCapturableAmount($paymentDetails)
+    {
+        if (!$paymentDetails) {
+            return 0.0;
+        }
+
+        if (!$paymentDetails->getStatusOutput()->getIsAuthorized()) {
+            return 0.0;
+        }
+
+        $merchantClient = $this->merchantClientFactory->getMerchant();
+
+        try {
+            $captures = $merchantClient->payments()->getCaptures($paymentDetails->getId());
+        } catch (\Exception $e) {
+            throw new \Exception('Could not retrieve capture details');
+        }
+
+        $totalCaptured = 0;
+        $totalPendingCapture = 0;
+
+        if (!empty($captures->getCaptures())) {
+            foreach ($captures->getCaptures() as $capture) {
+                if (TransactionPresenter::STATUS_CAPTURE_REQUESTED === $capture->getStatus()) {
+                    $totalPendingCapture += $capture->getCaptureOutput()->getAmountOfMoney()->getAmount();
+                }
+                if (TransactionPresenter::STATUS_PAYMENT_CAPTURED === $capture->getStatus()) {
+                    $totalCaptured += $capture->getCaptureOutput()->getAmountOfMoney()->getAmount();
+                }
+            }
+        }
+
+        $masterAmount = $paymentDetails->getPaymentOutput()->getAmountOfMoney()->getAmount();
+        $currencyCode = $paymentDetails->getPaymentOutput()->getAmountOfMoney()->getCurrencyCode();
+
+        $capturableAmount = Tools::getRoundedAmountFromCents(
+            $masterAmount - $totalCaptured - $totalPendingCapture,
+            $currencyCode
+        );
+
+        return max(0, $capturableAmount);
     }
 
     /**

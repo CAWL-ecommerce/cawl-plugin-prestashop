@@ -14,6 +14,10 @@
 
 namespace WorldlineOP\PrestaShop\Builder;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 use Context;
 use Country;
 use OnlinePayments\Sdk\Domain\Address;
@@ -32,6 +36,7 @@ use OnlinePayments\Sdk\Domain\RedirectionData;
 use OnlinePayments\Sdk\Domain\RedirectPaymentMethodSpecificInput;
 use OnlinePayments\Sdk\Domain\RedirectPaymentProduct5403SpecificInput;
 use OnlinePayments\Sdk\Domain\RedirectPaymentProduct5402SpecificInput;
+use OnlinePayments\Sdk\Domain\RedirectPaymentProduct3112SpecificInput;
 use OnlinePayments\Sdk\Domain\Shipping;
 use OnlinePayments\Sdk\Domain\SurchargeSpecificInput;
 use RandomLib\Factory;
@@ -49,15 +54,12 @@ use WorldlineOP\PrestaShop\Utils\Tools;
  */
 abstract class AbstractRequestBuilder implements PaymentRequestBuilderInterface
 {
-    const METHOD_HOSTED = 'hosted';
-    const METHOD_HTP = 'htp';
-
     const PRODUCT_ID_MAESTRO = 117;
-    const PRODUCT_ID_PAYPAL = 840;
     const PRODUCT_ID_INTERSOLVE = 5700;
     const PRODUCT_ID_CVCO = 5403;
     const PRODUCT_ID_MEALVOUCHER = 5402;
     const PRODUCT_ID_PLEDG = 5300;
+    const PRODUCT_ID_ILLICADO = 3112;
 
     const PHONE_NUMBER_MAX_CHARS = 15;
 
@@ -67,13 +69,9 @@ abstract class AbstractRequestBuilder implements PaymentRequestBuilderInterface
     const CARD_ON_FILE_REQUESTOR_SUBSEQUENT = 'cardholderInitiated';
     const CARD_ON_FILE_SEQUENCE_INDICATOR_FIRST = 'first';
     const CARD_ON_FILE_SEQUENCE_INDICATOR_SUBSEQUENT = 'subsequent';
-
     const CHALLENGE_INDICATOR_REQUIRED = 'challenge-required';
     const CHALLENGE_INDICATOR_NO_PREFERENCE = 'no-preference';
-
     const SURCHARGE_ON_BEHALF_OF = 'on-behalf-of';
-    const SURCHARGE_PASS_THROUGH = 'pass-through';
-
     const MAX_NUMBER_OF_ITEMS = 99;
 
     /** @var Settings */
@@ -91,7 +89,7 @@ abstract class AbstractRequestBuilder implements PaymentRequestBuilderInterface
     /** @var string */
     protected $idProduct;
 
-    /** @var string */
+    /** @var string|false */
     protected $tokenValue;
 
     /** @var array|false */
@@ -146,7 +144,8 @@ abstract class AbstractRequestBuilder implements PaymentRequestBuilderInterface
         }
         if ($this->idProduct == self::PRODUCT_ID_MEALVOUCHER
             || (int) $this->idProduct === self::PRODUCT_ID_CVCO
-            || (int) $this->idProduct === self::PRODUCT_ID_PLEDG) {
+            || (int) $this->idProduct === self::PRODUCT_ID_PLEDG
+            || (int) $this->idProduct === self::PRODUCT_ID_ILLICADO) {
             $redirectPaymentMethodSpecificInput->setRequiresApproval(false);
         } else {
             $redirectPaymentMethodSpecificInput->setRequiresApproval(
@@ -167,6 +166,10 @@ abstract class AbstractRequestBuilder implements PaymentRequestBuilderInterface
         $product5402SpecificInput = new RedirectPaymentProduct5402SpecificInput();
         $product5402SpecificInput->setCompleteRemainingPaymentAmount(true);
         $redirectPaymentMethodSpecificInput->setPaymentProduct5402SpecificInput($product5402SpecificInput);
+
+        $product3112SpecificInput = new RedirectPaymentProduct3112SpecificInput();
+        $product3112SpecificInput->setCompleteRemainingPaymentAmount(true);
+        $redirectPaymentMethodSpecificInput->setPaymentProduct3112SpecificInput($product3112SpecificInput);
 
         return $redirectPaymentMethodSpecificInput;
     }

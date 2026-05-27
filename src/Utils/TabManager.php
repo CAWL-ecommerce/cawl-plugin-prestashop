@@ -14,9 +14,14 @@
 
 namespace WorldlineOP\PrestaShop\Utils;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 use Language;
 use Monolog\Logger;
 use Tab;
+use Validate;
 
 /**
  * Class TabManager
@@ -51,14 +56,16 @@ class TabManager
      */
     public function createTab($moduleTab, $moduleName)
     {
-        if (Tab::getIdFromClassName($moduleTab['className'])) {
+        $existingTab = Tab::getInstanceFromClassName($moduleTab['className']);
+        if (Validate::isLoadedObject($existingTab)) {
             return;
         }
+        $parentTab = Tab::getInstanceFromClassName($moduleTab['parentClassName']);
         $tab = new Tab();
         $tab->class_name = pSQL($moduleTab['className']);
         $tab->module = pSQL($moduleName);
         $tab->icon = '';
-        $tab->id_parent = (int) Tab::getIdFromClassName($moduleTab['parentClassName']);
+        $tab->id_parent = Validate::isLoadedObject($parentTab) ? (int) $parentTab->id : 0;
         $tab->active = true;
         $tab->name = [];
         $names = $moduleTab['names'];

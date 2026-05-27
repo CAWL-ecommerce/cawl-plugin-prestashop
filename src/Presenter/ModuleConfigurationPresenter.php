@@ -14,6 +14,10 @@
 
 namespace WorldlineOP\PrestaShop\Presenter;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 use OrderState;
 use Cawlop;
 use WorldlineOP\PrestaShop\Configuration\Entity\AccountSettings;

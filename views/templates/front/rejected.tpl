@@ -20,7 +20,7 @@
       <p>{l s='There was an issue with your payment, and you have not been charged.' mod='cawlop'}</p>
       <p>
         {l s='Please double check your emails and click' mod='cawlop'}
-        <a href="{$reorder_link}" >{l s='here' mod='cawlop'}</a>
+        <a href="{$reorder_link|escape:'html':'UTF-8'}" >{l s='here' mod='cawlop'}</a>
         {l s='if you wish to re-order.' mod='cawlop'}
       </p>
     </div>

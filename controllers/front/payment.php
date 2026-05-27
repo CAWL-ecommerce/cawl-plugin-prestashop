@@ -16,7 +16,7 @@ if (!defined('_PS_VERSION_')) {
 }
 
 use OnlinePayments\Sdk\ResponseException;
-use PrestaShop\Decimal\Number;
+use PrestaShop\Decimal\DecimalNumber;
 use WorldlineOP\PrestaShop\Repository\TokenRepository;
 
 /**
@@ -46,7 +46,7 @@ class CawlopPaymentModuleFrontController extends ModuleFrontController
 
         $cart = $this->context->cart;
         $hostedTokenizationId = Tools::getValue('hostedTokenizationId');
-        $totalCartPost = new Number(Tools::getValue('worldlineopTotalCartCents'));
+        $totalCartPost = new DecimalNumber(Tools::getValue('worldlineopTotalCartCents'));
         $cartCurrencyCodePost = Tools::getValue('worldlineopCartCurrencyCode');
         $totalCart = \WorldlineOP\PrestaShop\Utils\Tools::getRoundedAmountInCents($cart->getOrderTotal(),
             \WorldlineOP\PrestaShop\Utils\Tools::getIsoCurrencyCodeById($cart->id_currency));
@@ -105,7 +105,7 @@ class CawlopPaymentModuleFrontController extends ModuleFrontController
             $cardData = $hostedTokenizationResponse->getToken()->getCard()->getData()->getCardWithoutCvv();
             $token->id_customer = (int) $this->context->customer->id;
             $token->id_shop = (int) $this->context->shop->id;
-            $token->product_id = PSQL($hostedTokenizationResponse->getToken()->getPaymentProductId());
+            $token->product_id = pSQL((string) $hostedTokenizationResponse->getToken()->getPaymentProductId());
             $token->card_number = pSQL($cardData->getCardNumber());
             $token->expiry_date = pSQL($cardData->getExpiryDate());
             $token->value = pSQL($tokenId);
@@ -130,8 +130,7 @@ class CawlopPaymentModuleFrontController extends ModuleFrontController
             ]));
             // @formatter:on
         } catch (Exception $e) {
-            $this->logger->debug('IframeHostedTokenizationResponse',
-                ['json' => json_decode($e->getResponse()->toJson(), true)]);
+            $this->logger->debug('IframeHostedTokenizationResponse', ['error' => $e->getMessage()]);
             // @formatter:off
             exit(json_encode([
                 'success' => false,

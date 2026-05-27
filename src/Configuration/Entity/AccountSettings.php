@@ -14,6 +14,10 @@
 
 namespace WorldlineOP\PrestaShop\Configuration\Entity;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Class AccountSettings
  */
@@ -60,9 +64,9 @@ class AccountSettings
     /** @var string */
     public $prodWebhooksSecret;
 
-    /** @var string */
+    /** @var string|null */
     public $webhookMode = 'manual';
 
-    /** @var array */
+    /** @var array|null */
     public $additionalWebhookUrls = [];
 }

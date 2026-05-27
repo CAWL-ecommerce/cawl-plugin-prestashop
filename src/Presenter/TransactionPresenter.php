@@ -14,6 +14,10 @@
 
 namespace WorldlineOP\PrestaShop\Presenter;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 use OnlinePayments\Sdk\Domain\CaptureOutput;
 use OnlinePayments\Sdk\Domain\CardPaymentMethodSpecificOutput;
 use OnlinePayments\Sdk\Domain\MobilePaymentMethodSpecificOutput;
@@ -25,7 +29,6 @@ use OnlinePayments\Sdk\Domain\RefundMobileMethodSpecificOutput;
 use OnlinePayments\Sdk\Domain\RefundOutput;
 use OnlinePayments\Sdk\Domain\RefundRedirectMethodSpecificOutput;
 use OnlinePayments\Sdk\Merchant\MerchantClient;
-use Cawlop;
 use WorldlineOP\PrestaShop\Repository\TransactionRepository;
 use WorldlineOP\PrestaShop\Utils\Tools;
 
@@ -34,14 +37,12 @@ use WorldlineOP\PrestaShop\Utils\Tools;
  */
 class TransactionPresenter implements PresenterInterface
 {
+    const STATUS_PAYMENT_CREATED = 'CREATED';
     const STATUS_REFUND_REQUESTED = 'REFUND_REQUESTED';
     const STATUS_CAPTURE_REQUESTED = 'CAPTURE_REQUESTED';
     const STATUS_PAYMENT_CAPTURED = 'CAPTURED';
     const STATUS_PAYMENT_REFUNDED = 'REFUNDED';
     const STATUS_PAYMENT_REJECTED = 'REJECTED';
-
-    /** @var Cawlop */
-    private $module;
 
     /** @var TransactionRepository */
     private $transactionRepository;
@@ -50,11 +51,9 @@ class TransactionPresenter implements PresenterInterface
     private $merchantClient;
 
     public function __construct(
-        Cawlop                $module,
         TransactionRepository $transactionRepository,
         MerchantClient        $merchantClient
     ) {
-        $this->module = $module;
         $this->transactionRepository = $transactionRepository;
         $this->merchantClient = $merchantClient;
     }
@@ -69,9 +68,9 @@ class TransactionPresenter implements PresenterInterface
      */
     public function present($idOrder = false)
     {
-        /** @var \WorldlineopTransaction $transaction */
+        /** @var \WorldlineopTransaction|false $transaction */
         $transaction = $this->transactionRepository->findByIdOrder($idOrder);
-        if (false === $transaction) {
+        if (!$transaction) {
             throw new \Exception('Cannot find Cawl transaction');
         }
         $transactionData = array();
@@ -82,9 +81,9 @@ class TransactionPresenter implements PresenterInterface
             throw new \Exception('Could not retrieve transaction details');
         }
 
-        if ($paymentDetails) {
-            foreach ($paymentDetails->getOperations() as $paymentDetail) {
+        foreach ($paymentDetails->getOperations() as $paymentDetail) {
                 if (!in_array($paymentDetail->getStatus(), array(
+                    self::STATUS_PAYMENT_CREATED,
                     self::STATUS_PAYMENT_REFUNDED,
                     self::STATUS_REFUND_REQUESTED,
                     self::STATUS_PAYMENT_REJECTED
@@ -200,12 +199,17 @@ class TransactionPresenter implements PresenterInterface
                             $payment->getPaymentOutput()->getSurchargeSpecificOutput()->getSurchargeAmount()->getCurrencyCode()
                         );
                     }
+
+                    /** @var \OnlinePayments\Sdk\Domain\CardFraudResults|\OnlinePayments\Sdk\Domain\FraudResults|null $fraudResults */
+                    $fraudResults = $paymentSpecificOutput->getFraudResults();
+                    $fraudResult = $fraudResults ? $fraudResults->getFraudServiceResult() : '';
+
                     $transactionData[] = [
                         'orderId' => $idOrder,
                         'payment' => [
                             'amount' => Tools::getRoundedAmountFromCents(
                                 $paymentDetail->getAmountOfMoney()->getAmount(), $currencyCode),
-                            'hasSurcharge' => !($surchargeAmount === 0),
+                            'hasSurcharge' => ((float) $surchargeAmount) !== 0.0,
                             'surchargeAmount' => $surchargeAmount,
                             'amountWithoutSurcharge' => Tools::getRoundedAmountFromCents(
                                 $payment->getPaymentOutput()->getAmountOfMoney()->getAmount(), $currencyCode),
@@ -215,8 +219,7 @@ class TransactionPresenter implements PresenterInterface
                             'id' => $paymentDetail->getId(),
                             'status' => $paymentDetail->getStatus(),
                             'productId' => $paymentSpecificOutput->getPaymentProductId(),
-                            'fraudResult' => !empty($paymentSpecificOutput->getFraudResults()) ?
-                                $paymentSpecificOutput->getFraudResults()->getFraudServiceResult() : '',
+                            'fraudResult' => $fraudResult,
                             'liability' => $liability,
                             'exemptionType' => $exemptionType,
                             'errors' => $errors,
@@ -240,7 +243,6 @@ class TransactionPresenter implements PresenterInterface
                         ],
                     ];
                 }
-            }
         }
 
         return $transactionData;

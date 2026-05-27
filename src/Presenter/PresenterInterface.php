@@ -14,13 +14,17 @@
 
 namespace WorldlineOP\PrestaShop\Presenter;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Interface PresenterInterface
  */
 interface PresenterInterface
 {
     /**
-     * @return array
+     * @return mixed
      */
     public function present();
 }

@@ -14,6 +14,10 @@
 
 namespace WorldlineOP\PrestaShop\Presenter;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 use Configuration;
 use Context;
 use Language;
@@ -123,11 +127,11 @@ class PaymentOptionsPresenter implements PresenterInterface
             foreach ($tokens as $token) {
                 $logoPath = realpath($this->module->getLocalPath() . sprintf('views/img/payment_logos/%s.svg', $token->product_id));
                 $paymentOption = new PaymentOption();
-                //@formatter:off
+                // @formatter:off
                 $paymentOption
                     ->setAction($this->context->link->getModuleLink($this->module->name, 'redirect', ['action' => 'redirectExternal', 'ajax' => true, 'productId' => $token->product_id, 'tokenId' => $token->id]))
                     ->setCallToActionText(sprintf($this->module->l('Pay with my previously saved card %s', 'PaymentOptionsPresenter'), $token->card_number));
-                //@formatter:on
+                // @formatter:on
                 if (false !== realpath($logoPath)) {
                     $paymentOption->setLogo($this->module->getPathUri() . sprintf('views/img/payment_logos/%s.svg', $token->product_id));
                 }
@@ -220,13 +224,13 @@ class PaymentOptionsPresenter implements PresenterInterface
 
                 $logoPath = realpath($this->module->getLocalPath() . sprintf('views/img/payment_logos/%s.svg', $token->product_id));
                 $paymentOption = new PaymentOption();
-                //@formatter:off
+                // @formatter:off
                 $paymentOption
                     ->setCallToActionText(sprintf($this->module->l('Pay with my previously saved card %s', 'PaymentOptionsPresenter'), $token->card_number))
                     ->setAdditionalInformation($this->context->smarty->fetch('module:cawlop/views/templates/front/hostedTokenizationAdditionalInformation_1click.tpl'))
                     ->setBinary(true)
                     ->setModuleName('worldlineop-token-htp-' . $token->id_worldlineop_token);
-                //@formatter:on
+                // @formatter:on
                 if (false !== realpath($logoPath)) {
                     $paymentOption->setLogo($this->module->getPathUri() . sprintf('views/img/payment_logos/%s.svg', $token->product_id));
                 }
@@ -279,7 +283,7 @@ class PaymentOptionsPresenter implements PresenterInterface
             'surchargeEnabled' => $this->settings->advancedSettings->surchargingEnabled,
         ]);
 
-        $defaultIsoLang = Language::getIsoById(Configuration::get('PS_LANG_DEFAULT'));
+        $defaultIsoLang = Language::getIsoById((int) Configuration::get('PS_LANG_DEFAULT'));
         $cta = $paymentMethodsSettings->iframeCallToAction;
         $paymentOption = new PaymentOption();
         $paymentOption
@@ -298,8 +302,8 @@ class PaymentOptionsPresenter implements PresenterInterface
     private function getGenericPaymentOption()
     {
         if (true === $this->settings->paymentMethodsSettings->displayGenericOption) {
-            $cartIsoLang = Language::getIsoById($this->context->cart->id_lang);
-            $defaultIsoLang = Language::getIsoById(Configuration::get('PS_LANG_DEFAULT'));
+            $cartIsoLang = Language::getIsoById((int) $this->context->cart->id_lang);
+            $defaultIsoLang = Language::getIsoById((int) Configuration::get('PS_LANG_DEFAULT'));
             $cta = $this->settings->paymentMethodsSettings->redirectCallToAction;
             if ($this->settings->paymentMethodsSettings->genericLogoFilename) {
                 $logo = sprintf(
@@ -335,12 +339,12 @@ class PaymentOptionsPresenter implements PresenterInterface
                 continue;
             }
             $paymentOption = new PaymentOption();
-            //@formatter:off
+            // @formatter:off
             $paymentOption
                 ->setAction($this->context->link->getModuleLink($this->module->name, 'redirect', ['action' => 'redirectExternal', 'ajax' => true, 'productId' => $paymentMethod->productId]))
                 ->setLogo(sprintf($this->module->getPathUri() . 'views/img/payment_logos/%s.svg', $paymentMethod->productId))
                 ->setCallToActionText(sprintf($this->module->l('Pay with %s', 'PaymentOptionsPresenter'), $paymentMethod->identifier));
-            //@formatter:off
+            // @formatter:off
 
             $productId = $this->extractProductIdFromPaymentOption($paymentOption);
             if ((int)$productId === self::MEALVOUCHER_PRODUCT_ID &&

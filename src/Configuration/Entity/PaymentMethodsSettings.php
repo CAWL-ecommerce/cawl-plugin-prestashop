@@ -14,6 +14,10 @@
 
 namespace WorldlineOP\PrestaShop\Configuration\Entity;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 /**
  * Class PaymentMethodsSettings
  */

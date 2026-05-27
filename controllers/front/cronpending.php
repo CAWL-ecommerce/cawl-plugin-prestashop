@@ -98,14 +98,13 @@ class CawlopCronPendingModuleFrontController extends ModuleFrontController
             ->where('o.module = "' . pSQL($this->module->name) . '"')
             ->where('o.current_state IN (' . pSQL($implode) . ')');
 
-        $rows = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($dbQuery);
+        $rows = Db::getInstance((bool) _PS_USE_SQL_SLAVE_)->executeS($dbQuery);
         if (!$rows) {
             $this->printDebug('No orders eligible');
             exit;
         }
         /** @var \OnlinePayments\Sdk\Merchant\MerchantClient $merchantClient */
         $merchantClient = $this->module->getService('cawlop.sdk.client');
-        /** @var \WorldlineOP\PrestaShop\Repository\TransactionRepository $transactionRepository */
         $rows = array_map(
             function ($array) {
                 return $array['id_order'];
@@ -138,7 +137,7 @@ class CawlopCronPendingModuleFrontController extends ModuleFrontController
                 $orderHistory = new \OrderHistory();
                 $orderHistory->id_order = (int) $idOrder;
                 try {
-                    $orderHistory->changeIdOrderState(Configuration::get('PS_OS_CANCELED'), $idOrder);
+                    $orderHistory->changeIdOrderState((int) Configuration::get('PS_OS_CANCELED'), (int) $idOrder);
                     $orderHistory->addWithemail();
                 } catch (\Exception $e) {
                     $this->printOrderDebug('Order could not be cancelled');

@@ -2,7 +2,8 @@
 
 global $_MODULE;
 $_MODULE = array();
-$_MODULE['<{cawlop}prestashop>cawlop_a9928cf14ad15878c88657a133832f4b'] = 'Questo modulo offre un’integrazione con 1 clic per iniziare ad accettare pagamenti con le API dirette Cawl (ex Ingenico-Ogone). Offrendo ai clienti metodi di pagamento globali e regionali, è possibile vendere i propri prodotti in tutta Europa e aumentare di conseguenza i ricavi.';
+$_MODULE['<{cawlop}prestashop>cawlop_16a923262df766a6c43e2df7982f105a'] = 'Commercio elettronico CAWL';
+$_MODULE['<{cawlop}prestashop>cawlop_eda7346a0da4b89f43a5fc592b67a829'] = 'Questo modulo offre un’integrazione con 1 clic per iniziare ad accettare pagamenti con le API e-commerce di Cawl. Aumenta i tuoi ricavi offrendo ai tuoi clienti metodi di pagamento globali e regionali per vendere in tutta Europa.';
 $_MODULE['<{cawlop}prestashop>cawlop_35eedfe47e1e044854d5f05bdaaca80c'] = 'Si è verificato un errore durante l’elaborazione della richiesta. Riprovare.';
 $_MODULE['<{cawlop}prestashop>cawlop_97b2ab491f2b6cb5af9a361aa94e6239'] = 'Confermare il rimborso del denaro?';
 $_MODULE['<{cawlop}prestashop>cawlop_ea70ced75c5a05889a136ee4601a4cdc'] = 'Confermare la ricezione della transazione?';

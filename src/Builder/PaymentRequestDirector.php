@@ -14,6 +14,10 @@
 
 namespace WorldlineOP\PrestaShop\Builder;
 
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
+
 use OnlinePayments\Sdk\Domain\CreateHostedCheckoutRequest;
 use OnlinePayments\Sdk\Domain\CreatePaymentRequest;
 
@@ -69,7 +73,9 @@ class PaymentRequestDirector
         }
         $hostedCheckoutRequest->setOrder($this->builder->buildOrder());
 
-        if ($hostedCheckoutRequest->getOrder()->getCustomer()->getLocale() === null) {
+        /** @var string|null $customerLocale */
+        $customerLocale = $hostedCheckoutRequest->getOrder()->getCustomer()->getLocale();
+        if ($customerLocale === null) {
             $hostedCheckoutRequest->getOrder()->getCustomer()->setLocale(
                 $hostedCheckoutRequest->getHostedCheckoutSpecificInput()->getLocale()
             );

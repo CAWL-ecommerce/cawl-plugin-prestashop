@@ -87,10 +87,14 @@ class CawlopRedirectModuleFrontController extends ModuleFrontController
 
         $this->context->smarty->assign([
             'img_path' => sprintf(__PS_BASE_URI__ . 'modules/%s/views/img/', $this->module->name),
-            'worldlineopRedirectController' => $this->context->link->getModuleLink(
-                $this->module->name,
-                'redirect',
-                ['action' => $action]
+            'worldlineopRedirectController' => str_replace(
+                '&amp;',
+                '&',
+                $this->context->link->getModuleLink(
+                    $this->module->name,
+                    'redirect',
+                    ['action' => $action]
+                )
             ),
             'returnMac' => Tools::getValue('RETURNMAC'),
             'hostedCheckoutId' => Tools::getValue('hostedCheckoutId'),
@@ -128,7 +132,7 @@ class CawlopRedirectModuleFrontController extends ModuleFrontController
             }
             $tokenValue = $token->value;
         }
-        if (false !== Order::getOrderByCartId($cart->id)) {
+        if (Order::getIdByCartId((int) $cart->id) > 0) {
             Tools::redirect($this->context->link->getPageLink('order', null, null, ['step' => 3]));
         }
 
@@ -170,7 +174,9 @@ class CawlopRedirectModuleFrontController extends ModuleFrontController
             $hostedCheckoutResponse = $this->merchantClient->hostedCheckout()
                 ->createHostedCheckout($hostedCheckoutRequest);
         } catch (\OnlinePayments\Sdk\ValidationException $ve) {
-            foreach ($ve->getResponse()->getErrors() as $error) {
+            /** @var \OnlinePayments\Sdk\Domain\ErrorResponse $errorResponse */
+            $errorResponse = $ve->getResponse();
+            foreach ($errorResponse->getErrors() as $error) {
                 $this->logger->error(
                     'Request validation error',
                     ['error' => json_decode($error->toJson(), true)]
@@ -257,7 +263,8 @@ class CawlopRedirectModuleFrontController extends ModuleFrontController
                 ->getPaymentStatusCategory()
             ) {
                 $this->hostedCheckoutRepository->delete($hostedCheckout);
-                if (($idOrder = Order::getOrderByCartId($hostedCheckout->id_cart)) !== false) {
+                $idOrder = Order::getIdByCartId((int) $hostedCheckout->id_cart);
+                if ($idOrder > 0) {
                     exit(json_encode([
                         'redirectUrl' => $this->context->link->getModuleLink(
                             $this->module->name,
@@ -265,9 +272,8 @@ class CawlopRedirectModuleFrontController extends ModuleFrontController
                             ['id_order' => (int) $idOrder]
                         ),
                     ]));
-                } else {
-                    $this->dieOrderStep3();
                 }
+                $this->dieOrderStep3();
             }
         }
 
@@ -373,6 +379,8 @@ class CawlopRedirectModuleFrontController extends ModuleFrontController
 
     /**
      * @param bool $displayErrorMessage
+     *
+     * @return never
      */
     public function dieOrderStep3($displayErrorMessage = true)
     {
@@ -391,7 +399,7 @@ class CawlopRedirectModuleFrontController extends ModuleFrontController
      */
     public function dieIframeOrderConfirmation($cart, $customer)
     {
-        if (false !== Order::getOrderByCartId($cart->id)) {
+        if (Order::getIdByCartId((int) $cart->id) > 0) {
             exit(json_encode([
                 'redirectUrl' => $this->context->link->getPageLink(
                     'order-confirmation',
@@ -415,7 +423,7 @@ class CawlopRedirectModuleFrontController extends ModuleFrontController
      */
     public function dieRedirectOrderConfirmation($cart, $hostedCheckout)
     {
-        if (false !== Order::getOrderByCartId($cart->id)) {
+        if (Order::getIdByCartId((int) $cart->id) > 0) {
             $customer = new Customer((int) $cart->id_customer);
             exit(json_encode([
                 'redirectUrl' => $this->context->link->getPageLink(

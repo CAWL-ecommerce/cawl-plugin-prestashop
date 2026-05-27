@@ -10,9 +10,7 @@
  * @author    PrestaShop partner
  * @copyright 2021 CAWL Online Payments
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
- *
  */
-
 if (!defined('_PS_VERSION_')) {
     exit;
 }
@@ -30,7 +28,7 @@ function upgrade_module_1_0_3()
     $previousShopContext = Shop::getContext();
     Shop::setContext(Shop::CONTEXT_ALL);
 
-    $db = DB::getInstance();
+    $db = Db::getInstance();
 
     $sql = 'SELECT * FROM ' . _DB_PREFIX_ . 'configuration WHERE name = "WORLDLINEOP_ADVANCED_SETTINGS"';
     $results = $db->executeS($sql);

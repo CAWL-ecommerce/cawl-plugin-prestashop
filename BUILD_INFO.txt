@@ -1,1 +1,1 @@
-Built from Worldline-Plugins/cawl-plugin-prestashop@v1.0.22 on Wed Apr  1 14:15:22 UTC 2026
+Built from Worldline-Plugins/cawl-plugin-prestashop@v1.0.28 on Wed May 27 14:15:46 UTC 2026
