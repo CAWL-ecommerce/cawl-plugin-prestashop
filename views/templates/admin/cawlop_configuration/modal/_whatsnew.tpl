@@ -14,11 +14,11 @@
 
 <h1>
   {l s='What\'s new in version' mod='cawlop'}
-  1.0.28
+  1.0.29
 </h1>
 <br>
 <ul>
-  <li>{l s='Fixed CB logo' mod='cawlop'}</li>
+  <li>{l s='Fixed: Add compatibility between PrestaShop <=1.7.5.2 and PS Checkout 7.4.4.1 (Remove PS shared decimal library)' mod='cawlop'}</li>
 </ul>
 <br>
 <hr>

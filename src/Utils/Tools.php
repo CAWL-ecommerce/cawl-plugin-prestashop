@@ -160,8 +160,6 @@ class Tools
      * @param string $isoCurrency
      *
      * @return float|string
-     *
-     * @throws \PrestaShop\Decimal\Exception\DivisionByZeroException
      */
     public static function getRoundedAmountFromCents($amount, $isoCurrency)
     {
@@ -296,7 +294,7 @@ class Tools
     public static function removeSymfonyCache($env = null)
     {
         if (null === $env) {
-            $env = _PS_ENV_;
+            $env = defined('_PS_ENV_') ? _PS_ENV_ : (defined('_PS_MODE_DEV_') && _PS_MODE_DEV_ ? 'dev' : 'prod');
         }
         $dir = _PS_ROOT_DIR_ . '/var/cache/' . $env .'/';
         register_shutdown_function(function () use ($dir) {
