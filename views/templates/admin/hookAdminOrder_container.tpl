@@ -14,9 +14,9 @@
 
 <div id="worldlineop-admin-order-container">
   {if $theme == 'legacy'}
-    {include file="module:cawlop/views/templates/admin/hookAdminOrder_legacy.tpl"}
+    {include file="./hookAdminOrder_legacy.tpl"}
   {else}
-    {include file="module:cawlop/views/templates/admin/hookAdminOrder_new-theme.tpl"}
+    {include file="./hookAdminOrder_new-theme.tpl"}
   {/if}
 </div>
-{include file="module:cawlop/views/templates/admin/hookAdminOrder_script.tpl"}
+{include file="./hookAdminOrder_script.tpl"}
