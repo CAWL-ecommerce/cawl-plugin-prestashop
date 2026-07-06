@@ -311,3 +311,6 @@ $_MODULE['<{cawlop}prestashop>admincawlopajaxtransactioncontroller_8ff2a8d9d1c17
 $_MODULE['<{cawlop}prestashop>admincawlopajaxtransactioncontroller_957b6735a723d3eee5037a5ef416c32b'] = 'Rimborso dei fondi non riuscito con stato';
 $_MODULE['<{cawlop}prestashop>admincawlopajaxtransactioncontroller_316a88b88dbc5fbf5efd3bc6030865d4'] = 'Non si dispone dell’autorizzazione per annullare le transazioni.';
 $_MODULE['<{cawlop}prestashop>admincawloplogscontroller_b3d9808fb7672a092145c8de0109691f'] = 'Impossibile trovare il file di registro. Assicurarsi che i registri siano abilitati';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_371bb1ebd773a55e154076bf236ccac9'] = 'Mostra la pagina di conferma del pagamento';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_76e22ee120faed11b2bf0396a09739c7'] = 'Abilitando questa opzione, i vostri clienti vedranno la pagina di conferma del pagamento di CAWL';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_784be2cc8f1518051548166e76f47a38'] = 'Se abilitato, i clienti vedranno uno schermo di conferma dedicato dopo l\'elaborazione del pagamento, che conferma il pagamento e fornisce dettagli chiave.';

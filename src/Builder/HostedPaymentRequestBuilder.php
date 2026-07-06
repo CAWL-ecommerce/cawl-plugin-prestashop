@@ -68,6 +68,9 @@ class HostedPaymentRequestBuilder extends AbstractRequestBuilder
     public function buildHostedCheckoutSpecificInput()
     {
         $hostedCheckoutSpecificInput = new HostedCheckoutSpecificInput();
+        $hostedCheckoutSpecificInput->setShowResultPage(
+            $this->settings->advancedSettings->displayPaymentConfirmationPage
+        );
         if ($this->settings->paymentMethodsSettings->redirectTemplateFilename) {
             $hostedCheckoutSpecificInput->setVariant($this->settings->paymentMethodsSettings->redirectTemplateFilename);
         }

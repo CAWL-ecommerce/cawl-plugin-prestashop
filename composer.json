@@ -1,7 +1,7 @@
 {
   "name": "cawl/prestashop-1.7",
   "description": "CAWL payments module for Prestashop 1.7+",
-  "version": "1.0.26",
+  "version": "1.0.32",
   "author": "CAWL",
   "license": "AFL-3.0",
   "config": {

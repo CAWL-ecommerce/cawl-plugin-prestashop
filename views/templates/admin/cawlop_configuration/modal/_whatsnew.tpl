@@ -14,11 +14,11 @@
 
 <h1>
   {l s='What\'s new in version' mod='cawlop'}
-  1.0.31
+  1.0.32
 </h1>
 <br>
 <ul>
-  <li>{l s='Fixed: CAWL order panel not displaying on PrestaShop 1.7.5.x)' mod='cawlop'}</li>
+  <li>{l s='Added: Add showResultPage parameter' mod='cawlop'}</li>
 </ul>
 <br>
 <hr>

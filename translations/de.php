@@ -312,3 +312,6 @@ $_MODULE['<{cawlop}prestashop>admincawlopajaxtransactioncontroller_8ff2a8d9d1c17
 $_MODULE['<{cawlop}prestashop>admincawlopajaxtransactioncontroller_957b6735a723d3eee5037a5ef416c32b'] = 'Erstattung von Geldmitteln fehlgeschlagen mit Status';
 $_MODULE['<{cawlop}prestashop>admincawlopajaxtransactioncontroller_316a88b88dbc5fbf5efd3bc6030865d4'] = 'Sie haben keine Berechtigung zur Stornierung von Transaktionen.';
 $_MODULE['<{cawlop}prestashop>admincawloplogscontroller_b3d9808fb7672a092145c8de0109691f'] = 'Log-Datei nicht gefunden. Stellen Sie sicher, dass Logs aktiviert sind';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_371bb1ebd773a55e154076bf236ccac9'] = 'Zahlungsbestätigungsseite anzeigen';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_76e22ee120faed11b2bf0396a09739c7'] = 'Wenn Sie diese Option aktivieren, sehen Ihre Kunden die CAWL-Zahlungsbestätigungsseite';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_784be2cc8f1518051548166e76f47a38'] = 'Wenn aktiviert, sehen Kunden nach der Zahlungsabwicklung einen speziellen Bestätigungsbildschirm, der die Zahlung bestätigt und wichtige Details bereitstellt.';

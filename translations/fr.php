@@ -311,3 +311,6 @@ $_MODULE['<{cawlop}prestashop>admincawlopajaxtransactioncontroller_8ff2a8d9d1c17
 $_MODULE['<{cawlop}prestashop>admincawlopajaxtransactioncontroller_957b6735a723d3eee5037a5ef416c32b'] = 'Le remboursement des fonds a échoué avec le statut';
 $_MODULE['<{cawlop}prestashop>admincawlopajaxtransactioncontroller_316a88b88dbc5fbf5efd3bc6030865d4'] = 'Vous ne disposez pas de la permission pour annuler des transactions.';
 $_MODULE['<{cawlop}prestashop>admincawloplogscontroller_b3d9808fb7672a092145c8de0109691f'] = 'Fichier journal introuvable. Assurez-vous que les fichiers journaux sont activés';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_371bb1ebd773a55e154076bf236ccac9'] = 'Afficher la page de confirmation de paiement';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_76e22ee120faed11b2bf0396a09739c7'] = 'En activant cette option, vos clients verront la page de confirmation de paiement de CAWL';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_784be2cc8f1518051548166e76f47a38'] = 'Si activé, les clients verront un écran de confirmation dédié après le traitement du paiement, confirmant le paiement et fournissant les informations clés.';

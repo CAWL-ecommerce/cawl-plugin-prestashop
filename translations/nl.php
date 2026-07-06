@@ -311,3 +311,6 @@ $_MODULE['<{cawlop}prestashop>admincawlopajaxtransactioncontroller_8ff2a8d9d1c17
 $_MODULE['<{cawlop}prestashop>admincawlopajaxtransactioncontroller_957b6735a723d3eee5037a5ef416c32b'] = 'Het terugbetalen van geldmiddelen is mislukt met status';
 $_MODULE['<{cawlop}prestashop>admincawlopajaxtransactioncontroller_316a88b88dbc5fbf5efd3bc6030865d4'] = 'Je bent niet gemachtigd voor het annuleren van transacties.';
 $_MODULE['<{cawlop}prestashop>admincawloplogscontroller_b3d9808fb7672a092145c8de0109691f'] = 'Kan het logboekbestand niet vinden. Zorg ervoor dat logboeken ingeschakeld zijn';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_371bb1ebd773a55e154076bf236ccac9'] = 'Pagina met betalingsbevestiging weergeven';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_76e22ee120faed11b2bf0396a09739c7'] = 'Door deze optie in te schakelen, zien uw klanten de CAWL-betaalbevestigingspagina';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_784be2cc8f1518051548166e76f47a38'] = 'Indien ingeschakeld, zien klanten een speciale bevestigingsscherm nadat de betaling is verwerkt, die de betaling bevestigt en belangrijke details verstrekt.';
