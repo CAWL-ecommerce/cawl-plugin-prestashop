@@ -14,11 +14,12 @@
 
 <h1>
   {l s='What\'s new in version' mod='cawlop'}
-  1.0.32
+  1.0.33
 </h1>
 <br>
 <ul>
-  <li>{l s='Added: Add showResultPage parameter' mod='cawlop'}</li>
+  <li>{l s='Fixed: Calculate the shipping cost for the free shipping voucher' mod='cawlop'}</li>
+  <li>{l s='Fixed: Payments with Mealvouchers method when shipping is not free' mod='cawlop'}</li>
 </ul>
 <br>
 <hr>
