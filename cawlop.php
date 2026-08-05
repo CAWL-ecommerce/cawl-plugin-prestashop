@@ -42,9 +42,9 @@ class Cawlop extends PaymentModule
 
         $this->name = 'cawlop';
         $this->author = 'Cawl Online Payments';
-        $this->version = '1.0.33';
+        $this->version = '1.0.34';
         $this->tab = 'payments_gateways';
-        // $this->module_key = '089d13d0218de8085259e542483f4438'; TODO: UPDATE MODULE KEY WHEN MODULE IS RELEASING
+        $this->module_key = '6e8df9df11465c3a7a47c83f8190e242';
         $this->currencies = true;
         $this->currencies_mode = 'checkbox';
         parent::__construct();

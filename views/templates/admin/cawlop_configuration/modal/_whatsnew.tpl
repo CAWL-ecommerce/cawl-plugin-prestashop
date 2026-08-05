@@ -14,12 +14,12 @@
 
 <h1>
   {l s='What\'s new in version' mod='cawlop'}
-  1.0.33
+  1.0.34
 </h1>
 <br>
 <ul>
-  <li>{l s='Fixed: Calculate the shipping cost for the free shipping voucher' mod='cawlop'}</li>
-  <li>{l s='Fixed: Payments with Mealvouchers method when shipping is not free' mod='cawlop'}</li>
+  <li>{l s='Fixed: Payment method label lost on capture-confirmation state transition' mod='cawlop'}</li>
+  <li>{l s='Added: Module key required by Prestashop AddOns' mod='cawlop'}</li>
 </ul>
 <br>
 <hr>
