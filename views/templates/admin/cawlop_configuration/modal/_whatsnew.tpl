@@ -14,12 +14,13 @@
 
 <h1>
   {l s='What\'s new in version' mod='cawlop'}
-  1.0.34
+  1.0.35
 </h1>
 <br>
 <ul>
-  <li>{l s='Fixed: Payment method label lost on capture-confirmation state transition' mod='cawlop'}</li>
-  <li>{l s='Added: Module key required by Prestashop AddOns' mod='cawlop'}</li>
+  <li>{l s='Changed: Regular maintenance updates to enhance the integrity and security of the integration' mod='cawlop'}</li>
+  <li>{l s='Changed: Update the Sofinco payment method name on the checkout' mod='cawlop'}</li>
+  <li>{l s='Fixed: Credit card and hosted checkout labels for non-default languages' mod='cawlop'}</li>
 </ul>
 <br>
 <hr>

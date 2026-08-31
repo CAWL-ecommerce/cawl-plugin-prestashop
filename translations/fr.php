@@ -27,6 +27,9 @@ $_MODULE['<{cawlop}prestashop>paymentmethodssettingsupdater_40742c4d9a7b4af31441
 $_MODULE['<{cawlop}prestashop>paymentmethodssettingsupdater_a5b77336d45235ff5107c069d87dd9d4'] = 'Impossible de télécharger le logo.';
 $_MODULE['<{cawlop}prestashop>paymentoptionspresenter_6294b8b61ea3540661e970803ddc382c'] = 'Payer avec ma carte enregistrée précédemment %s';
 $_MODULE['<{cawlop}prestashop>paymentoptionspresenter_35895cff7df70dab18783453e2bd241f'] = 'Payer avec %s';
+$_MODULE['<{cawlop}prestashop>paymentoptionspresenter_a2465f4c7f50964ada143c76bc7ea32a'] = 'Payez en plusieurs fois';
+$_MODULE['<{cawlop}prestashop>paymentoptionspresenter_5c2ddd84491205038da9434827513778'] = 'Payer avec une carte de crédit';
+$_MODULE['<{cawlop}prestashop>paymentoptionspresenter_6c686edcb8f621628c57b08e9e1ed84a'] = 'Payer avec Cawl Online Payments';
 $_MODULE['<{cawlop}prestashop>installer_3f501d96438cf202a1607f1caf6714f5'] = 'Vous devez activer l’extension cURL pour utiliser ce module.';
 $_MODULE['<{cawlop}prestashop>hostedpaymentrequestbuilder_552a0d8c17d95d5dbdc0c28217024f5a'] = 'Frais de port';
 $_MODULE['<{cawlop}prestashop>rejected_b3411a5a2ed780ab3070c401f18d8769'] = 'Un problème est servenu lors de votre paiement, mais vous n\'avez pas été débité.';

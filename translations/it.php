@@ -27,6 +27,9 @@ $_MODULE['<{cawlop}prestashop>paymentmethodssettingsupdater_40742c4d9a7b4af31441
 $_MODULE['<{cawlop}prestashop>paymentmethodssettingsupdater_a5b77336d45235ff5107c069d87dd9d4'] = 'Impossibile caricare il logo.';
 $_MODULE['<{cawlop}prestashop>paymentoptionspresenter_6294b8b61ea3540661e970803ddc382c'] = 'Pagare con la carta di credito salvata in precedenza %s';
 $_MODULE['<{cawlop}prestashop>paymentoptionspresenter_35895cff7df70dab18783453e2bd241f'] = 'Pagare con %s';
+$_MODULE['<{cawlop}prestashop>paymentoptionspresenter_a2465f4c7f50964ada143c76bc7ea32a'] = 'Paga a rate';
+$_MODULE['<{cawlop}prestashop>paymentoptionspresenter_5c2ddd84491205038da9434827513778'] = 'Pagare con carta di credito';
+$_MODULE['<{cawlop}prestashop>paymentoptionspresenter_6c686edcb8f621628c57b08e9e1ed84a'] = 'Pagare con Cawl Online Payments';
 $_MODULE['<{cawlop}prestashop>installer_3f501d96438cf202a1607f1caf6714f5'] = 'Per utilizzare questo modulo è necessario abilitare l’estensione cURL.';
 $_MODULE['<{cawlop}prestashop>hostedpaymentrequestbuilder_552a0d8c17d95d5dbdc0c28217024f5a'] = 'Costi di spedizione';
 $_MODULE['<{cawlop}prestashop>rejected_b3411a5a2ed780ab3070c401f18d8769'] = 'Si è verificato un problema con il pagamento e non ti è stato addebitato alcun importo';
