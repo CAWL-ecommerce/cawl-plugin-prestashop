@@ -14,13 +14,12 @@
 
 <h1>
   {l s='What\'s new in version' mod='cawlop'}
-  1.0.35
+  1.0.36
 </h1>
 <br>
 <ul>
-  <li>{l s='Changed: Regular maintenance updates to enhance the integrity and security of the integration' mod='cawlop'}</li>
-  <li>{l s='Changed: Update the Sofinco payment method name on the checkout' mod='cawlop'}</li>
-  <li>{l s='Fixed: Credit card and hosted checkout labels for non-default languages' mod='cawlop'}</li>
+  <li>{l s='Fixed: Fix rounding of shopping cart line items sent in the payment request' mod='cawlop'}</li>
+  <li>{l s='Changed: Group all card payment options under a single payment button on the hosted checkout by default for new installations' mod='cawlop'}</li>
 </ul>
 <br>
 <hr>
