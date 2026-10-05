@@ -317,3 +317,5 @@ $_MODULE['<{cawlop}prestashop>admincawloplogscontroller_b3d9808fb7672a092145c8de
 $_MODULE['<{cawlop}prestashop>_advancedsettings_371bb1ebd773a55e154076bf236ccac9'] = 'Mostrar la página de confirmación de pago';
 $_MODULE['<{cawlop}prestashop>_advancedsettings_76e22ee120faed11b2bf0396a09739c7'] = 'Al habilitar esta opción, sus clientes verán la página de confirmación de pago de CAWL';
 $_MODULE['<{cawlop}prestashop>_advancedsettings_784be2cc8f1518051548166e76f47a38'] = 'Si está habilitado, los clientes verán una pantalla de confirmación dedicada después de procesar el pago, confirmando el pago y proporcionando detalles clave.';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_74130dec4c3c1c081009cdf704bde0a9'] = 'Habilitar guardar tarjetas';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_d9909c31706e7a057e925b5f9060f101'] = 'Cuando está habilitado, los clientes pueden guardar su tarjeta y pagar utilizando su método de pago guardado previamente. Cuando está deshabilitado, la opción de guardar su tarjeta no se mostrará en la página de pago ni en el iFrame de la tarjeta de crédito.';

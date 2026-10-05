@@ -14,12 +14,12 @@
 
 <h1>
   {l s='What\'s new in version' mod='cawlop'}
-  1.0.36
+  1.0.37
 </h1>
 <br>
 <ul>
-  <li>{l s='Fixed: Fix rounding of shopping cart line items sent in the payment request' mod='cawlop'}</li>
-  <li>{l s='Changed: Group all card payment options under a single payment button on the hosted checkout by default for new installations' mod='cawlop'}</li>
+  <li>{l s='Fixed: Voucher discounts being counted twice in payment validation' mod='cawlop'}</li>
+  <li>{l s='Added: Enable/Disable save card option' mod='cawlop'}</li>
 </ul>
 <br>
 <hr>

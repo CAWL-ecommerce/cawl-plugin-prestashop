@@ -317,3 +317,5 @@ $_MODULE['<{cawlop}prestashop>admincawloplogscontroller_b3d9808fb7672a092145c8de
 $_MODULE['<{cawlop}prestashop>_advancedsettings_371bb1ebd773a55e154076bf236ccac9'] = 'Mostra la pagina di conferma del pagamento';
 $_MODULE['<{cawlop}prestashop>_advancedsettings_76e22ee120faed11b2bf0396a09739c7'] = 'Abilitando questa opzione, i vostri clienti vedranno la pagina di conferma del pagamento di CAWL';
 $_MODULE['<{cawlop}prestashop>_advancedsettings_784be2cc8f1518051548166e76f47a38'] = 'Se abilitato, i clienti vedranno uno schermo di conferma dedicato dopo l\'elaborazione del pagamento, che conferma il pagamento e fornisce dettagli chiave.';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_74130dec4c3c1c081009cdf704bde0a9'] = 'Abilitare il salvataggio delle carte';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_d9909c31706e7a057e925b5f9060f101'] = 'Se è abilitato, i clienti possono salvare la carta e pagare utilizzando il metodo di pagamento salvato in precedenza. Se disabilitato, l\'opzione per salvare la carta non sarà visualizzata sulla pagina di pagamento né nell\'iFrame della carta di credito.';

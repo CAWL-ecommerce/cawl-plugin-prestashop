@@ -318,3 +318,5 @@ $_MODULE['<{cawlop}prestashop>admincawloplogscontroller_b3d9808fb7672a092145c8de
 $_MODULE['<{cawlop}prestashop>_advancedsettings_371bb1ebd773a55e154076bf236ccac9'] = 'Zahlungsbestätigungsseite anzeigen';
 $_MODULE['<{cawlop}prestashop>_advancedsettings_76e22ee120faed11b2bf0396a09739c7'] = 'Wenn Sie diese Option aktivieren, sehen Ihre Kunden die CAWL-Zahlungsbestätigungsseite';
 $_MODULE['<{cawlop}prestashop>_advancedsettings_784be2cc8f1518051548166e76f47a38'] = 'Wenn aktiviert, sehen Kunden nach der Zahlungsabwicklung einen speziellen Bestätigungsbildschirm, der die Zahlung bestätigt und wichtige Details bereitstellt.';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_74130dec4c3c1c081009cdf704bde0a9'] = 'Karten speichern aktivieren';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_d9909c31706e7a057e925b5f9060f101'] = 'Wenn aktiviert, können Kunden ihre Karte speichern und mit ihrer zuvor gespeicherten Zahlungsmethode bezahlen. Wenn deaktiviert, wird die Option zum Speichern ihrer Karte nicht auf der Zahlungsseite oder im Kreditkarten-iFrame angezeigt.';

@@ -317,3 +317,5 @@ $_MODULE['<{cawlop}prestashop>admincawloplogscontroller_b3d9808fb7672a092145c8de
 $_MODULE['<{cawlop}prestashop>_advancedsettings_371bb1ebd773a55e154076bf236ccac9'] = 'Pagina met betalingsbevestiging weergeven';
 $_MODULE['<{cawlop}prestashop>_advancedsettings_76e22ee120faed11b2bf0396a09739c7'] = 'Door deze optie in te schakelen, zien uw klanten de CAWL-betaalbevestigingspagina';
 $_MODULE['<{cawlop}prestashop>_advancedsettings_784be2cc8f1518051548166e76f47a38'] = 'Indien ingeschakeld, zien klanten een speciale bevestigingsscherm nadat de betaling is verwerkt, die de betaling bevestigt en belangrijke details verstrekt.';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_74130dec4c3c1c081009cdf704bde0a9'] = 'Kaarten opslaan inschakelen';
+$_MODULE['<{cawlop}prestashop>_advancedsettings_d9909c31706e7a057e925b5f9060f101'] = 'Wanneer ingeschakeld kunnen klanten hun kaart opslaan en betalen met hun eerder opgeslagen betaalmethode. Wanneer uitgeschakeld wordt de optie om hun kaart op te slaan niet weergegeven op de betaalpagina of in de creditcard iFrame.';
