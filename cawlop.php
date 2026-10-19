@@ -17,6 +17,7 @@ if (!defined('_PS_VERSION_')) {
 
 use Monolog\Logger;
 use PrestaShop\ModuleLibServiceContainer\DependencyInjection\ServiceContainer;
+use PrestaShop\PrestaShop\Core\Payment\PaymentOption;
 use WorldlineOP\PrestaShop\Utils\Tools as ToolsWorldline;
 
 /**
@@ -42,7 +43,7 @@ class Cawlop extends PaymentModule
 
         $this->name = 'cawlop';
         $this->author = 'Cawl Online Payments';
-        $this->version = '1.0.37';
+        $this->version = '1.0.38';
         $this->tab = 'payments_gateways';
         $this->module_key = '6e8df9df11465c3a7a47c83f8190e242';
         $this->currencies = true;
@@ -64,6 +65,12 @@ class Cawlop extends PaymentModule
      */
     public function install()
     {
+        if (!extension_loaded('bcmath')) {
+            $this->_errors[] = $this->l('The PHP bcmath extension is required.');
+
+            return false;
+        }
+
         /** @var WorldlineOP\PrestaShop\Installer\Installer $installer */
         $installer = $this->getService('cawlop.installer');
         if (false === parent::install()) {
@@ -192,17 +199,10 @@ class Cawlop extends PaymentModule
             ]);
             $this->context->controller->addCSS($this->getPathUri() . 'views/css/admin_order.css');
         }
-        if (Tools::getValue('controller') == 'AdminCawlopConfiguration') {
-            $this->context->controller->addJS([
-                $this->getPathUri() . 'views/js/translations.js',
-                $this->getPathUri() . 'views/js/config.js',
-                $this->getPathUri() . 'views/js/jquery.custom-file-input.js',
-            ]);
-        }
     }
 
     /**
-     * @return array
+     * @return PaymentOption[]
      */
     public function hookPaymentOptions()
     {

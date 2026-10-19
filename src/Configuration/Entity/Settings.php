@@ -61,6 +61,11 @@ class Settings
             $this->credentials->webhooksSecret = $this->accountSettings->prodWebhooksSecret;
             $endpoint = $this->advancedSettings->prodEndpoint ?: self::DEFAULT_SDK_ENDPOINT_PROD;
         }
+        $this->credentials->pspid = (string) $this->credentials->pspid;
+        $this->credentials->apiKey = (string) $this->credentials->apiKey;
+        $this->credentials->apiSecret = (string) $this->credentials->apiSecret;
+        $this->credentials->webhooksKey = (string) $this->credentials->webhooksKey;
+        $this->credentials->webhooksSecret = (string) $this->credentials->webhooksSecret;
         $this->credentials->endpoint = rtrim($endpoint, '/');
         if (null === $this->advancedSettings->displayPaymentConfirmationPage) {
             $this->advancedSettings->displayPaymentConfirmationPage = true;

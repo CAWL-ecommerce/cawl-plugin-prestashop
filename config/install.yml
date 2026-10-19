@@ -18,5 +18,6 @@ services:
       - '@cawlop.settings.account.updater'
       - '@cawlop.settings.advanced_settings.updater'
       - '@cawlop.settings.payment_methods.updater'
+      - '@cawlop.settings.defaults'
       - !php/const _PS_VERSION_
       - '@cawlop.logger.factory'

@@ -4,11 +4,16 @@ services:
     class: 'WorldlineOP\PrestaShop\Serializer\SettingsSerializer'
     public: true
 
+  cawlop.settings.defaults:
+    class: 'WorldlineOP\PrestaShop\Configuration\Loader\DefaultSettingsProvider'
+    public: true
+
   cawlop.settings.loader:
     class: 'WorldlineOP\PrestaShop\Configuration\Loader\SettingsLoader'
     public: true
     arguments:
       - '@=service("cawlop.settings.serializer").getSerializer()'
+      - '@cawlop.settings.defaults'
 
   cawlop.settings.presenter:
     class: 'WorldlineOP\PrestaShop\Presenter\ModuleConfigurationPresenter'
@@ -22,6 +27,7 @@ services:
     public: true
     arguments:
       - '@=service("cawlop.settings.serializer").getSerializer()'
+      - '@cawlop.settings.defaults'
 
   cawlop.settings:
     class: 'WorldlineOP\PrestaShop\Configuration\Loader\SettingsLoader'
