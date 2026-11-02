@@ -14,14 +14,11 @@
 
 <h1>
   {l s='What\'s new in version' mod='cawlop'}
-  1.0.38
+  1.0.39
 </h1>
 <br>
 <ul>
-  <li>{l s='Fixed: Issues regarding multistore' mod='cawlop'}</li>
-  <li>{l s='Fixed: Showing configuration fields when module is disabled' mod='cawlop'}</li>
-  <li>{l s='Fixed: Orders created by webhook without status and transaction' mod='cawlop'}</li>
-  <li>{l s='Fixed: Align PrestaShop module with marketplace standards and validation requirements' mod='cawlop'}</li>
+  <li>{l s='Fixed: Prevent duplicate order creation and strengthen race condition locking' mod='cawlop'}</li>
 </ul>
 <br>
 <hr>
