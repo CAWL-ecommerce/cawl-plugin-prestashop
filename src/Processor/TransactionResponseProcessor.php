@@ -20,8 +20,6 @@ if (!defined('_PS_VERSION_')) {
 
 use Context;
 use Order;
-use Symfony\Component\Lock\Factory;
-use Symfony\Component\Lock\Store\FlockStore;
 use Cawlop;
 use WorldlineOP\PrestaShop\Logger\LoggerFactory;
 use WorldlineOP\PrestaShop\Presenter\TransactionPresented;
@@ -65,16 +63,9 @@ class TransactionResponseProcessor
     {
         if ($presentedData->validateOrder) {
             try {
-                $store = new FlockStore();
-                $factory = new Factory($store);
-                $lock = $factory->createLock($presentedData->payments['merchantReference']);
-                if (!$lock->acquire(true)) {
-                    $this->logger->debug('Lock cannot be acquired', ['presentedData' => $presentedData]);
-
-                    return;
-                }
-                // Another process (webhook or customer return) may have created the order while this one was waiting
-                // for the lock. Cart::orderExists() may already be cached as false for this request
+                // The callers run this under the cart's lock together with presenting the payment (see CartLock), so
+                // no other process creates the order in between. The check below stays as a last guard against a
+                // duplicate order. Cart::orderExists() may already be cached as false for this request
                 // (FrontController::init), so the cache entry is cleared and the database is checked directly.
                 $idCart = (int) $presentedData->cardDetails['idCart'];
                 \Cache::clean('Cart::orderExists_' . $idCart);
@@ -83,7 +74,6 @@ class TransactionResponseProcessor
                     false
                 );
                 if ($existingOrderId) {
-                    $lock->release();
                     $this->logger->debug(
                         'Order already created by a concurrent process',
                         ['id_cart' => $idCart, 'id_order' => $existingOrderId]
@@ -103,8 +93,6 @@ class TransactionResponseProcessor
                     false,
                     $presentedData->cardDetails['secureKey']
                 );
-
-                $lock->release();
             } catch (\Throwable $e) {
                 $this->logger->error($e->getMessage(), ['presentedData' => $presentedData, 'trace' => $e->getTraceAsString()]);
             }

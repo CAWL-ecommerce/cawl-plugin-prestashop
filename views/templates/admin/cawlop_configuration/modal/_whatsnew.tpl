@@ -14,11 +14,11 @@
 
 <h1>
   {l s='What\'s new in version' mod='cawlop'}
-  1.0.39
+  1.0.40
 </h1>
 <br>
 <ul>
-  <li>{l s='Fixed: Prevent duplicate order creation and strengthen race condition locking' mod='cawlop'}</li>
+  <li>{l s='Fixed: Orders stuck in pending state by locking event handling per cart' mod='cawlop'}</li>
 </ul>
 <br>
 <hr>
